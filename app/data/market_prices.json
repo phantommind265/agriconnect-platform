@@ -1,0 +1,53 @@
+[
+    {
+        "crop": "maize",
+        "prices": {
+            "January": 300,
+            "February": 320,
+            "March": 350,
+            "April": 400,
+            "May": 450,
+            "June": 430,
+            "July": 420,
+            "August": 410,
+            "September": 390,
+            "October": 370,
+            "November": 340,
+            "December": 310
+        }
+    },
+    {
+        "crop": "Groundnuts",
+        "prices": {
+                "January": 300,
+            "February": 320,
+            "March": 350,
+            "April": 400,
+            "May": 450,
+            "June": 430,
+            "July": 420,
+            "August": 410,
+            "September": 390,
+            "October": 370,
+            "November": 340,
+            "December": 310
+        }
+    },
+    {
+        "crop": "tobacco",
+        "prices": {
+		"January": 900,
+		"February": 720,
+            	"March": 850,
+            	"April": 700,
+            	"May": 650,
+            	"June": 430,
+            	"July": 520,
+            	"August": 710,
+            	"September": 990,
+            	"October": 570,
+            	"November": 340,
+            	"December": 510
+        }
+    }
+]

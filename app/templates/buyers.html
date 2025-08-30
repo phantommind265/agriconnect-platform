@@ -1,0 +1,22 @@
+<script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+<script>
+    const socket = io("http://localhost:5000");
+
+    socket.on('connect', () => {
+        console.log('Connected to server');
+    });
+
+    socket.on('new_product', (data) => {
+        console.log('New product added:', data);
+        // You can dynamically add this product to your product list
+        const productList = document.getElementById('product-list');
+        const item = document.createElement('li');
+        item.innerText = `${data.name} - ${data.quantity} ${data.unit} @ ${data.price}`;
+        productList.prepend(item);
+    });
+</script>
+
+<ul id="product-list">
+    <!-- Real-time updates will appear here -->
+</ul>
+

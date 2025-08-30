@@ -1,0 +1,22 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<h2>Community Discussion Forum</h2>
+<a href="{{ url_for('forum.new_post') }}" class="btn btn-primary">New Post</a>
+<br><br>
+
+{% for post in posts %}
+	<div class="card" style="margin-bottom: 15px;">
+		<div class="card-body">
+			<h5 class="card-title">{{ post['title'] }}</h5>
+			<p class="card-text">{{ post['content'] }}</p>
+			<small class="text-muted">
+				Posted by {{ post['username'] }} on {{ post['timestamp'] }}</small>
+		</div>
+	</div>
+{% else %}
+	<p>No forum posts yet. Be the first to post!</p>
+{% endfor %}
+
+{% endblock %}

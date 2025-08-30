@@ -1,0 +1,23 @@
+[
+    {
+        "crop": "maize",
+        "prices": {
+            "January": 300,
+            "February": 320,
+            "March": 350,
+            "April": 400,
+            "May": 450,
+            "June": 430,
+            "July": 420,
+            "August": 410,
+            "September": 390,
+            "October": 370,
+            "November": 340,
+            "December": 310
+        }
+    },
+    {
+        "crop": "Groundnuts",
+        "prices": 900
+    }
+]

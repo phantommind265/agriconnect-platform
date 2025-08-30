@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .market-prices-container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        margin: 20px auto;
+        max-width: 1000px;
+        font-family: Arial, sans-serif;
+    }
+
+    .market-prices-container h2 {
+        color: #2e7d32;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+        background: #fefefe;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    thead {
+        background: #388e3c;
+        color: white;
+    }
+
+    thead th {
+        padding: 12px;
+        text-align: center;
+    }
+
+    tbody td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #e0e0e0;
+        color: #444;
+    }
+
+    tbody tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background: #e8f5e9;
+        transition: background 0.3s;
+    }
+
+    tbody td a {
+        background: #66bb6a;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        transition: background 0.3s;
+    }
+
+    tbody td a:hover {
+        background: #388e3c;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 10px 0;
+    }
+</style>
+
+<div class="market-prices-container">
+    <h2>📊 {{ t("market_prices") }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ t("crop") }}</th>
+                <th>{{ t("month") }}</th>
+                <th>{{ t("price") }}</th>
+                <th>{{ t("actions") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in prices %}
+                {% for month, price in item.prices.items() %}
+                    <tr>
+                        {% if loop.index == 1 %}
+                            <td rowspan="12" style="vertical-align: middle; font-weight: bold;">🌱 {{ item.crop }}</td>
+                        {% endif %}
+                        <td>{{ month }}</td>
+                        <td>{{ price }} MWK/kg</td>
+                        {% if loop.index == 1 %}
+                            <td rowspan="12" style="vertical-align: middle;">
+                                <a href="{{ url_for('market.price_trend', crop=item.crop) }}">{{ t("view_price_trend") }}</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"><hr></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

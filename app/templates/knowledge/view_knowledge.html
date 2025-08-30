@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📚 Knowledge Hub</h2>
+
+    <!-- Search + Filter -->
+    <form method="GET" class="row g-2 mb-4">
+        <div class="col-md-6">
+            <input type="text" name="q" class="form-control" placeholder="🔍 Search resources..."
+                   value="{{ search_query }}">
+        </div>
+        <div class="col-md-4">
+            <select name="category" class="form-select">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category }}" {% if category == category_filter %}selected{% endif %}>
+                        {{ category }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+    </form>
+
+    <!-- Resource cards -->
+    <div class="row">
+        {% for resource in resources %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ url_for('knowledge_bp.resource_detail', resource_id=resource['id']) }}">
+                            {{ resource['title'] }}
+                        </a>
+                    </h5>
+                    <p class="card-text text-truncate">{{ resource['content'] }}</p>
+                    <span class="badge bg-success">{{ resource['category'] or "General" }}</span>
+		</div>
+	    </div>
+	</div>
+    </div>
+    {% else %}
+    <p>No resources found.</p>
+    <a href="{{ url_for('knowledge_bp.add_knowledge') }}">Add Resources</a>
+    {% endfor %}
+</div>
+{% endblock %}
+

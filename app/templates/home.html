@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriConnect</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/dashboardone.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" data-animate>
+    <div class="container header-container">
+      <h1 class="logo">🌱 AgriConnect</h1>
+      <div class="contact-info">
+	      <!-- Notification Bell in Navbar -->
+	      <div class="notification-container" style="position: relative; display: inline-block;">
+		      <a href="#" id="notificationBell" style="color: white; font-size: 20px;">
+			      🔔
+			      <span id="notificationCount"
+					style="display:none;
+						position:absolute;
+						top:-5px;
+                     				right:-10px;
+                     				background:red;
+                     				color:white;
+                     				padding:2px 6px;
+                     				border-radius:50%;
+                     				font-size:12px;">
+			      </span>
+		      </a>
+	      </div>
+	      <!-- Notifications Dropdown -->
+	      <div id="notificationDropdown" style="display:none;
+		       position:absolute;
+		       top:30px;
+		       right:0;
+		       background:white;
+		       border:1px solid #ddd;
+		       width:250px;
+		       box-shadow:0 4px 8px rgba(0,0,0,0.1);
+		       border-radius:6px;
+		       z-index:1000;">
+	      </div>
+	      <span><a href="#" class="cta-btn">📞 Get In Touch</a></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <!--
+  <section class="hero">
+	<div class="glass">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h2>What We Do</h2>
+        <p class="sub">We help Malawian farmers and extension workers connect, learn, trade, and make data-driven decisions - all in one place.</p>
+	<a href="#" class="btn">Contact Us</a>
+      </div>
+    </div>
+	</div>
+  </section>
+  -->
+
+  <section class="what-we-do" aria-labelledby="what-we-do-title" data-animate>
+	  <div class="container">
+		  <div class="glass" role="region" aria-label="AgriConnect capabilities">
+			  <div class="glass-inner">
+				  <div class="grid">
+					  <div class="column left">
+						  <div class="heading">
+							  <h1 id="what-we-do-title">What We Do</h1>
+							  <p class="blurb">We help Malawian farmers and extension workers connect, learn, trade, and make data‑driven decisions — all in one place.</p>
+							  <h2 style="margin:0 0 6px;font-size:20px">How we create value</h2>
+							  <p class="blurb">AgriConnect blends messaging, market access, and agronomy know‑how with a smart assistant. We bring reliable local data to your fingertips and make it simple to act — whether that’s finding buyers, asking an expert, or planning for next week’s weather.<br>All features are designed for low data usage and simple, reliable access even on basic devices.</p>
+							  <div class="cta-row">
+								  <a href="{{ url_for('auth.contact') }}" class="btn">Contact Us</a>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" data-animate>
+    <div class="container features-grid">
+	    <div class="feature-box"><i class="fas fa-leaf"></i><p><a href="{{ url_for('auth.home') }}">Dashboard</a></p></div>
+	    <div class="feature-box"><i class="fas fa-leaf"></i><p><a href="{{ url_for('auth.help') }}">Help/FAQ</a></p></div>
+	    <div class="feature-box"><i class="fas fa-seedling"></i><p><a href="{{ url_for('auth.about_page') }}">About</a></p></div>
+      <div class="feature-box"><i class="fas fa-apple-alt"></i><p><a href="{{ url_for('auth.login') }}">{{ t("login") }}</a></p></div>
+      <div class="feature-box"><i class="fas fa-truck"></i><p><a href="{{ url_for('auth.register') }}">{{ t("register_now") }}</a></p></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about container" data-animate>
+    <h2>Farmer Growth</h2>
+    <p>Start building the farming future you deserve by connecting with trusted partners on AgriConnect.</p>
+    <div class="about-grid">
+      <div class="about-card">
+	      <img src="{{ url_for('static', filename='images/Green Tech.jpeg') }}" alt="Agriconnect logo">
+        <h3>Technology & Innovation</h3>
+        <p>Farming meets technology on AgriConnect—manage your farm, market your crops, and succeed all in one place.</p>
+      </div>
+      <div class="about-card">
+        <h3>Join Now</h3>
+        <p>Join AgriConnect today and discover a community of farmers and buyers working together to grow better and earn more.</p>
+	<a href="{{ url_for('auth.register') }}" class="btn">Join Now</a>
+      </div>
+      <div class="about-card" data-animate>
+	      <img src="{{ url_for('static', filename='images/person and picnic basket.jpeg') }}" alt="Agriconnect logo">
+        <h3>Farmer Support</h3>
+        <p>Farming doesn’t have to be a struggle; with AgriConnect, you’re never alone.</p>
+      </div>
+      <div class="about-card">
+	      <img src="{{ url_for('static', filename='images/farmer on tractor.jpg') }}" alt="Agriconnect logo">
+        <h3>Smart Farming Starts Here</h3>
+        <p>Don’t just farm—farm smart! AgriConnect gives you the tools to stay ahead.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-choose-us" data-animate>
+    <div class="container">
+      <h2>Why Choose Us</h2>
+      <div class="choose-grid">
+        <div class="choose-item"><img src="{{ url_for('static', filename='images/Maize plantation.jpeg') }}" alt="Agriconnect logo"><h3>Connecting Farmers, Growing Together.</h3><p></p></div>
+        <div class="choose-item"><img src="{{ url_for('static', filename='images/Planting Secrets.jpeg') }}" alt="Agriconnect logo"><h3>Your Farm, Your Future—Connected.</h3><p></p></div>
+        <div class="choose-item"><img src="{{ url_for('static', filename='images/Agriculture Farm.jpeg') }}" alt="Agriconnect logo"><h3>From Soil to Success, We’re With You.</h3><p></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" data-animate>
+    <div class="container">
+      <h2>We Provide the Best Services</h2>
+      <div class="service-grid">
+        <div class="service-box"><h3>Farmer Support & Growth</h3><p>Take your farm beyond the boundaries of your village—AgriConnect brings the world to your crops.</p></div>
+        <div class="service-box"><h3>Market Access & Trade</h3><p>Your hard work deserves better profits—AgriConnect makes that possible by connecting farmers and buyers instantly.</p></div>
+	<div class="service-box"><h3>Technology & Innovation</h3><p>Digital farming is the future, and with AgriConnect, the future is here for you.</p></div>
+        <div class="service-box"><h3>Community & Sustainability</h3><p>Every farmer deserves knowledge, tools, and opportunities—AgriConnect gives you all three in one platform.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" data-animate>
+    <div class="container stats-grid">
+      <div class="stat-box"><h3>10, 000+</h3><p>Farmers Registered</p></div>
+      <div class="stat-box"><h3>500+</h3><p>Extension Workers</p></div>
+      <div class="stat-box"><h3>20+</h3><p>Districts Reached</p></div>
+      <div class="stat-box"><h3>15, 000+</h3><p>Happy Clients</p></div>
+    </div>
+  </section>
+
+  <!-- Meet the Team -->
+  <section class="about-team" data-animate>
+	  <h2>Meet the Team</h2>
+	  <div class="team-grid">
+		  <div class="team-member">
+			  <img src="{{ url_for('static', filename='images/hope.jpg') }}" alt="Team Member">
+			  <h4>Hopeson Chikuse</h4>
+			  <p>Founder & Lead Developer</p>
+		  </div>
+		  <div class="team-member">
+			  <img src="{{ url_for('static', filename='images/clement.jpg') }}" alt="Team Member">
+			  <h4>Clement Matapa</h4>
+			  <p>AgriTech Specialist</p>
+		  </div>
+	  </div>
+  </section>
+
+  <!-- Contact & Map -->
+   <section class="contact" data-animate>
+    <div class="container contact-grid">
+      <form class="contact-form">
+        <h3>Request a Free Quote</h3>
+	<input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Enter Email">
+        <input type="text" placeholder="Enter Phone Number">
+        <input type="text" placeholder="Subject">
+        <textarea placeholder="Enter Your Message"></textarea>
+        <button type="submit" class="btn">Send Request</button>
+	</form>
+      <div class="map">
+		      <iframe src="https://maps.google.com/maps?q=Malawi"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo & About -->
+    <div class="footer-col">
+      <h2 class="footer-logo">🌱 AgriConnect</h2>
+      <p>
+        Connecting farmers, extension workers & markets in Malawi with technology, knowledge, and opportunities.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/forums">Discussion Forums</a></li>
+        <li><a href="/profiles">Farmers Profiles</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div class="footer-col">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="/knowledge">Knowledge Hub</a></li>
+        <li><a href="/market">Market Prices</a></li>
+        <li><a href="/weather">Weather Updates</a></li>
+        <li><a href="/support">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="footer-col">
+      <h3>Stay Connected</h3>
+      <p>Subscribe for updates on farming tips, market insights, and weather alerts.</p>
+      <form class="newsletter">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    © <span id="year"></span> AgriConnect. All Rights Reserved.
+  </div>
+</footer>
+
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+
+<script>
+  // Auto year update
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+  <script src="{{ url_for('static', filename='JS/home.js') }}"></script>
+</body>
+</html>
+

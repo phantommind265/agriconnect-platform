@@ -1,0 +1,26 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div style="max-width:500px; margin:auto; padding:20px; border:1px solid #ddd; border-radius:10px;">
+    <h2 style="text-align:center;">Soil Analysis Result</h2>
+
+    <img src="{{ url_for('static', filename='uploads/' ~ filename) }}"
+         alt="Uploaded soil image"
+         style="max-width:100%; border-radius:8px; margin-bottom:20px;">
+
+    <p><strong>Detected Soil Type:</strong> {{ soil_type }}</p>
+
+    <p><strong>Recommended Crops:</strong></p>
+    <ul>
+        {% for crop in crops %}
+            <li>{{ crop }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Tip:</strong> {{ tip }}</p>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ url_for('soil.soil_analyzer') }}" class="btn btn-success">Analyze Another Soil</a>
+    </div>
+</div>
+{% endblock %}
+

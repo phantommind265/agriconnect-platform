@@ -1,0 +1,152 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<!--
+
+	<h2>{{ t("pest_and_diseases") }}</h2>
+	<form method="GET" action="{{ url_for('pest.list_pests') }}">
+		<input type="text" name="q" placeholder="{{ t('search_by_name_or_symptom') }}" value="{{ query }}">
+		<button type="submit">{{ t("search") }}</button>
+	</form>
+	<br><br>
+	<table>
+		<thead>
+			<tr>
+				<th>{{ t("name") }}</th>
+				<th>{{ t("crops_affected") }}</th>
+				<th>{{ t("symptoms") }}</th>
+				<th>{{ t("solution") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for pest in pests %}
+			<tr>
+				<td><a href="{{ url_for('pest.view_pest', name=pest.name) }}">{{ pest.name }}</a></td>
+				<td>{{ pest.crops | join(', ') }}</td>
+				<td>{{ pest.symptoms }}</td>
+				<td>{{ pest.solution }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+-->
+<style>
+    .pest-container {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        margin: 20px auto;
+        max-width: 1000px;
+        font-family: Arial, sans-serif;
+    }
+
+    .pest-container h2 {
+        color: #2e7d32;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .pest-container form {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .pest-container input[type="text"] {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        width: 60%;
+    }
+
+    .pest-container button {
+        background: #388e3c;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .pest-container button:hover {
+        background: #2e7d32;
+    }
+
+    .pest-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .pest-container th,
+    .pest-container td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .pest-container th {
+        background-color: #f1f8f4;
+        color: #2e7d32;
+        font-weight: bold;
+    }
+
+    .pest-container tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .pest-container tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .pest-container a {
+        color: #2e7d32;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .pest-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="pest-container">
+    <h2>🪲 {{ t("pest_and_diseases") }}</h2>
+
+    <form method="GET" action="{{ url_for('pest.list_pests') }}">
+        <input type="text" name="q" placeholder="{{ t('search_by_name_or_symptom') }}" value="{{ query }}">
+        <button type="submit">{{ t("search") }}</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ t("name") }}</th>
+                <th>{{ t("crops_affected") }}</th>
+                <th>{{ t("symptoms") }}</th>
+                <th>{{ t("solution") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pest in pests %}
+            <tr>
+                <td><a href="{{ url_for('pest.view_pest', name=pest.name) }}">{{ pest.name }}</a></td>
+                <td>{{ pest.crops | join(', ') }}</td>
+                <td>{{ pest.symptoms }}</td>
+                <td>{{ pest.solution }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center; color: gray;">{{ t("no_results_found") }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

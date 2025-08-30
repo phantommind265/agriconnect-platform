@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>AgriConnect AI Assistant</title>
+	<style>
+	body {
+		background-color: #f2f2f2;
+		font-family: 'Segoe UI', sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+	.chat-container {
+		background: #fff;
+		width: 90%;
+		max-width: 600px;
+		margin: 40px auto;
+		border: 1px solid #ccc;
+		padding: 20px;
+		border-radius: 15px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	}
+	.chat-box {
+		height: 300px;
+		overflow-y: auto;
+		border-radius: 8px;
+		border: 1px solid #ddd;
+		padding: 10px;
+		margin-bottom: 10px;
+		background-color: #fafafa;
+	}
+	.chat-entry {
+		margin-bottom: 10px;
+	}
+	.chat-entry.user {
+		text-align: right;
+		color: #0d6efd;
+	}
+	.chat-entry.bot {
+		text-align: left;
+		color: #198754;
+	}
+	input[type="text"] {
+		width: 80%;
+		padding: 8px;
+	}
+	button {
+		padding: 8px 12px;
+	}
+/*
+<div class="chat-container">
+	<h4 class="text-center mb-4">AgriConnect AI Assistant</h4>
+	<div class="chat-box" id="chat-box">
+	</div>
+	<div class="input-group">
+		<input type="text" id="user-input" class="form-control" placeholder="Ask something......" onkeydown="handleKey(event)">
+		<button class="btn btn-primary" onclick="sendMessage()">{{ t("send") }}</button>
+	</div>
+</div>
+*/
+    .chat-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        height: 80vh;
+    }
+
+    .chat-container h4 {
+        text-align: center;
+        color: #2e7d32;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .chat-box {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        overflow-y: auto;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* User message bubble */
+    .chat-message.user {
+        align-self: flex-end;
+        background: #2e7d32;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 16px 16px 0 16px;
+        max-width: 75%;
+        font-size: 15px;
+        word-wrap: break-word;
+    }
+
+    /* Bot message bubble */
+    .chat-message.bot {
+        align-self: flex-start;
+        background: #e8f5e9;
+        color: #333;
+        padding: 12px 16px;
+        border-radius: 16px 16px 16px 0;
+        max-width: 75%;
+        font-size: 15px;
+        word-wrap: break-word;
+        border: 1px solid #c8e6c9;
+    }
+
+    .input-group {
+        display: flex;
+        gap: 8px;
+    }
+
+    .input-group input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+        transition: border 0.3s;
+    }
+
+    .input-group input:focus {
+        border-color: #2e7d32;
+        box-shadow: 0 0 6px rgba(46, 125, 50, 0.3);
+    }
+
+    .input-group button {
+        background: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .input-group button:hover {
+        background: #1b5e20;
+    }
+	</style>
+	<link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="chat-container">
+		<h4>🌱 AgriConnect AI Assistant</h4>
+		<div class="chat-box" id="chat-box">
+			<!-- Example messages -->
+			 <div class="chat-message bot">👩‍🌾 Hello! How can I help you with your farming today?</div>
+			 <!-- User messages will append here dynamically -->
+		</div>
+    	<div class="input-group">
+        	<input type="text" id="user-input" class="form-control" placeholder="Ask something......" onkeydown="handleKey(event)">
+        	<button onclick="sendMessage()">{{ t("send") }}</button>
+    	</div>
+	</div>
+	<script>
+	function handleKey(event) {
+		if (event.key === "Enter") {
+			sendMessage();
+		}
+	}
+
+	function getCurrentTime() {
+		const now = new Date();
+		return now.getHours().toString().padStart(2, '0') + ':' +
+			now.getMinutes().toString().padStart(2, '0');
+	}
+
+	function sendMessage() {
+		const input = document.getElementById('user-input');
+		const message = input.value.trim();
+		if (!message) return;
+
+		const chatBox = document.getElementById('chat-box');
+		const time = getCurrentTime();
+
+		//Display user message
+		const userEntry = document.createElement('div');
+		userEntry.className = 'chat-entry user';
+		userEntry.textContent = `You (${time}): ${message}`;
+		chatBox.appendChild(userEntry);
+
+		//show typing message
+		const typingEntry = document.createElement('div');
+		typingEntry.className = 'chat-entry bot';
+		typingEntry.id = 'typing-entry';
+		typingEntry.textContent = "AI is typing......";
+		chatBox.appendChild(typingEntry);
+
+		//send to flask backend
+		fetch('/chat', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ message: message })
+		})
+		.then(response => response.json())
+		.then(data => {
+			//remove typing message
+			const oldTyping = document.getElementById('typing-entry');
+			if (oldTyping) oldTyping.remove();
+
+			const botTime = getCurrentTime();
+			const botEntry = document.createElement('div');
+			botEntry.className = 'chat-entry bot';
+			botEntry.textContent = `AI (${botTime}): ${data.reply}`;
+               		chatBox.appendChild(botEntry);
+			chatBox.scrollTop = chatBox.scrollHeight;
+		})
+		.catch(error => {
+			const oldTyping = document.getElementById('typing-entry');
+			if (oldTyping) oldTyping.remove();
+
+			const errorEntry = document.createElement('div');
+			errorEntry.className = 'chat-entry bot';
+			errorEntry.textContent = "AI: Sorry, there was a problem.";
+			chatBox.appendChild(errorEntry);
+			chatBox.scrollTop = chatBox.scrollHeight;
+		});
+
+		input.value = "";
+	}
+	</script>
+</body>
+</html>

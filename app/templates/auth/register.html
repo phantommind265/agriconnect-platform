@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<title>Agriconnect</title>
+	<style>
+    .register-container {
+        background: white;
+        padding: 35px 40px;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        max-width: 450px;
+        width: 90%;
+        margin: 40px auto;
+        text-align: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .register-container h2 {
+        color: #2e7d32;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #c8e6c9;
+        border-radius: 10px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        background: #f9fff9;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #66bb6a;
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+    }
+
+    /* Icons for fields */
+    .form-group.username .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/user.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.password .form-control,
+    .form-group.confirm .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/lock.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.language .form-select {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/language.png") no-repeat 10px center;
+        background-size: 20px;
+        padding-left: 40px;
+    }
+
+    .btn-success {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn-success:hover {
+        background: #388e3c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .register-container p {
+        margin-top: 20px;
+        font-size: 15px;
+        color: #555;
+    }
+
+    .register-container p a {
+        color: #2e7d32;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .register-container p a:hover {
+        text-decoration: underline;
+    }
+	</style>
+	<link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+	</head>
+	<body>
+<div class="register-container">
+    <h2>🌱 {{ t("register") }}</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group username">
+		{{ form.username.label }}
+            {{ form.username(class="form-control", size=32) }}
+        </div>
+
+	<div class="form-group username">
+		{{ form.email.label }}
+		{{ form.email(class="form-contro;", size=32) }}
+	</div>
+
+        <div class="form-group password">
+            {{ form.password.label }}
+            {{ form.password(class="form-control", size=32) }}
+        </div>
+
+        <div class="form-group confirm">
+            {{ form.confirm.label }}
+            {{ form.confirm(class="form-control", size=32) }}
+        </div>
+
+	<div class="form-group language">
+		{{ form.role.label }}
+		{{ form.role(class="form-select") }}
+	</div>
+
+        <div class="form-group language">
+            {{ form.language.label }}
+            {{ form.language(class="form-select") }}
+        </div>
+
+        <div style="margin-top: 10px;">
+            {{ form.submit(class="btn-success") }}
+        </div>
+    </form>
+
+    <p>
+        {{ t("have_account") }}
+        <a href="{{ url_for('auth.login') }}">{{ t("login") }}</a>
+    </p>
+</div>
+</body>
+</html>
+

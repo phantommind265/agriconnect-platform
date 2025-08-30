@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AgriShare - Connected</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: #2c7a2c;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 10px 0 20px;
+        }
+
+        form {
+            background: #f4f6f8;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            background-color: #2c7a2c;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #256d25;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        h3 {
+            color: #1d4d1d;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 10px;
+            background: #f9fafb;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li a {
+            color: #2c7a2c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        .empty {
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Connected to Share Session: {{ session_id }}</h2>
+        <p>You can now upload files to share:</p>
+
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('agrishare.upload_file', session_id=session_id) }}">
+            {{ form.hidden_tag() }}
+            {{ form.file() }}
+            {{ form.submit() }}
+        </form>
+
+        <hr>
+
+        <h3>Files shared in this session:</h3>
+        {% if files %}
+            <ul>
+            {% for file in files %}
+                <li>
+                    <a href="{{ url_for('agrishare.download_file', file_id=file['id']) }}">{{ file['filename'] }}</a>
+                    <span>uploaded at {{ file['uploaded_at'] }}</span>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty">No files uploaded yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

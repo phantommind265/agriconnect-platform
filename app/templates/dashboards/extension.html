@@ -1,0 +1,44 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card shadow-lg rounded-3">
+		<div class="card-body">
+			<h2 class="md-3">Extension Worker Dashboard</h2>
+			<p>Welcome <strong>{{ current_user.username }}</strong>!<br>Here you can assist farmers, share knowledge, and manage field reports.</p>
+			<hr>
+			<div class="row g-3">
+				<!--farmer support-->
+				<div class+"col-md-4">
+					<div class="card text-center border-successs shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">Farmer Support</h5>
+							<p class="card-text">View and respond to farmer queries.</p>
+							<a href="{{ url_for('message_bp.inbox') }}" class="btn btn-success btn-sm">Go</a>
+						</div>
+					</div>
+				</div>
+				<!--knowledge hub-->
+				<div class="col-md-4">
+					<div class="card text-center border-primary shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">Knowledge Hub</h5>
+							<p class="card-text">Share guides, tips, and best practices.</p>
+							<a href="{{ url_for('knowledge_bp.add_knowledge') }}" class="btn btn-primary btn-sm">Go</a>
+						</div>
+					</div>
+				</div>
+				<!--field reports-->
+				<div class="col-md-4">
+					<div class="card text-center border-warning shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">Field Reports</h5>
+							<p class="card-text">Submit and review field activity reports.</p>
+							<a href="#" class="btn btn-warning btn-sm">Go</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

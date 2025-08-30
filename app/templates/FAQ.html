@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriConnect - Help & FAQ</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: linear-gradient(135deg, #2d6a4f, #40916c);
+        color: white;
+        padding: 1rem 2rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    header img {
+        height: 40px;
+        border-radius: 50%;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 2rem;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #1b4332;
+    }
+    .search-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .search-box input {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px 15px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        outline: none;
+        font-size: 1rem;
+    }
+    .accordion {
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .accordion button {
+        background: #f1f1f1;
+        color: #333;
+        cursor: pointer;
+        padding: 1rem;
+        border: none;
+        text-align: left;
+        outline: none;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background 0.3s;
+    }
+    .accordion button:hover {
+        background: #e6e6e6;
+    }
+    .accordion .panel {
+        padding: 1rem;
+        background: white;
+        display: none;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h2>AgriConnect Help & FAQ</h2>
+</header>
+
+<div class="container">
+    <h1>Need Help? Search or Browse FAQs</h1>
+
+    <div class="search-box">
+        <input type="text" id="faqSearch" placeholder="Search for help...">
+    </div>
+
+    <!-- FAQ Item -->
+    <div class="accordion">
+        <button><i class="fa-solid fa-user-plus"></i> How do I create an account?</button>
+        <div class="panel">
+            <p>1. Go to the Register page.<br>
+            2. Fill in your name, email/phone, password, and role.<br>
+            3. Click Register and log in.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button><i class="fa-solid fa-key"></i> I forgot my password. What should I do?</button>
+        <div class="panel">
+            <p>Click the "Forgot Password" link on the Login page and follow the steps to reset your password.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button><i class="fa-solid fa-envelope"></i> How do I send a message to another user?</button>
+        <div class="panel">
+            <p>1. Go to Messaging in your Dashboard.<br>
+            2. Select the user.<br>
+            3. Type your message and click Send.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button><i class="fa-solid fa-store"></i> How do I post an item in the Marketplace?</button>
+        <div class="panel">
+            <p>1. Go to Marketplace.<br>
+            2. Click Post New Listing.<br>
+            3. Add details and price.<br>
+            4. Click Submit.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button><i class="fa-solid fa-headset"></i> Contact Support</button>
+        <div class="panel">
+            <p>📧 Email: chikusehopeson@gmail.com<br>
+               📞 Phone/WhatsApp: +265-997-255-736<br>
+               💬 Chat with Admin in the Dashboard</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Accordion Toggle
+    document.querySelectorAll(".accordion button").forEach(btn => {
+        btn.addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // FAQ Search Filter
+    document.getElementById("faqSearch").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        document.querySelectorAll(".accordion").forEach(faq => {
+            let text = faq.innerText.toLowerCase();
+            faq.style.display = text.includes(filter) ? "" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

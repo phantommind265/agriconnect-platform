@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title> Weather Info</title>
+		<link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
+	</head>
+	<body>
+		<h1>Weather Information</h1>
+		<div id="weather-result">
+			<p>Getting your location.....</p>
+		</div>
+
+		<script>
+			// get users GPS coordinates
+			if ("geolocation" in navigator) {
+				navigator.geolocation.getCurrentPosition(
+					function(position) {
+						const lat = position.coords.latitude;
+						const lon = position.coords.longtude;
+						console.log("Sending location:", lat, lon);
+						//send lat/lon to flask backend
+						fetch("/api/weather", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify({
+								lat: lat,
+								lon: lon 
+							})
+						})
+						.then(response => response.json())
+						.then(data => {
+							console.log("Response data:", data);
+							const weatherDiv = document.getElementById("weather-result");
+							if (data.error) {
+								weatherDiv.innerHTML = `<p>${data.error}</p>`;
+							} else {
+								weatherDiv.innerHTML = `
+									<h3>${data.location}</h3>
+									<p><strong>Conditon:</strong> ${data.weather}</p>
+									<p><strong>Temperature:</strong> ${data.temp}</p>
+									<p><strong>Humidity:</strong> ${data.humidity}</p>
+									<p><strong>Wind:</strong> ${data.wind_speed} m/s</p>
+								`;
+							}
+						})
+						.catch(err => {
+							console.error("Fetch error:", err);
+							document.getElementById("weather-result").inneHTML = "<p>Unable to load weather data.</p>";
+						});
+					},
+					function(error) {
+						document.getElementById("weather-result").innerHTML = "<p>Failed to get location. Please allow location access.</p>";
+					}
+				);
+			} else {
+				document.getElementById("weather-result").innerHTML = "<p>Geolocation is not supported by your browser.</p>";
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Add New Event</h2>
+<form method="POST" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+
+	<p>{{ form.title.label }}
+	<br>{{ form.title(size=40) }}</p>
+
+	<p>{{ form.description.label }}
+	<br>{{ form.description(rows=3, cols=40) }}</p>
+
+	<p>{{ form.location.label }}
+	<br>{{ form.location(size=40) }}</p>
+
+	<p>{{ form.date.label }}
+	<br>{{ form.date() }}</p>
+
+	<p>{{ form.time.label }}
+	<br>{{ form.time() }}</p>
+
+	<p>{{ form.organizer.label }}
+	<br>{{ form.organizer(size=40) }}</p>
+
+	<p>{{ form.flyer.label }}
+	<br>{{ form.flyer() }}</p>
+
+	<p>{{ form.submit(class_="btn btn-primary") }}</p>
+</form>
+{% endblock %}

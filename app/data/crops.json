@@ -1,0 +1,275 @@
+[
+    {
+        "name": "Maize",
+        "season": "Rainy",
+        "region": "Northern",
+        "soil": "Sandy soil",
+        "description": "Staple cereal crop, main food source in Malawi.",
+        "tips": "Ensure proper spacing, timely planting, and weed control.",
+        "yield": "2.1 tons/acre",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Clear field, plough and ridge 2-3 weeks before planting."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Sow seeds with 75cm spacing between rows and 25cm between holes."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply NPK at planting and Urea at 4 weeks after germination."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed 2-3 times during the growing season for better yield."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Monitor for fall armyworm and spray pesticides if needed."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest when cobs are dry and grain is hard; Usually 3-4 months."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Dry thoroughly and store in dry, cool granaries to avoid mold or rot."
+            }
+        ]
+    },
+    {
+        "name": "Sorghum",
+        "season": "Rainy",
+        "region": "Southern",
+        "soil": "Loamy soil",
+        "description": "Drought-resistant cereal, often grown for food and fodder.",
+        "tips": "Resistant to water stress, but requires good drainage.",
+        "yield": "1.5 tons/acre",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Clear weeds, plough field to 10-15cm depth."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Space seeds 45cm apart in rows with 15cm between each seed."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply NPK at planting and top-dress with Urea at 6 weeks."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed as needed, especially during the first 6 weeks."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Watch for aphids and caterpillars, use organic insecticides if necessary."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest when grains are hard and the plant turns yellow (90-120 days)."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Store in dry conditions to prevent mold or insect damage."
+            }
+        ]
+    },
+    {
+        "name": "Cassava",
+        "season": "Rainy",
+        "region": "Central",
+        "soil": "Well-drained sandy loam",
+        "description": "Perennial crop used for food, starch, and industrial purposes.",
+        "tips": "Cassava is drought tolerant and requires minimal input once established.",
+        "yield": "15-20 tons/ha",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Plough to a depth of 15-20cm, add compost if needed."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Plant stem cuttings 30-40cm long, spaced 1m apart."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply NPK fertilizers at planting and top-dress with Urea at 2 months."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed the field for the first 3 months to reduce competition."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Watch for cassava mealybugs and mosaic disease."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest after 8-12 months or when tubers reach full size."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Store in a cool, dry place, preferably in a pit to avoid spoilage."
+            }
+        ]
+    },
+    {
+        "name": "Beans",
+        "season": "Rainy",
+        "region": "All regions",
+        "soil": "Loamy, well-drained",
+        "description": "Rich in protein, common in both smallholder and commercial farming.",
+        "tips": "Ensure proper spacing to minimize disease risk.",
+        "yield": "0.8-1.2 tons/acre",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Plough and harrow the soil to break up clods."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Sow seeds 4-5cm deep with 20cm between plants and 50cm between rows."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply NPK fertilizer at planting."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed 2-3 times during the growing season."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Spray for aphids and root rot if necessary."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest when pods turn yellow and beans rattle inside."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Store in airtight containers in cool, dry conditions."
+            }
+        ]
+    },
+    {
+        "name": "Sweet Potato",
+        "season": "Rainy",
+        "region": "Southern and Central",
+        "soil": "Well-drained sandy loam",
+        "description": "A nutritious root crop used for food and fodder.",
+        "tips": "Maintain weed control and monitor for pests like weevils.",
+        "yield": "10-20 tons/ha",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Plough soil to a depth of 20cm and incorporate organic matter."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Plant cuttings 20-30cm long, spaced 30cm apart in rows."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply NPK at planting and Urea 6 weeks after planting."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed regularly during the first 3 months."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Watch for sweet potato weevils and whiteflies."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest after 4-5 months when roots are mature."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Store in a cool, dry, and ventilated place to prevent rotting."
+            }
+        ]
+    },
+    {
+        "name": "Groundnut",
+        "season": "Rainy",
+        "region": "Southern",
+        "soil": "Sandy loam",
+        "description": "A legume crop used for food, oil production, and animal feed.",
+        "tips": "Ensure adequate spacing for good air circulation.",
+        "yield": "1-1.5 tons/acre",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Plough the soil deeply to loosen it."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Plant seeds 3-5cm deep, spaced 20cm apart in rows."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply a balanced fertilizer like NPK at planting."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed 2-3 times during the growing season."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Watch for aphids and soil-borne diseases."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest when the plants begin to yellow and leaves fall off."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Dry nuts thoroughly before storage in a cool, dry place."
+            }
+        ]
+    },
+    {
+        "name": "Tomato",
+        "season": "Rainy",
+        "region": "Central",
+        "soil": "Loamy soil",
+        "description": "A common vegetable, rich in vitamins, widely grown in Malawi.",
+        "tips": "Ensure proper spacing to prevent disease transmission.",
+        "yield": "12-15 tons/ha",
+        "growth_cycle": [
+            {
+                "stage": "Land Preparation",
+                "instructions": "Plough, harrow and add organic manure."
+            },
+            {
+                "stage": "Planting",
+                "instructions": "Space seeds 50-60cm apart with 30cm between rows."
+            },
+            {
+                "stage": "Fertilization",
+                "instructions": "Apply NPK at planting, and top-dress with Urea at 4 weeks."
+            },
+            {
+                "stage": "Weeding",
+                "instructions": "Weed regularly, especially in the first 2 months."
+            },
+            {
+                "stage": "Pest and Disease Control",
+                "instructions": "Control for aphids, leaf miners, and blight with appropriate pesticides."
+            },
+            {
+                "stage": "Harvesting",
+                "instructions": "Harvest when fruits are fully ripe and firm."
+            },
+            {
+                "stage": "Storage",
+                "instructions": "Store in cool, dry conditions or process into sauces."
+            }
+        ]
+    }
+]

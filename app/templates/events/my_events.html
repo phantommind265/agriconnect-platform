@@ -1,0 +1,37 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>📅 My Registered Events</h2>
+    <hr>
+
+    {% if events %}
+        <div class="row">
+            {% for event in events %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0">
+                    {% if event['flyer'] %}
+                        <img src="{{ url_for('static', filename='uploads/' + event['flyer']) }}" 
+                             class="card-img-top" 
+                             alt="Event Flyer" 
+                             style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event['title'] }}</h5>
+                        <p class="card-text text-muted">
+                            📍 {{ event['location'] }} <br>
+                            🗓 {{ event['date'] }}
+                        </p>
+                        <p class="card-text">{{ event['description']|truncate(100) }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">You have not registered for any events yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+

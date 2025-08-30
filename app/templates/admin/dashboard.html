@@ -1,0 +1,92 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<!--
+	<h2>{{ t("admin_dashboard") }}</h2>
+	<ul class="admin-tools">
+		<li><a href="{{ url_for('admin.manage_crops') }}">{{ t("manage_crops") }}</a></li>
+		<li><a href="{{ url_for('admin.add_crop') }}">{{ t("add_crop") }}</a></li>
+		<li><a href="{{ url_for('admin.manage_pests') }}">{{ t("manage_pests") }}</a></li>
+		<li><a href="{{ url_for('admin.add_pest') }}">{{ t("add_pest") }}</a></li>
+		<li><a href="{{ url_for('auth.logout') }}">{{ t("logout") }}</a></li>
+	</ul>
+
+-->
+
+<style>
+    .admin-dashboard {
+        max-width: 800px;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        font-family: Arial, sans-serif;
+    }
+
+    .admin-dashboard h2 {
+        text-align: center;
+        color: #2e7d32;
+        margin-bottom: 25px;
+        font-size: 26px;
+    }
+
+    .admin-tools {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .admin-tools li {
+        background: #f1f8f4;
+        border: 1px solid #c8e6c9;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .admin-tools li:hover {
+        background: #e8f5e9;
+        transform: translateY(-4px);
+    }
+
+    .admin-tools a {
+        text-decoration: none;
+        color: #1b5e20;
+        font-weight: bold;
+        font-size: 18px;
+        display: block;
+    }
+
+    .admin-tools a:hover {
+        color: #2e7d32;
+    }
+
+    .logout-link {
+        background: #c62828 !important;
+        color: #fff !important;
+        border-radius: 8px;
+        padding: 12px 16px;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .logout-link:hover {
+        background: #b71c1c !important;
+    }
+</style>
+
+<div class="admin-dashboard">
+    <h2>🛠 {{ t("admin_dashboard") }}</h2>
+    <ul class="admin-tools">
+        <li><a href="{{ url_for('admin.manage_crops') }}">🌱 {{ t("manage_crops") }}</a></li>
+        <li><a href="{{ url_for('admin.add_crop') }}">➕ {{ t("add_crop") }}</a></li>
+        <li><a href="{{ url_for('admin.manage_pests') }}">🪲 {{ t("manage_pests") }}</a></li>
+        <li><a href="{{ url_for('admin.add_pest') }}">➕ 🐛 {{ t("add_pest") }}</a></li>
+        <li><a href="{{ url_for('auth.logout') }}" class="logout-link">🚪 {{ t("logout") }}</a></li>
+    </ul>
+</div>
+{% endblock %}

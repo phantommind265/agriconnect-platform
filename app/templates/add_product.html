@@ -1,0 +1,20 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Add Product</h2>
+<form method="POST" action="{{ url_for('supply_chain.add_product') }}">
+    {{ form.hidden_tag() }}
+    <label>Name:</label>
+    {{ form.name() }}<br>
+    <label>Quantity:</label>
+    {{ form.quantity() }}<br>
+    <label>Unit:</label>
+    {{ form.unit() }}<br>
+    <label>Price:</label>
+    {{ form.price() }}<br>
+    <button type="submit">Add Product</button>
+</form>
+<div id="product-updates"></div>
+<script src="//cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/supply_chain.js') }}"></script>
+{% endblock %}
+

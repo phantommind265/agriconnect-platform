@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="max-width: 600px; margin: 30px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
+    
+    <div style="background: #28a745; color: #fff; text-align: center; padding: 15px; font-size: 1.5rem; font-weight: bold;">
+        💬 Chats
+    </div>
+
+    <ul style="list-style:none; padding:0; margin:0;">
+      {% for user in users %}
+        <li style="border-bottom:1px solid #eee;">
+          <a href="{{ url_for('message_bp.chat', user_id=user['id']) }}" 
+             style="text-decoration:none; color:inherit; display:flex; align-items:center; justify-content:space-between; padding: 15px;">
+            
+            <!-- Left Section: Profile & Name -->
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="{{ url_for('static', filename='profile_pic/' ~ (user['profile_pic'] or 'default.png')) }}" 
+                     alt="Profile" width="45" height="45" style="border-radius:50%; object-fit:cover;">
+                <div>
+                    <strong style="font-size: 1rem; color:#333;">{{ user['username'] }}</strong><br>
+                    <small style="color:#888;">{{ user['preview'] or 'No messages yet...' }}</small>
+                </div>
+            </div>
+
+            <!-- Right Section: Time -->
+            <div style="text-align:right;">
+                <small style="color:#888;">{{ user['timestamp'] }}</small>
+            </div>
+          </a>
+        </li>
+      {% else %}
+        <li style="text-align:center; padding: 20px; color: #888;">No other users found.</li>
+      {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+

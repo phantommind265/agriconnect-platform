@@ -1,0 +1,25 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div style="max-width:500px; margin:auto; padding:20px; border:1px solid #ddd; border-radius:10px;">
+    <h2 style="text-align:center;">Soil Analyzer</h2>
+    <p style="text-align:center; color:#555;">Upload a clear photo of your farm soil and get instant analysis.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div style="margin-bottom:15px;">
+            {{ form.soil_image.label }}
+            <br>
+            {{ form.soil_image(class="form-control") }}
+            {% for error in form.soil_image.errors %}
+                <small style="color:red;">{{ error }}</small>
+            {% endfor %}
+        </div>
+
+        <div style="text-align:center;">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+

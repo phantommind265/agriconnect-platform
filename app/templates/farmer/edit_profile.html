@@ -1,0 +1,145 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<style>
+    .profile-form-container {
+        background: white;
+        padding: 35px 40px;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 95%;
+        margin: 40px auto;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .profile-form-container h2 {
+        text-align: center;
+        color: #2e7d32;
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .form-control, textarea, select, input[type="file"] {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #c8e6c9;
+        border-radius: 10px;
+        font-size: 15px;
+        background: #f9fff9;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .form-control:focus, textarea:focus, select:focus {
+        border-color: #66bb6a;
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+    }
+
+    /* Icons for inputs */
+    .form-group.full_name .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/user.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.farm_location .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/marker.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.contact_info .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/phone.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.crops .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/wheat.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.animals .form-control {
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/cow.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-group.bio textarea {
+        padding-left: 40px;
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/note.png") no-repeat 10px 10px;
+        background-size: 20px;
+    }
+
+    .btn-success {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn-success:hover {
+        background: #388e3c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+</style>
+
+<div class="profile-form-container">
+    <h2>🌱 {% if profile %}Edit{% else %}Create{% endif %} Farmer Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group image">
+            {{ form.image.label }}
+            {{ form.image(class="form-control") }}
+        </div>
+
+        <div class="form-group full_name">
+            {{ form.full_name.label }}
+            {{ form.full_name(class="form-control", size=40) }}
+        </div>
+
+        <div class="form-group farm_location">
+            {{ form.farm_location.label }}
+            {{ form.farm_location(class="form-control", size=40) }}
+        </div>
+
+        <div class="form-group contact_info">
+            {{ form.contact_info.label }}
+            {{ form.contact_info(class="form-control", size=40) }}
+        </div>
+
+        <div class="form-group crops">
+            {{ form.crops.label }}
+            {{ form.crops(class="form-control", size=40) }}
+        </div>
+
+        <div class="form-group animals">
+            {{ form.animals.label }}
+            {{ form.animals(class="form-control", size=40) }}
+        </div>
+
+        <div class="form-group bio">
+            {{ form.bio.label }}
+            {{ form.bio(class="form-control", rows=3, cols=40) }}
+        </div>
+
+        {{ form.submit(class="btn-success") }}
+    </form>
+</div>
+{% endblock %}
+

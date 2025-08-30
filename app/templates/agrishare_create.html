@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AgriShare - Create Share Session</title>
+    <style>
+        /* Basic reset */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9faff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2.5rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c7a2c;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin: 0.8rem 0;
+            line-height: 1.4;
+        }
+
+        img {
+            margin: 1rem 0 1.5rem;
+            max-width: 180px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(42, 122, 226, 0.25);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 0.3rem;
+            color: #2c7a2c;
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: none;
+            border-top: 1px solid #eee;
+        }
+
+        form {
+            margin-top: 1rem;
+        }
+
+        button, input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 0.65rem 1.6rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Share Session Created!</h2>
+        <p>Have the other user scan this QR code to connect:</p>
+        <img src="data:image/png;base64,{{ qr_base64 }}" alt="QR Code">
+        <p>Or open this link:</p>
+        <a href="{{ share_url }}" target="_blank">{{ share_url }}</a>
+
+        <hr>
+
+        <form method="post">
+            {{ form.hidden_tag() }}
+            {{ form.close_session(class="btn") }}
+        </form>
+    </div>
+</body>
+</html>
+

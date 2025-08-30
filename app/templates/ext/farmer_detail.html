@@ -1,0 +1,69 @@
+{% extends "dashboard.html" %}
+{% block title %}Farmer Profile | AgriConnect{% endblock %}
+{% block content %}
+<style>
+.header{background:linear-gradient(135deg,#2d6a4f,#40916c);color:#fff;padding:1rem 1.5rem;border-radius:12px;margin-bottom:1rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:1rem}
+label{display:block;margin:.4rem 0 .2rem}
+input,select,textarea{width:100%;padding:.6rem;border:1px solid #ddd;border-radius:8px}
+button{background:#2d6a4f;color:#fff;border:none;padding:.6rem 1rem;border-radius:8px;margin-top:.6rem;cursor:pointer}
+button:hover{background:#40916c}
+.photo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #e9fce3}
+</style>
+
+<div class="header">
+  <h2>Farmer: {{ row[2] }}</h2>
+  <p>Manage profile, notes and assignment</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>Profile</h3>
+    <img class="photo" src="{{ row[11] or url_for('static', filename='images/profile_fallback.png') }}" alt="photo">
+    <form method="POST">
+      <label>District</label>
+      <input name="district" value="{{ row[3] or '' }}">
+      <label>Location (Village/T.A.)</label>
+      <input name="location" value="{{ row[4] or '' }}">
+      <label>Phone</label>
+      <input name="phone" value="{{ row[5] or '' }}">
+      <label>Crops (comma-separated)</label>
+      <input name="crops" value="{{ row[6] or '' }}">
+      <label>Farm Size (acres)</label>
+      <input type="number" step="0.01" name="farm_size_acres" value="{{ row[7] or '' }}">
+      <label>Assigned Extension Worker</label>
+      <select name="assigned_to">
+        <option value="">(Unassigned)</option>
+        {% for e in extensions %}
+          <option value="{{ e[0] }}" {% if row[8]==e[0] %}selected{% endif %}>{{ e[1] }}</option>
+        {% endfor %}
+      </select>
+      <label>Last Visit</label>
+      <input type="date" name="last_visit" value="{{ row[9] or '' }}">
+      <label>Notes</label>
+      <textarea name="notes" rows="5">{{ row[10] or '' }}</textarea>
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Quick Info</h3>
+    <p><strong>Username:</strong> {{ row[2] }}</p>
+    <p><strong>District:</strong> {{ row[3] or '-' }}</p>
+    <p><strong>Crops:</strong> {{ row[6] or '-' }}</p>
+    <p><strong>Assigned To:</strong>
+      {% set assigned_name = (extensions | selectattr(0,'equalto',row[8]) | list) %}
+      {% if row[8] %}
+        {% for e in extensions %}
+          {% if e[0] == row[8] %} {{ e[1] }} {% endif %}
+        {% endfor %}
+      {% else %}-{% endif %}
+    </p>
+    <hr>
+    <p>Use this page to record visits, update farmer details, and re-assign if needed.</p>
+  </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,15 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Register Equipment</h2>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div>{{ form.name.label }} {{ form.name() }}</div>
+    <div>{{ form.type.label }} {{ form.type() }}</div>
+    <div>{{ form.model.label }} {{ form.model() }}</div>
+    <div>{{ form.condition.label }} {{ form.condition() }}</div>
+    <div>{{ form.location.label }} {{ form.location() }}</div>
+    <div>{{ form.image.label }} {{ form.image() }}</div>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}
+

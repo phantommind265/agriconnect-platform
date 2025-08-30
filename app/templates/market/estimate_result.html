@@ -1,0 +1,31 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header bg-success text-white text-center rounded-top-4">
+            <h4>📊 {{ t("profit_estimation_result") }}</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="mb-3">Crop: <span class="text-primary">{{ crop }}</span></h5>
+            <p><strong>{{ t("month") }}:</strong> {{ month }}</p>
+            <p><strong>{{ t("area") }}:</strong> {{ area }} acres</p>
+            <p><strong>{{ t("yield_per_acre") }}:</strong> {{ yield_per_acre }} tons/acre</p>
+            <hr>
+            <p><strong>{{ t("revenue") }}:</strong> <span class="text-success">{{ revenue }} MWK</span></p>
+            <p><strong>{{ t("cost") }}:</strong> <span class="text-danger">{{ cost }} MWK</span></p>
+            <h5 class="mt-3">
+                💰 {{ t("profit") }}:
+                {% if profit >= 0 %}
+                    <span class="badge bg-success">{{ profit }} MWK</span>
+                {% else %}
+                    <span class="badge bg-danger">{{ profit }} MWK</span>
+                {% endif %}
+            </h5>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{{ url_for('market.estimate_profit') }}" class="btn btn-outline-primary">🔄 {{ t("new_estimation") }}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

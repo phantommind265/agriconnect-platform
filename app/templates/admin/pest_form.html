@@ -1,0 +1,16 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>{{ pest and t("add_pest") or t("add_pest") }}</h2>
+
+<form method="POST">
+	<label>{{ t("name") }}</label><br>
+	<input type="text" name="name" value="{{ pest.name if pest else '' }}"><br>
+	<label>{{ t("symptoms") }}</label><br>
+	<textarea name="symptoms">{{ pest.symptoms if pest else '' }}</textarea><br>
+	<label>{{ t("solution") }}</label><br>
+	<textarea name="solution">{{ pest.solution if pest else '' }}</textarea><br>
+	<label>{{ t("crops_affected") }} (comma separated)</label><br>
+	<input type="text" name="crops" value="{{ pest.crops | join(', ') if pest else '' }}"><br>
+	<button type="submit">{{ t("save") }}</button>
+</form>
+{% endblock %}

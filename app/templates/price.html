@@ -1,0 +1,30 @@
+<script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+<script>
+    const socket = io("http://localhost:5000");
+
+    socket.on('price_update', (data) => {
+        console.log('Price update received:', data);
+        const priceList = document.getElementById('price-list');
+        priceList.innerHTML = ''; // Clear old list
+        data.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.crop} - ${item.price} KES`;
+            priceList.appendChild(li);
+        });
+    });
+
+    socket.on('new_order', (data) => {
+	    console.log('New order received:', data);
+	    // Add order to farmer dashboard
+    });
+
+    socket.on('order_status_update', (data) => {
+	    console.log(`Order ${data.order_id} status changed to ${data.status}`);
+	    // Update buyer's order tracking UI
+    });
+
+
+</script>
+
+<ul id="price-list"></ul>
+

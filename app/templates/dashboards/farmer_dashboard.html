@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriConnect - Farmer Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f4f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .sidebar {
+      height: 600vh;
+      background: #2d3436;
+      color: #fff;
+      position: fixed;
+      top: 0; left: 0;
+      width: 250px;
+      padding-top: 60px;
+    }
+    .sidebar a {
+      color: #dfe6e9;
+      display: block;
+      padding: 12px 20px;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background: #636e72;
+      color: #fff;
+    }
+    .topbar {
+      margin-left: 250px;
+      background: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .card {
+	    border-radius: 15px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+    }
+    /* Dropdown container */
+    .dropdown {
+	    position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+	    top: 40px;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+	.dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #333;
+            background: #fff;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .dropdown-content a:hover {
+            background: #f4f4f4;
+            color: #2e7d32;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h4 class="text-center text-light">👨‍🌾 Farmer</h4>
+    <!--Farmer field and crop dropdown-->
+    <div class="dropdown">
+	    <a href="#"><i class="fa-solid fa-seedling me-2"></i>My Fields & Crops</a>
+	    <div class="dropdown-content">
+		    <a href="{{ url_for('field.my_fields') }}"><i class="fa-solid fa-seedling me-2"></i> Add Field</a>
+		    <a href="{{ url_for('field.my_crops') }}"><i class="fa-solid fa-seedling me-2"></i> Add Crop</a>
+		    <a href="{{ url_for('field.view_fields') }}"><i class="fa-solid fa-seedling me-2"></i> View Fields</a>
+		    <a href="{{ url_for('field.active_crops') }}"><i class="fa-solid fa-seedling me-2"></i> View Crops</a>
+	    </div>
+    </div>
+    <a href="{{ url_for('ai.ai_assistant') }}"><i class="fa-solid fa-robot me-1"></i> AI</a>
+    <!--<a href="{{ url_for('market.market_prices') }}"><i class="fa-solid fa-chart-line me-2"></i> Market Prices</a>-->
+    <a href="#"><i class="fa-solid fa-lightbulb me-2"></i> Advisory</a>
+    <a href="{{ url_for('message_bp.users_list') }}"><i class="fa-solid fa-message me-2"></i> Messaging & Support</a>
+    <!--Market dropdown-->
+    <div class="dropdown">
+	    <a href="#"><i class="fa-solid fa-chart-line me-2"></i> Market</a>
+            <div class="dropdown-content">
+                <a href="{{ url_for('market.market_prices') }}"> Market Prices</a>
+                <a href="{{ url_for('market.estimate_profit') }}">Estimate Profit</a>
+                <a href="{{ url_for('marketplace.market_page') }}">Marketplace</a>
+            </div>
+    </div>
+    <a href="#"><i class="fa-solid fa-bell me-2"></i> Notifications & Alerts</a>
+    <a href="#"><i class="fa-solid fa-file-lines me-2"></i> My Reports</a>
+    <a href="{{ url_for('knowledge_bp.view_knowledge') }}"><i class="fa-solid fa-book me-2"></i> Knowledge Hub</a>
+    <!--Agrishare dropdown-->
+    <div class="dropdown">
+	    <a href="#"><i class="fa-solid fa-handshake-angle"></i> Agrishare</a>
+	    <div class="dropdown-content">
+		    <a href="{{ url_for('agrishare.create_share_session') }}"><i class="fa-solid fa-share"></i>Share</a>
+		    <a href="{{ url_for('agrishare.join_session') }}"><i class="fa-solid fa-arrow-down-short-wide"></i>Receive</a>
+	    </div>
+    </div>
+    <!--Equipment dropdown-->
+    <!--
+    <div class="dropdown">
+	    <a href="#">Equipment</a>
+	    <div class="dropdown-content">
+		    <a href="{{ url_for('equipment.register_equipment') }}">{{ t("register_equipment") }}</a>
+		    <a href="{{ url_for('equipment.list_equipment') }}">{{ t("equipment_list") }}</a>
+		    <a href="{{ url_for('equipment.marketplace') }}">Marketplace</a>
+	    </div>
+    </div>
+    -->
+  </div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <h5>AgriConnect - Farmer Dashboard</h5>
+    <div>
+      <span class="me-3"><i class="fa-solid fa-bell"></i> <span class="badge bg-danger">3</span></span>
+      <span><i class="fa-solid fa-user-circle"></i> {{ current_user.username }}</span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="row g-4">
+
+      <!-- Quick Stats -->
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <h6><a href="{{ url_for('field.view_fields') }}">Total Fields</a></h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+		<h6><a href="{{ url_for('field.active_crops') }}">Active Crops</a></h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <h6><a href="{{ url_for('marketplace.market_page') }}">Market Updates</a></h6>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+		<h6><a href="{{ url_for('message_bp.users_list') }}">Unread Messages</a></h6>
+          <h3>{{ inbox }}</h3>
+        </div>
+      </div>
+
+      <!-- Crop Growth Chart -->
+      <div class="col-md-8">
+        <div class="card p-3">
+          <h6>Crop Growth Monitoring</h6>
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Market Prices -->
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h6>Market Prices</h6>
+          <ul class="list-group">
+            {% for price in market_prices %}
+              <li class="list-group-item d-flex justify-content-between">
+                {{ price.crop }} <span>{{ price.value }} MWK/kg</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Advisory -->
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h6>Latest Advisory</h6>
+          <p>{{ latest_advisory }}</p>
+          <a href="#" class="btn btn-sm btn-success">Read More</a>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h6>Notifications</h6>
+          <ul>
+            {% for note in notifications %}
+              <li>{{ note }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

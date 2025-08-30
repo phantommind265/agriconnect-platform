@@ -1,0 +1,79 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<!--
+<h2>{{ pest.name }}</h2>
+
+<p><strong>{{ t("crops_affected") }}:</strong> {{ pest.crops | join(",") }}</p>
+<p><strong>{{ t("symptoms") }}:</strong> {{ pest.symptoms }}</p>
+<p><strong>{{ t("solution") }}:</strong> {{ pest.solution }}</p>
+
+<a href="{{ url_for('pest.list_pests') }}">{{ t("back_to_all_pests") }}</a>
+-->
+<style>
+    .pest-detail-container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        margin: 20px auto;
+        max-width: 800px;
+        font-family: Arial, sans-serif;
+    }
+
+    .pest-detail-container h2 {
+        color: #2e7d32;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .pest-info {
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .pest-info strong {
+        color: #1b5e20;
+    }
+
+    .info-box {
+        background: #f9fdf9;
+        border-left: 5px solid #43a047;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        background: #388e3c;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .back-link:hover {
+        background: #2e7d32;
+    }
+</style>
+
+<div class="pest-detail-container">
+    <h2>🪲 {{ pest.name }}</h2>
+
+    <div class="info-box pest-info">
+        <p><strong>{{ t("crops_affected") }}:</strong> {{ pest.crops | join(", ") }}</p>
+    </div>
+    <div class="info-box pest-info">
+        <p><strong>{{ t("symptoms") }}:</strong> {{ pest.symptoms }}</p>
+    </div>
+    <div class="info-box pest-info">
+        <p><strong>{{ t("solution") }}:</strong> {{ pest.solution }}</p>
+    </div>
+
+    <a class="back-link" href="{{ url_for('pest.list_pests') }}">⬅ {{ t("back_to_all_pests") }}</a>
+</div>
+{% endblock %}

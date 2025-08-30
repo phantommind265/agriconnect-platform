@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>AgriConnect</title>
+	<style>
+header {
+	background: linear-gradient(135deg, #2e7d32, #4caf50);
+        padding: 12px 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+/* Dropdown container */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+	    top: 40px;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+	.dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: #333;
+            background: #fff;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .dropdown-content a:hover {
+            background: #f4f4f4;
+            color: #2e7d32;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+	/* Call to action button */
+        .cta-btn {
+            background: #ffca28;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #ffc107;
+        }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    nav a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+    }
+
+    nav a.active {
+        background: #1b5e20;
+        font-weight: bold;
+    }
+
+    /* Mobile Friendly */
+    @media (max-width: 768px) {
+        nav {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+	nav a {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    /* Theme Switch (Dark/Light) */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border-color);
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "🌙";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2px;
+  background-color: var(--card-bg);
+  border-radius: 50%;
+  transition: 0.4s;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+}
+
+input:checked + .slider {
+  background-color: var(--link-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+  content: "🌞";
+}
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="{{ url_for('auth.home') }}">🏡 Home</a>
+        <a href="{{ url_for('auth.login') }}">🔑 Login</a>
+	<!-- Market Dropdown ▾-->
+        <div class="dropdown">
+            <a href="#">💰 Market</a>
+            <div class="dropdown-content">
+                <a href="{{ url_for('market.market_prices') }}">📈 {{ t("market_prices") }}</a>
+                <a href="{{ url_for('market.estimate_profit') }}">📊 {{ t("estimate_profit") }}</a>
+                <a href="{{ url_for('marketplace.market_page') }}">🛒 {{ t("marketplace") }}</a>
+            </div>
+        </div>
+	<!--Language dropdown-->
+	<div class="dropdown">
+		<a href="#">Language</a>
+		<div class="dropdown-content">
+			<a href="{{ url_for('auth.set_language', code='en') }}">🇬🇧 English</a>
+			<a href="{{ url_for('auth.set_language', code='ny') }}">🇲🇼 Chichewa</a>
+		</div>
+	</div>
+	<!--Agrishare dropdown-->
+	<div class="dropdown">
+		<a href="#">Agrishare</a>
+		<div class="dropdown-content">
+			<a href="{{ url_for('agrishare.create_share_session') }}">{{ t("share") }}</a>
+			<a href="{{ url_for('agrishare.join_session') }}">{{ t("receive") }}</a>
+		</div>
+	</div>
+	<!--Equipment dropdown-->
+	<div class="dropdown">
+		<a href="#">Equipment</a>
+		<div class="dropdown-content">
+			<a href="{{ url_for('equipment.register_equipment') }}">{{ t("register_equipment") }}</a>
+			<a href="{{ url_for('equipment.list_equipment') }}">{{ t("equipment_list") }}</a>
+			<a href="{{ url_for('equipment.marketplace') }}">Marketplace</a>
+		</div>
+	</div>
+	<!--Events dropdown -->
+	<div class="dropdown">
+		<a href="#">Events</a>
+		<div class="dropdown-content">
+			<a href="{{ url_for('events_bp.view_events') }}">{{ t("view_event") }}</a>
+			<a href="{{ url_for('events_bp.add_event') }}">{{ t("add_event") }}</a>
+			<a href="{{ url_for('events_bp.my_events') }}">{{ t("my_events") }}</a>
+		</div>
+	</div>
+	<!--messages dropdown-->
+	<div class="dropdown">
+		<a href="#">✉️ Messages</a>
+		<div class="dropdown-content">
+			<a href="{{ url_for('message_bp.inbox') }}">{{ t("received_messages") }}</a>
+			<a href="{{ url_for('message_bp.users_list') }}">{{ t("Users") }}</a>
+		</div>
+	</div>
+	<!--knowledge hub dropdown-->
+	<div class="dropdown">
+		<a href="#">knowledge hub</a>
+		<div class="dropdown-content">
+			<a href="{{ url_for('knowledge_bp.view_knowledge') }}">Resources</a>
+			<a href="{{ url_for('knowledge_bp.add_knowledge') }}">Add resources</a>
+		</div>
+	</div>
+        <a href="{{ url_for('crop.crop_list') }}">🌱 {{ t("crops") }}</a>
+        <a href="{{ url_for('pest.list_pests') }}">🐛 {{ t("pest_and_diseases") }}</a>
+        <a href="{{ url_for('ai.ai_assistant') }}">🤖 {{ t("ai_assistant") }}</a>
+        <a href="{{ url_for('weather.weather_page') }}">☀️ {{ t("weather") }}</a>
+        <a href="{{ url_for('forum.forum_home') }}">💬 {{ t("forum discussion") }}</a>
+        <a href="{{ url_for('farmer.all_farmers') }}">👨‍🌾 {{ t("farmer directory") }}</a>
+        <a href="{{ url_for('farmer.view_profile') }}">📇 {{ t("profile") }}</a>
+	<a href="{{ url_for('auth.extension_dashboard') }}">{{ t("extension_worker") }}</a>
+	<a href="{{ url_for('profile_bp.view_profile') }}">{{ t("my_profile") }}</a>
+	<a href="{{ url_for('ext.farmers_list') }}">Famers</a>
+        <a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
+	<label class="theme-switch">
+		<input type="checkbox" id="theme-toggle">
+		<span class="slider"></span>
+	</label>
+    </nav>
+</header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    	{% if messages %}
+    		<div class="flashes">
+	    		{% for category, message in messages %}
+	    			<div class="flash {{ category }}">{{ message }}</div>
+	    		{% endfor %}
+    		</div>
+    	{% endif %}
+    {% endwith %}
+    <main>
+	    {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo & About -->
+    <div class="footer-col">
+      <h2 class="footer-logo">🌱 AgriConnect</h2>
+      <p>
+        Connecting farmers, extension workers & markets in Malawi with technology, knowledge, and opportunities.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/forums">Discussion Forums</a></li>
+        <li><a href="/profiles">Farmers Profiles</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div class="footer-col">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="/knowledge">Knowledge Hub</a></li>
+        <li><a href="/market">Market Prices</a></li>
+        <li><a href="/weather">Weather Updates</a></li>
+        <li><a href="/support">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="footer-col">
+      <h3>Stay Connected</h3>
+      <p>Subscribe for updates on farming tips, market insights, and weather alerts.</p>
+      <form class="newsletter">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    © <span id="year"></span> AgriConnect. All Rights Reserved.
+  </div>
+</footer>
+
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+
+<script>
+  // Auto year update
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+
+    <script>
+async function fetchNotifications() {
+    try {
+        let response = await fetch('/notifications');
+        if (!response.ok) throw new Error('Failed to fetch');
+
+        let data = await response.json();
+        let countElement = document.getElementById("notificationCount");
+        let dropdown = document.getElementById("notificationDropdown");
+
+        if (data.notifications.length > 0) {
+            countElement.style.display = "inline";
+            countElement.textContent = data.notifications.length;
+
+            // Fill dropdown with notifications
+            dropdown.innerHTML = "";
+            data.notifications.forEach(n => {
+                let item = document.createElement("div");
+                item.style.padding = "8px";
+                item.style.borderBottom = "1px solid #eee";
+                item.innerHTML = `<a href="${n.link || '#'}">${n.message}</a><br>
+                                  <small>${n.created_at}</small>`;
+                dropdown.appendChild(item);
+            });
+        } else {
+            countElement.style.display = "none";
+            dropdown.innerHTML = "<div style='padding:8px; text-align:center;'>No new notifications</div>";
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// Auto-refresh every 10 seconds
+setInterval(fetchNotifications, 10000);
+fetchNotifications();
+
+// Toggle dropdown on click
+document.getElementById("notificationBell").addEventListener("click", function(e) {
+    e.preventDefault();
+    let dropdown = document.getElementById("notificationDropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+});
+    </script>
+
+    <script>
+	    const toggleSwitch = document.getElementById("theme-toggle");
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    toggleSwitch.checked = savedTheme === "dark";
+  }
+
+  // Switch theme
+  toggleSwitch.addEventListener("change", () => {
+    let newTheme = toggleSwitch.checked ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  });
+    </script>
+
+</body>
+</html>

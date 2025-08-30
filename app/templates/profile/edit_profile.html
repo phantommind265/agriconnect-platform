@@ -1,0 +1,14 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Edit Profile</h2>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.profile_pic.label }}<br>
+        {{ form.profile_pic() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

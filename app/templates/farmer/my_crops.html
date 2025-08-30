@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>My Crops</h2>
+
+    <!-- Form to add a new crop -->
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group mb-2">
+            {{ form.name.label }} 
+            {{ form.name(class="form-control") }}
+        </div>
+        <div class="form-group mb-2">
+            {{ form.season.label }} 
+            {{ form.season(class="form-control") }}
+        </div>
+        <div class="form-group mb-2">
+            {{ form.expected_yield.label }} 
+            {{ form.expected_yield(class="form-control") }}
+        </div>
+        <div class="form-group mb-2">
+            {{ form.field_id.label }} 
+            {{ form.field_id(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-success mt-2") }}
+    </form>
+
+    <hr>
+    <h3>My Registered Crops</h3>
+    <ul class="list-group">
+	    {% for crop in crops %}
+	    <li class="list-group-item">
+		    <b>{{ crop[1] }}</b> ({{ crop[2] }}) – Expected yield: {{ crop[3] }} tonnes/acre
+		    <br><small>Planted: {{ crop[4] }} | Field: {{ crop[5] }}</small>
+		    <div class="mt-2">
+			    <a href="{{ url_for('field.edit_crop', crop_id=crop[0]) }}" class="btn btn-sm btn-warning">Edit</a>
+			    <form method="POST" action="{{ url_for('field.delete_crop', crop_id=crop[0]) }}" style="display:inline;">
+				    {{ form.hidden_tag() }}
+				    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+			    </form>
+		    </div>
+	    </li>
+	    {% else %}
+	    <li class="list-group-item">No crops registered yet.</li>
+	    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+

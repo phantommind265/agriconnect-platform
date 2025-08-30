@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">🌱 My Fields</h2>
+
+    <a href="{{ url_for('field.my_fields') }}" class="btn btn-success mb-3">➕ Add Field</a>
+
+    {% if fields %}
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Size (acres)</th>
+                    <th>Location</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for field in fields %}
+                <tr>
+                    <td>{{ field[1] }}</td>
+                    <td>{{ field[2] }}</td>
+                    <td>{{ field[3] }}</td>
+                    <td>{{ field[4] }}</td>
+                    <td>
+                        <a href="{{ url_for('field.edit_field', field_id=field[0]) }}" class="btn btn-sm btn-primary">Edit</a>
+			<a href="{{ url_for('field.delete_field', field_id=field[0]) }}" 
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this field?')">
+				Delete
+			</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">No fields added yet. Start by adding one!</div>
+    {% endif %}
+</div>
+{% endblock %}
+

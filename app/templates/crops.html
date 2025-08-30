@@ -1,0 +1,158 @@
+{% extends "dashboard.html" %}
+
+<!--
+<h2>{{ t("crop_list") }}</h2>
+
+<form method="get" style="margin-bottom: 1rem;">
+    <input type="text" name="q" placeholder="{{ t('search_crop')}}" value="{{ request.args.get('q', '') }}">
+    <select name="soil">
+        <option value="">{{ t("any_soil") }}</option>
+        <option value="Loamy">Loamy</option>
+        <option value="Sandy">Sandy</option>
+        <option value="Clay">Clay</option>
+    </select>
+    <select name="season">
+        <option value="">{{ t("any_season") }}</option>
+        <option value="Rainy">Rainy</option>
+        <option value="Dry">Dry</option>
+    </select>
+    <button type="submit">{{ t("filter") }}</button>
+</form>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+    {% for crop in crops %}
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; background-color: #fff;">
+        <h3>{{ crop.name }}</h3>
+        <p>{{ crop.description[:100] }}......</p>
+        <a href="{{ url_for('crop.crop_detail', name=crop.name) }}">{{ t("view_details") }}</a>
+    </div>
+    {% else %}
+    <p>{{ t("no_crops_found") }}</p>
+    {% endfor %}
+</div>
+-->
+
+{% block content %}
+<style>
+    .crop-container {
+        margin-top: 20px;
+    }
+
+    .filter-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+        background: #f1f8e9;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .filter-form input,
+    .filter-form select,
+    .filter-form button {
+        padding: 10px;
+        border: 1px solid #c8e6c9;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .filter-form input,
+    .filter-form select {
+        flex: 1;
+        min-width: 150px;
+    }
+
+    .filter-form button {
+        background: #43a047;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .filter-form button:hover {
+        background: #2e7d32;
+    }
+
+    .crop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .crop-card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .crop-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    .crop-card h3 {
+        margin-bottom: 10px;
+        color: #2e7d32;
+    }
+
+    .crop-card p {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 12px;
+    }
+
+    .crop-card a {
+        text-decoration: none;
+        background: #66bb6a;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: background 0.3s;
+    }
+
+    .crop-card a:hover {
+        background: #388e3c;
+    }
+</style>
+
+<div class="crop-container">
+    <h2 style="color:#2e7d32;">🌱 {{ t("crop_list") }}</h2>
+
+    <form method="get" class="filter-form">
+        <input type="text" name="q" placeholder="{{ t('search_crop')}}" value="{{ request.args.get('q', '') }}">
+        <select name="soil">
+            <option value="">{{ t("any_soil") }}</option>
+            <option value="Loamy">Loamy</option>
+            <option value="Sandy">Sandy</option>
+            <option value="Clay">Clay</option>
+        </select>
+        <select name="season">
+            <option value="">{{ t("any_season") }}</option>
+            <option value="Rainy">Rainy</option>
+            <option value="Dry">Dry</option>
+        </select>
+        <button type="submit">🔍 {{ t("filter") }}</button>
+    </form>
+
+    <div class="crop-grid">
+        {% for crop in crops %}
+        <div class="crop-card">
+            <h3>🌿 {{ crop.name }}</h3>
+            <p>{{ crop.description[:100] }}...</p>
+            <a href="{{ url_for('crop.crop_detail', name=crop.name) }}">📖 {{ t("view_details") }}</a>
+        </div>
+        {% else %}
+        <p style="color:gray; text-align:center;">{{ t("no_crops_found") }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

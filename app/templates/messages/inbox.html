@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Inbox</h2>
+<ul>
+  {% for msg in messages %}
+    <li>
+      <strong>{{ msg['sender'] }}</strong>: {{ msg['content'] }}
+      <small>({{ msg['timestamp'] }})</small>
+    </li>
+  {% else %}
+    <li>No messages yet.</li>
+  {% endfor %}
+</ul>
+<a href="{{ url_for('message_bp.users_list') }}">Send a message</a>
+{% endblock %}

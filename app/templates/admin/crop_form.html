@@ -1,0 +1,19 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>{{ crop and t("edit_crop") or t("add_crop") }}</h2>
+
+<form method="POT">
+	<label>{{ t("name") }}</label><br>
+	<input type="text" name="name" value="{{ crop.name if crop else '' }}"><br>
+	<label>{{ t("description") }}</label><br>
+	<textarea name="description">{{ crop.description if crop else '' }}</textarea><br>
+	<label>{{ t("growth_cycle") }}</label><br>
+	<input type="text" name="growth_cycle" value="{{ crop.growth_cycle if crop else '' }}"><br>
+	<label>{{ t("soil_type") }}</label><br>
+	<input type="text" name="soil_type" value="{{ crop.soil_type if crop else '' }}"><br>
+	<label>{{ t("season") }}</label><br>
+	<input type="text" name="season" value="{{ crop.season if crop else '' }}"><br>
+
+	<button type="submit">{{ t("save") }}</button>
+</form>
+{% endblock %}

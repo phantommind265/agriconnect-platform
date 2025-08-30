@@ -1,0 +1,11 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Request Booking for {{ equipment[1] }}</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>{{ form.start_date.label }}: {{ form.start_date() }}</p>
+    <p>{{ form.end_date.label }}: {{ form.end_date() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

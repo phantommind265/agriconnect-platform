@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Available Products</h1>
+    <ul id="product-list"></ul>
+
+    <script>
+        const socket = io("http://localhost:5000");
+
+        socket.on('connect', () => {
+            console.log("Connected to SocketIO");
+        });
+
+        socket.on('new_product', (data) => {
+            const list = document.getElementById('product-list');
+            const li = document.createElement('li');
+            li.textContent = `${data.name} - ${data.quantity} ${data.unit} @ ${data.price}`;
+            list.prepend(li);
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<style>
+    .login-container {
+        background: white;
+        padding: 35px 40px;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        max-width: 420px;
+        width: 90%;
+        margin: 40px auto;
+        text-align: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container h2 {
+        color: #2e7d32;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #c8e6c9;
+        border-radius: 10px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        background: #f9fff9 url("https://img.icons8.com/ios-glyphs/30/4caf50/leaf.png") no-repeat 10px center;
+        background-size: 20px;
+    }
+
+    .form-control:focus {
+        border-color: #66bb6a;
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+    }
+
+    .form-group.username .form-control {
+        background-image: url("https://img.icons8.com/ios-glyphs/30/4caf50/user.png");
+    }
+
+    .form-group.password .form-control {
+        background-image: url("https://img.icons8.com/ios-glyphs/30/4caf50/lock.png");
+    }
+
+    .btn-primary {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background: #388e3c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .login-container p {
+        margin-top: 20px;
+        font-size: 15px;
+        color: #555;
+    }
+
+    .login-container p a {
+        color: #2e7d32;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .login-container p a:hover {
+        text-decoration: underline;
+    }
+	</style>
+</head>
+<body>
+	<div class="login-container">
+		<h2>🌱 {{ t("login") }}</h2>
+		<form method="POST">
+			{{ form.hidden_tag() }}
+
+			<div class="form-group username">
+				{{ form.username.label }}
+				{{ form.username(class="form-control", size=32) }}
+			</div>
+
+			<div class="form-group password">
+            			{{ form.password.label }}
+            			{{ form.password(class="form-control", size=32) }}
+        		</div>
+
+        		<div style="margin-top: 10px;">
+            			{{ form.submit(class="btn-primary") }}
+        		</div>
+		</form>
+
+		<p>
+		{{ t("no_account") }}
+		<a href="{{ url_for('auth.register') }}">{{ t("register_now") }}</a>
+		</p>
+	</div>
+</body>
+</html>

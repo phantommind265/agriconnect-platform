@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriConnect - Help & FAQ</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: #2d6a4f;
+        color: white;
+        padding: 1rem 2rem;
+        text-align: center;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 2rem;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #1b4332;
+    }
+    .accordion {
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .accordion button {
+        background: #f1f1f1;
+        color: #333;
+        cursor: pointer;
+        padding: 1rem;
+        border: none;
+        text-align: left;
+        outline: none;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    .accordion button:hover {
+        background: #e6e6e6;
+    }
+    .accordion .panel {
+        padding: 1rem;
+        background: white;
+        display: none;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h2>AgriConnect Help & FAQ</h2>
+</header>
+
+<div class="container">
+    <h1>Need Help? We’ve Got You Covered</h1>
+
+    <!-- Example FAQ Item -->
+    <div class="accordion">
+        <button>How do I create an account?</button>
+        <div class="panel">
+            <p>1. Go to the Register page.<br>
+            2. Fill in your name, email/phone, password, and role.<br>
+            3. Click Register and log in.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button>I forgot my password. What should I do?</button>
+        <div class="panel">
+            <p>Click the "Forgot Password" link on the Login page and follow the steps to reset your password.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button>How do I send a message to another user?</button>
+        <div class="panel">
+            <p>1. Go to Messaging in your Dashboard.<br>
+            2. Select the user.<br>
+            3. Type your message and click Send.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button>How do I post an item in the Marketplace?</button>
+        <div class="panel">
+            <p>1. Go to Marketplace.<br>
+            2. Click Post New Listing.<br>
+            3. Add details and price.<br>
+            4. Click Submit.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <button>Contact Support</button>
+        <div class="panel">
+            <p>📧 Email: support@agriconnect.com<br>
+               📞 Phone/WhatsApp: +265-XXX-XXX-XXX<br>
+               💬 Chat with Admin in the Dashboard</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Accordion Script
+    const acc = document.querySelectorAll(".accordion button");
+    acc.forEach(btn => {
+        btn.addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    });
+</script>
+
+</body>
+</html>

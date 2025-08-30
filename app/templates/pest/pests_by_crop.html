@@ -1,0 +1,130 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<!--
+<h2>{{ t("pests_for_crop") }}: {{ crop }}</h2>
+{% if pests %}
+<table>
+	<thead>
+		<tr>
+			<th>{{ t("name") }}</th>
+			<th>{{ t("symptoms") }}</th>
+			<th>{{ t("solution") }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for pest in pests %}
+		<tr>
+			<td>{{ pest.name }}</td>
+			<td>{{ pest.symptoms }}</td>
+			<td>{{ pest.solution }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+	<p>{{ t("no_pests_found") }}</p>
+{% endif %}
+
+<a href="{{ url_for('pest.list_pests') }}">{{ t("back_to_all_pests") }}</a>
+
+-->
+<style>
+    .crop-pest-container {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        margin: 20px auto;
+        max-width: 1000px;
+        font-family: Arial, sans-serif;
+    }
+
+    .crop-pest-container h2 {
+        color: #2e7d32;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .crop-pest-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .crop-pest-container th,
+    .crop-pest-container td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .crop-pest-container th {
+        background-color: #f1f8f4;
+        color: #2e7d32;
+        font-weight: bold;
+    }
+
+    .crop-pest-container tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .crop-pest-container tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .crop-pest-container p {
+        text-align: center;
+        color: gray;
+        font-style: italic;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 10px;
+        background: #388e3c;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .back-link:hover {
+        background: #2e7d32;
+    }
+</style>
+
+<div class="crop-pest-container">
+    <h2>🪲 {{ t("pests_for_crop") }}: {{ crop }}</h2>
+
+    {% if pests %}
+    <table>
+        <thead>
+            <tr>
+                <th>{{ t("name") }}</th>
+                <th>{{ t("symptoms") }}</th>
+                <th>{{ t("solution") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pest in pests %}
+            <tr>
+                <td>{{ pest.name }}</td>
+                <td>{{ pest.symptoms }}</td>
+                <td>{{ pest.solution }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>{{ t("no_pests_found") }}</p>
+    {% endif %}
+
+    <a class="back-link" href="{{ url_for('pest.list_pests') }}">⬅ {{ t("back_to_all_pests") }}</a>
+</div>
+{% endblock %}
+
+

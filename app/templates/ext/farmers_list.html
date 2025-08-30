@@ -1,0 +1,67 @@
+{% extends "dashboard.html" %}
+{% block title %}Farmer Management | AgriConnect{% endblock %}
+{% block content %}
+<style>
+.page-header{background:linear-gradient(135deg,#2d6a4f,#40916c);color:#fff;padding:1rem 1.5rem;border-radius:12px;margin-bottom:1rem}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:1rem;margin-bottom:1rem}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+input,select,button{padding:.6rem .8rem;border:1px solid #ddd;border-radius:8px}
+button{background:#2d6a4f;color:#fff;border:none;cursor:pointer}
+button:hover{background:#40916c}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:.6rem;border-bottom:1px solid #eee;text-align:left}
+.badge{background:#e9fce3;color:#2d6a4f;padding:.2rem .5rem;border-radius:999px;font-size:.8rem}
+</style>
+
+<div class="page-header">
+  <h2>Farmer Management</h2>
+  <p>Search, filter and manage your assigned farmers.</p>
+</div>
+
+<div class="card">
+  <form method="GET" class="filters">
+    <input type="text" name="q" placeholder="Search by name/phone/location" value="{{ q or '' }}">
+    <select name="district">
+      <option value="">All districts</option>
+      {% for d in districts %}
+        <option value="{{ d }}" {% if district == d %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+    <input type="text" name="crop" placeholder="Filter by crop (e.g. maize)" value="{{ crop or '' }}">
+    <button type="submit">Apply</button>
+    <a href="{{ url_for('ext.farmer_new') }}" style="margin-left:auto;"><button type="button">+ New Farmer Profile</button></a>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Farmer</th>
+        <th>District</th>
+        <th>Location</th>
+        <th>Phone</th>
+        <th>Crops</th>
+        <th>Farm Size</th>
+        <th>Last Visit</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for f in farmers %}
+      <tr>
+        <td><strong>{{ f[2] }}</strong></td>
+        <td>{{ f[3] or '-' }}</td>
+        <td>{{ f[4] or '-' }}</td>
+        <td>{{ f[5] or '-' }}</td>
+        <td>{% if f[6] %}<span class="badge">{{ f[6] }}</span>{% else %}-{% endif %}</td>
+        <td>{{ f[7] or '-' }}</td>
+        <td>{{ f[8] or '-' }}</td>
+        <td><a href="{{ url_for('ext.farmer_detail', fp_id=f[0]) }}"><button type="button">Open</button></a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="8" style="text-align:center;color:#777">No farmers found.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Marketplace</h2>
+<div id="product-list">
+    {% for product in products %}
+        <div>
+            <p>{{ product.name }} - {{ product.quantity }} {{ product.unit }} at {{ product.price }} Ksh</p>
+            <form method="POST" action="{{ url_for('supply_chain.create_order') }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="number" name="quantity" placeholder="Quantity" required>
+                <button type="submit">Order</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+<script src="//cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/supply_chain.js') }}"></script>
+{% endblock %}
+

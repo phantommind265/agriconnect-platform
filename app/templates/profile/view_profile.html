@@ -1,0 +1,9 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>My Profile</h2>
+<img src="{{ url_for('static', filename='profile_pic/' ~ (user['profile_pic'] or 'default.png')) }}"
+     alt="Profile Picture" width="150" style="border-radius:50%;">
+<p><strong>Username:</strong> {{ user['username'] }}</p>
+<a href="{{ url_for('profile_bp.edit_profile') }}">Edit Profile</a>
+
+{% endblock %}

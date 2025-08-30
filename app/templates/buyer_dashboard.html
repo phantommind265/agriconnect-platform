@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buyer Dashboard</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Buyer Dashboard</h1>
+    <ul id="status-list"></ul>
+
+    <script>
+        const socket = io("http://localhost:5000");
+
+        socket.on('order_status_update', (data) => {
+            const list = document.getElementById('status-list');
+            const li = document.createElement('li');
+            li.textContent = `Order ${data.order_id} status: ${data.status}`;
+            list.prepend(li);
+        });
+    </script>
+</body>
+</html>
+

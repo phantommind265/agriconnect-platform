@@ -1,0 +1,30 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>{{ t("manage_pests") }}</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>{{ t("name") }}</th>
+			<th>{{ t("symptoms") }}</th>
+			<th>{{ t("solution") }}</th>
+			<th>{{ t("actions") }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for pest in pests %}
+		<tr>
+			<td>{{ pest.name }}</td>
+			<td>{{ pest.symptoms[:60] }}......</td>
+			<td>{{ pest.solution[:60] }}......</td>
+			<td>
+				<a href="#">{{ t("edit") }}</a> |
+				<form method="POST" action="{{ url_for('admin.delete_pest', pest_name=pest_name) }}" style="display: inline;">
+					<button type="submit" onclick="return confirm('{{ t('confirm_delete_pests') }}')">{{ t("delete") }}</button>
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

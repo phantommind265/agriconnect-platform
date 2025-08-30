@@ -1,0 +1,243 @@
+[
+  {
+    "name": "Fall Armyworm",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Chewed leaves, ragged holes, frass in whorls",
+    "solution": "Pheromone traps for monitoring, collect/destroy egg masses and larvae, neem‑based sprays or azadirachtin"
+  },
+  {
+    "name": "African Maize Stalk Borer (Busseola fusca)",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Small holes ('windows') in new leaves, yellowing leaf hearts, dead hearts, stem tunneling",
+    "solution": "Push–pull intercrops (Desmodium + Napier grass), early planting, breaking stems postharvest, release parasitic wasps, neem or ash in whorl"
+  },
+  {
+    "name": "Spotted Stem Borer (Chilo partellus)",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Pinholes and 'windows' in leaf whorls, elongated lesions, dead hearts, stem bore tunnels",
+    "solution": "Intercrop, Trichogramma egg‑parasitoids, neem treatments, cultural sanitation, early detection and spray insecticides"
+  },
+  {
+    "name": "Yellow Top Borer (Chilo infuscatellus)",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Small holes in leaves, shoot tips killed, dead hearts, frass in stems",
+    "solution": "Remove and destroy affected plants, insecticide application at early instars, crop hygiene"
+  },
+  {
+    "name": "African Sugarcane Borer (Eldana saccharina)",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Stem tunneling, brittle stalks, broken stems, frass deposits",
+    "solution": "Intercropping, biological control with parasitic wasps, destroy crop residues, maintain plant health"
+  },
+  {
+    "name": "Corn Aphid (Rhopalosiphum maidis)",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Yellowing and stunting, sticky honeydew, sooty mold, virus transmission (e.g. maize dwarf mosaic)",
+    "solution": "Encourage predators (ladybugs, lacewings), use resistant varieties, apply insecticides (e.g. acetamiprid) if heavy"
+  },
+  {
+    "name": "Shoot Bug / Peregrinus maidis",
+    "crops": ["Maize", "Sorghum"],
+    "symptoms": "Leaf yellowing, wilting, stem weakening, plant death, transmits MMV and MStV viruses",
+    "solution": "Use vector‑resistant varieties, field sanitation, remove alternate hosts, control with insecticides, monitor early"
+  },
+  {
+    "name": "Two‑spotted Spider Mite (Tetranychus urticae)",
+    "crops": ["Maize"],
+    "symptoms": "Yellowish stippling on leaves, webbing under leaves, leaf drying and shriveling",
+    "solution": "Introduce predatory mites and lady beetles, spray dicofol or wettable sulfur or chlorfenvinphos"
+  },
+  {
+    "name": "Banks Grass Mite (Oligonychus pratensis)",
+    "crops": ["Maize"],
+    "symptoms": "Leaf yellowing, stippling, webbing similar to two‑spotted mite, earlier season infestations",
+    "solution": "Biological predators, early detection, chemical sprays like sulfur or chlorfenapyr"
+  },
+  {
+    "name": "Aphids (general)",
+    "crops": ["Maize"],
+    "symptoms": "Sap‑sucking causing mottling, stunting, sooty mold, viral disease spread",
+    "solution": "Natural enemies (ladybirds, hover flies), seed treatment, resistant varieties, insecticides if severe"
+  },
+  {
+    "name": "African Pink Stem Borer (Sesamia calamistis)",
+    "crops": ["Maize"],
+    "symptoms": "Larvae bore stem; dead hearts, broken stem, tunnels in ear sheaths",
+    "solution": "Pull and burn dead‑hearts, apply granules (e.g. carbofuran, carbaryl) in whorls at specific crop ages"
+  },
+  {
+    "name": "Maize Bollworm (Helicoverpa armigera)",
+    "crops": ["Maize"],
+    "symptoms": "Holes in whorl and ears, faecal granules near feeding, ear damage, open tips",
+    "solution": "Spray spinosad, indoxacarb or thiodicarb upon egg-hatch, two timed applications, resistant varieties"
+  },
+  {
+    "name": "Cutworms",
+    "crops": ["Maize"],
+    "symptoms": "Seedlings cut off at ground level, wilting or missing plants",
+    "solution": "Seed dressing, soil baiting, keep field weed‑free, rotate crops"
+  },
+  {
+    "name": "Maize Weevil",
+    "crops": ["Maize"],
+    "symptoms": "Storage pest: holes in kernels, weight and quality loss, larvae inside grain",
+    "solution": "Proper storage (airtight containers), dust with spinosad or phosphine fumigation"
+  },
+  {
+    "name": "Larger Grain Borer",
+    "crops": ["Maize"],
+    "symptoms": "Grains eaten completely inside storage, tunnels throughout kernels",
+    "solution": "Dry maize thoroughly before storage, use proper storage bins, treat with recommended dusts"
+  },
+  {
+    "name": "Rodents (rats/mice)",
+    "crops": ["Maize"],
+    "symptoms": "Gnawed cobs, eaten kernels, grain spoilage",
+    "solution": "Use rat traps or poison, maintain hygiene around storage, encourage predators"
+  },
+  {
+    "name": "Sorghum Shoot Fly",
+    "crops": ["Sorghum"],
+    "symptoms": "Seedling dead‑heart: central shoot withers and dies within 1 month",
+    "solution": "Early sowing, high seed rate, seed treatment (imidacloprid or thiamethoxam), intercropping, soil granules"
+  },
+  {
+    "name": "Sorghum Stem Borer",
+    "crops": ["Sorghum"],
+    "symptoms": "Ragged‑edged oblong holes in leaves, defoliation, stem borers later",
+    "solution": "Deep ploughing, synchronized planting, pheromone traps, collect larvae, neem or cyantraniliprole seed treatment"
+  },
+  {
+    "name": "Sorghum Midge (Stenodiplosis sorghicola)",
+    "crops": ["Sorghum"],
+    "symptoms": "Chaffy (shrunken) grains, emergence holes, pupal cases visible on spikelets",
+    "solution": "Synchronized planting, destroy residues, conserve parasitoids, plant tolerant varieties"
+  },
+  {
+    "name": "Sorghum Earhead Bug (Calocoris angustatus)",
+    "crops": ["Sorghum"],
+    "symptoms": "Grain sucking causing dusty black chaffy head‑tips, milky sap ooze",
+    "solution": "Monitor earheads, encourage natural enemies, spray appropriate insecticide early"
+  },
+  {
+    "name": "Brown Planthopper",
+    "crops": ["Rice"],
+    "symptoms": "Plants yellow, wilt; hopper burn; stunted growth; transmits grassy stunt and ragged stunt viruses",
+    "solution": "Use resistant rice varieties; maintain field hygiene; avoid over‑fertilization; apply approved insecticides only when thresholds reached"
+  },
+  {
+    "name": "Rice Stem Borer",
+    "crops": ["Rice"],
+    "symptoms": "Deadhearts in vegetative stage; whiteheads at grain‑fill; tunnels in stems",
+    "solution": "Plant early; use pheromone traps; remove stubble; apply biological control (parasitoids)"
+  },
+  {
+    "name": "Cassava Mosaic Virus (CMD)",
+    "crops": ["Cassava"],
+    "symptoms": "Mosaic leaf chlorosis; distortion; stunting; poor yields",
+    "solution": "Use disease‑resistant varieties; rogue infected plants; plant virus‑free planting material"
+  },
+  {
+    "name": "Cassava Brown Streak Disease (CBSD)",
+    "crops": ["Cassava"],
+    "symptoms": "Brown streaks on roots and stems; necrotic roots; above‑ground yellowing leaves",
+    "solution": "Use tolerant varieties; remove and destroy infected plants; plant clean seed"
+  },
+  {
+    "name": "Groundnut Leaf Miner",
+    "crops": ["Groundnut"],
+    "symptoms": "Leaf mining trails; defoliation; reduced pod set",
+    "solution": "Intercrop; timely planting; biological control where available"
+  },
+  {
+    "name": "Bean Aphid",
+    "crops": ["Beans", "Cowpea"],
+    "symptoms": "Leaf curling; stunting; honeydew and sooty mold; virus transmission",
+    "solution": "Encourage predators (ladybugs); use resistant varieties; spray neem or insecticide if heavy"
+  },
+  {
+    "name": "Cowpea Pod Borer (Maruca vitrata)",
+    "crops": ["Cowpea"],
+    "symptoms": "Larvae bore into buds and pods; malformed pods; yield loss",
+    "solution": "Deploy pheromone traps; intercropping; timely spraying with biopesticides"
+  },
+  {
+    "name": "Tobacco Thrips",
+    "crops": ["Tobacco"],
+    "symptoms": "Silvery leaf stippling; distorted new leaves; flower bud deformation",
+    "solution": "Use insect-proof nets; apply sticky traps; spray spinosad or neem"
+  },
+  {
+    "name": "Tobacco Cutworm",
+    "crops": ["Tobacco"],
+    "symptoms": "Seedlings cut at soil level; missing seedlings; chewed leaves",
+    "solution": "Seed dressing; clean field; baits; early planting"
+  },
+  {
+    "name": "Cotton Bollworm (Helicoverpa armigera)",
+    "crops": ["Cotton"],
+    "symptoms": "Holes in bolls and flowers; larval frass on blooms; premature boll opening",
+    "solution": "Spray spinosad/indoxacarb; pheromone traps; use Bt‑cotton where permitted"
+  },
+  {
+    "name": "Sunflower Rust (Puccinia helianthi)",
+    "crops": ["Sunflower"],
+    "symptoms": "Orange pustules on leaf surface; leaf defoliation; reduced head size",
+    "solution": "Use resistant hybrids; practice crop rotation; apply fungicide early"
+  },
+  {
+    "name": "Tomato Leaf Miner (Tuta absoluta)",
+    "crops": ["Tomato"],
+    "symptoms": "Leaf mines; rolled leaves; fruit scarring; severe defoliation",
+    "solution": "Use pheromone traps; biological control (Trichogramma); insect netting; early insecticide use"
+  },
+  {
+    "name": "Tomato Fruit Worm (Helicoverpa armigera)",
+    "crops": ["Tomato"],
+    "symptoms": "Chewed fruit; discoloration; frass around entry holes",
+    "solution": "Remove infected fruits; spray compatible insecticides or neem; use pheromone monitoring"
+  },
+  {
+    "name": "African Bollworm",
+    "crops": ["Groundnut", "Tomato", "Cotton"],
+    "symptoms": "Feeding holes on pods/flowers/leaves; larval frass",
+    "solution": "Intercrop; trap cropping; insecticide timing on egg hatch"
+  },
+  {
+    "name": "Okra Shoot Fly (Atherigona spp.)",
+    "crops": ["Okra"],
+    "symptoms": "Central shoot killed; seedling dead hearts",
+    "solution": "Seed treatment; early sowing; intercropping; field sanitation"
+  },
+  {
+    "name": "Onion Thrips",
+    "crops": ["Onion", "Garlic"],
+    "symptoms": "Silver streaks on leaves; curled leaf tips; bulb shrinkage",
+    "solution": "Use reflective mulches; release predators; apply sticky traps; spray insecticides when needed"
+  },
+  {
+    "name": "Cabbage Loopers",
+    "crops": ["Cabbage", "Lettuce"],
+    "symptoms": "Large semi-circular holes in leaves; frass on lower leaves; skeletonized foliage",
+    "solution": "Handpick; encourage parasitic wasps; neem spray"
+  },
+  {
+    "name": "Diamondback Moth",
+    "crops": ["Cabbage", "Brassicas"],
+    "symptoms": "Small holes between veins; webbing on underside; stunted heads",
+    "solution": "Use row covers; apply Bt‑based bioinsecticides; release parasitoids"
+  },
+  {
+    "name": "Bean Thrips",
+    "crops": ["Beans", "Leafy vegetables"],
+    "symptoms": "Silvery speckling on leaves; leaf distortion; pod discoloration",
+    "solution": "Encourage natural enemies; spray insecticidal soap or neem; field sanitation"
+  },
+  {
+    "name": "Banana Weevil",
+    "crops": ["Banana"],
+    "symptoms": "Exit holes in pseudostem; wilting; physical stalk breakage; reduced bunch weight",
+    "solution": "Remove and destroy residues; use clean planting material; apply entomopathogenic nematodes or biopesticides"
+  }
+]
+

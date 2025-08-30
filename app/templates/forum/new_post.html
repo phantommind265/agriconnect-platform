@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2> Start a New Discussion</h2>
+
+<form method="POST">
+	{{ form.hidden_tag() }}
+
+	{{ form.title.label }}<br>
+	{{ form.title(class="form-content") }}<br><br>
+
+	{{ form.content.label }}<br>
+	{{ form.content(class="form-control", rows=4) }}<br><br>
+
+	{{ form.submit(class="btn btn-success") }}
+	<a href="{{ url_for('forum.forum_home') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">🌾 My Crops</h2>
+
+    <a href="{{ url_for('field.my_crops') }}" class="btn btn-success mb-3">➕ Add Crop</a>
+
+    {% if crops %}
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Crop Name</th>
+                    <th>Season</th>
+                    <th>Expected Yield</th>
+                    <th>Planted At</th>
+                    <th>Field</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for crop in crops %}
+                <tr>
+                    <td>{{ crop[1] }}</td>
+                    <td>{{ crop[2] }}</td>
+                    <td>{{ crop[3] }}</td>
+                    <td>{{ crop[4] }}</td>
+                    <td>{{ crop[5] }}</td>
+                    <td>
+                        <a href="{{ url_for('field.edit_crop', crop_id=crop[0]) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{ url_for('field.delete_crop', crop_id=crop[0]) }}" 
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this crop?')">
+                           Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">No crops added yet. Start by adding one!</div>
+    {% endif %}
+</div>
+{% endblock %}
+

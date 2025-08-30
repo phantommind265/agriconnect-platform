@@ -1,0 +1,28 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>{{ t("manage_crops") }}</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>{{ t("name") }}</th>
+			<th>{{ t("description") }}</th>
+			<th>{{ t("actions") }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for crop in crops %}
+		<tr>
+			<td>{{ crop.name }}</td>
+			<td>{{ crop.description[:80] }}......</td>
+			<td>
+				<a href="#">{{ t("edit") }}</a> |
+				<form method="POST" action="{{ url_for('admin.delete_crop', crop_name=crop_name) }}" style="display: inline;">
+					<button type="submit" onclick="return confirm('{{ t('confirm_delete') }}')">{{ t("delete") }}</button>
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

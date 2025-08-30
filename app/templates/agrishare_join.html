@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join AgriShare Session</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(to bottom right, #f5fff5, #e6ffe6);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: #2f6d31;
+            padding: 15px 30px;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        main {
+            max-width: 600px;
+            background: white;
+            margin: 40px auto;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #2f6d31;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"], 
+        input[type="url"], 
+        input[type="search"], 
+        input[type="email"], 
+        input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border: 1px solid #2f6d31;
+            outline: none;
+        }
+
+        button, input[type="submit"] {
+            padding: 10px;
+            background: #2f6d31;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background: #265826;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        #qr-reader {
+            width: 100%;
+            max-width: 350px;
+            margin: auto;
+        }
+
+        #qr-reader-results {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        📡 Join AgriShare Session
+    </header>
+
+    <main>
+        <h2>Enter Session Details</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <label>{{ form.session_value.label }}</label>
+            {{ form.session_value(size=40, placeholder="Session URL or ID") }}
+            {{ form.submit() }}
+        </form>
+
+        <hr>
+
+        <h3>Or Scan QR Code</h3>
+        <div id="qr-reader"></div>
+        <div id="qr-reader-results"></div>
+    </main>
+
+    <script>
+        function onScanSuccess(decodedText) {
+            document.getElementById('qr-reader-results').innerHTML = `Scanned: ${decodedText}`;
+            window.location.href = decodedText;
+        }
+
+        function onScanError(errorMessage) {
+            // ignore scanning errors
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", 
+            { fps: 10, qrbox: 250 },
+            false
+        );
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+</body>
+</html>
+

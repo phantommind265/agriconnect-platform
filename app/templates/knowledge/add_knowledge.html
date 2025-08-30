@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-container">
+    <h2>📚 Add Knowledge Resource</h2>
+    <p class="subtitle">Share useful agricultural knowledge with the community.</p>
+
+    <form method="POST" enctype="multipart/form-data" class="styled-form">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label>{{ form.title.label }}</label>
+            {{ form.title(size=40, class_="form-input", placeholder="Enter resource title") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.content.label }}</label>
+            {{ form.content(rows=5, cols=50, class_="form-textarea", placeholder="Write detailed information...") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.category.label }}</label>
+            {{ form.category(class_="form-select") }}
+        </div>
+
+        <div class="form-group">
+            <label>{{ form.file.label }}</label>
+            {{ form.file(class_="form-input-file") }}
+        </div>
+
+        <button type="submit" class="btn-primary">Add Resource</button>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        font-family: Arial, sans-serif;
+    }
+
+    .form-container h2 {
+        font-size: 24px;
+        color: #2f855a;
+        margin-bottom: 10px;
+    }
+
+    .form-container .subtitle {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .styled-form .form-group {
+        margin-bottom: 18px;
+    }
+
+    .styled-form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .form-input, .form-textarea, .form-select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+        border-color: #2f855a;
+        box-shadow: 0 0 4px rgba(47,133,90,0.3);
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .form-input-file {
+        border: none;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        background: #2f855a;
+        color: #fff;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: #276749;
+    }
+</style>
+{% endblock %}
+

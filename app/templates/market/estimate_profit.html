@@ -1,0 +1,47 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+            <h4>🌱 {{ t("profit_estimation") }}</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    {{ form.crop.label(class="form-label") }}
+                    {{ form.crop(class="form-select") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.area.label(class="form-label") }}
+                    {{ form.area(class="form-control", placeholder="Enter area in acres") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.cost.label(class="form-label") }}
+                    {{ form.cost(class="form-control", placeholder="Enter total cost in MWK") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.yield_per_acre.label(class="form-label") }}
+                    {{ form.yield_per_acre(class="form-control", placeholder="Enter yield in tons/acre") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.month.label(class="form-label") }}
+                    {{ form.month(class="form-control", placeholder="Enter month (e.g. March)") }}
+                </div>
+
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-success w-50 py-2 rounded-pill") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

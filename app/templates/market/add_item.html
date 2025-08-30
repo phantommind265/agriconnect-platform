@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .add-item-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .add-item-container h2 {
+        text-align: center;
+        color: #2e7d32;
+        margin-bottom: 25px;
+        font-size: 28px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="file"],
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #2e7d32;
+        outline: none;
+        box-shadow: 0 0 6px rgba(46, 125, 50, 0.3);
+    }
+
+    .form-submit {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .form-submit button,
+    .form-submit input[type="submit"] {
+        background-color: #2e7d32;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .form-submit button:hover,
+    .form-submit input[type="submit"]:hover {
+        background-color: #1b5e20;
+    }
+
+    .icon-label::before {
+        margin-right: 8px;
+    }
+</style>
+
+<div class="add-item-container">
+    <h2>🛒 Add New Marketplace Item</h2>
+
+    <form action="{{ url_for('marketplace.add_item') }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label class="icon-label">📦 {{ form.title.label }}</label>
+            {{ form.title(size=40, class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label class="icon-label">💰 {{ form.price.label }}</label>
+            {{ form.price(step="10", class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label class="icon-label">📝 {{ form.description.label }}</label>
+            {{ form.description(rows=3, cols=40, class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label class="icon-label">📂 {{ form.category.label }}</label>
+            {{ form.category(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label class="icon-label">👨‍🌾 {{ form.seller_name.label }}</label>
+            {{ form.seller_name(size=40, class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label class="icon-label">☎️ {{ form.contact_info.label }}</label>
+            {{ form.contact_info(size=40, class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label class="icon-label">🖼 {{ form.image.label }}</label>
+            {{ form.image(class="form-control-file") }}
+        </div>
+
+        <div class="form-submit">
+            {{ form.submit(class="btn btn-success") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+

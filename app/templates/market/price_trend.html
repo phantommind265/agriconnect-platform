@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="max-width: 800px; margin: 30px auto; background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 20px;">
+        {{ t("price_trend") }} - {{ crop }}
+    </h2>
+
+    <canvas id="priceChart" width="600" height="300" style="display:block; margin:auto;"></canvas>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ url_for('market.market_prices') }}" 
+           style="color:#28a745; text-decoration:none; font-weight:bold;">
+            ← {{ t("back_to_market") }}
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ months|tojson }},
+            datasets: [{
+                label: '{{ crop }} (MWK/kg)',
+                data: {{ prices|tojson }},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: '{{ t("price_trend") }} - {{ crop }}',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        color: '#333',
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: '{{ t("months") }}'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'MWK per kg'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

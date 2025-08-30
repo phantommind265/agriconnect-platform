@@ -1,0 +1,45 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h2>Equipment Marketplace</h2>
+<p>Browse equipment posted by farmers across the platform.</p>
+
+<form method="GET" action="{{ url_for('equipment.marketplace') }}" style="margin-bottom: 20px; display: flex; gap: 10px;">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search by name or model">
+    
+    <select name="type">
+        <option value="">All Types</option>
+        <option value="Tractor" {% if filter_type == 'Tractor' %}selected{% endif %}>Tractor</option>
+        <option value="Plough" {% if filter_type == 'Plough' %}selected{% endif %}>Plough</option>
+        <option value="Harvester" {% if filter_type == 'Harvester' %}selected{% endif %}>Harvester</option>
+        <!-- Add more types as needed -->
+    </select>
+    
+    <input type="text" name="location" value="{{ filter_location }}" placeholder="Filter by location">
+
+    <button type="submit">Filter</button>
+</form>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+    {% for eq in equipments %}
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px;">
+        {% if eq[6] %}
+        <img src="{{ url_for('static', filename='uploads/' ~ eq[6]) }}" alt="Equipment Image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
+        {% else %}
+        <div style="width: 100%; height: 150px; background: #eee; display: flex; align-items: center; justify-content: center;">No Image</div>
+        {% endif %}
+        <h4>{{ eq[1] }} ({{ eq[2] }})</h4i>
+        <p>Model: {{ eq[3] }}</p>
+        <p>Condition: {{ eq[4] }}</p>
+        <p>Location: {{ eq[5] }}</p>
+        <p><strong>Owner:</strong> {{ eq[7] }}</p>
+
+	{% if current_user.id %}
+        <a href="{{ url_for('equipment.request_booking', equipment_id=eq[0]) }}" class="btn btn-primary">Request Booking</a>
+	{% else %}
+	<p><em>Login to book</em></p>
+	{% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
