@@ -8,6 +8,7 @@ Flask-Login==0.6.3
 Flask-WTF==1.2.2
 Flask-Cors==3.0.10
 gunicorn==23.0.0
+Flask-Mail==0.9.1
 idna==3.10
 itsdangerous==2.2.0
 Jinja2==3.1.6
