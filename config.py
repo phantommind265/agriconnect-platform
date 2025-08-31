@@ -1,12 +1,12 @@
 import os
 
-DB_PATH = os.path.join("app", "agriconnect.db")
-PESTS_DATA_PATH = os.path.join("app", "data", "pests.json")
-CROPS_DATA_PATH = os.path.join("app", "data", "crops.json")
-PRICES_DATA_PATH = os.path.join("app", "data", "market_prices.json")
+DB_PATH = os.path.join("agriplatform", "agriconnect.db")
+PESTS_DATA_PATH = os.path.join("agriplatform", "data", "pests.json")
+CROPS_DATA_PATH = os.path.join("agriplatform", "data", "crops.json")
+PRICES_DATA_PATH = os.path.join("agriplatform", "data", "market_prices.json")
 OPEN_API_KEY = os.getenv("OPENAI_API_KEY")
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Max 5MB
-UPLOAD_FOLDER = os.path.join("app", "static", "uploads")
+UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads")
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 587
 MAIL_USE_TLS = True
