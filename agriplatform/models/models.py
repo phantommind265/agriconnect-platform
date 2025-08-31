@@ -2,7 +2,7 @@ from flask_login import UserMixin
 import sqlite3
 import os
 
-DB_PATH = os.path.join("app", "agriconnect.db")
+DB_PATH = os.path.join("agriplatform", "agriconnect.db")
 
 class User(UserMixin):
     def __init__(self, id, username, role, language, password_hash, profile_pic="default.png"):
