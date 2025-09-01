@@ -440,3 +440,20 @@ h1 {
   color: #9ca3af;
 }
 
+/*mobile responsivenes for getintouch*/
+@media (max-width: 600px) {
+	#notificationDropdown {
+		position: fixed;
+		top: 60px;
+		right: 10px;
+		left: 10px;
+		width: auto;
+		max-width: 100;
+	}
+	.cta-btn {
+		font-size: 16px;
+		padding: 12px 18px;
+		width: 100%;
+		text-align: center;
+	}
+}

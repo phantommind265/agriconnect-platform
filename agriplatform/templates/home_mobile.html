@@ -1,4 +1,4 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <style>
@@ -114,7 +114,7 @@
     		<div class="swiper-slide">
 			<img src="{{ url_for('static', filename='images/Maize plantation.jpeg') }}" alt="Farm">
 			<div class="caption">
-				<h2>🌱 Welcome to AgriConnect</h2>
+				<h2>Welcome to AgriConnect</h2>
 				<p>Connecting farmers & markets</p>
 			</div>
 		</div>
@@ -134,7 +134,7 @@
 			<div class="caption">
 				<h2>🤝 Farmer Community</h2>
 				<p>Share knowledge & experiences</p>
-				<a href="{{ url_for('pest.list_pests') }}">🐛 {{ t("pest_and_diseases") }}</a>
+				<a href="{{ url_for('pest.list_pests') }}">Pest & Diseases</a>
 			</div>
 		</div>
 	</div>
@@ -148,27 +148,47 @@
 </div>
 
 <div class="market-section">
-	<h2>🌾 {{ t("market_tools") }}</h2>
+	<h2>🌾 Common Farming Tools</h2>
 	<div class="market-grid">
         <div class="market-card">
-            <img src="{{ url_for('static', filename='images/plant.jpeg') }}" alt="Market Prices">
-            <a href="{{ url_for('market.market_prices') }}">📈 {{ t("market_prices") }}</a>
+            <img src="{{ url_for('static', filename='images/7 Grocery Items About to Get More Expensive.jpeg') }}" alt="Market Prices">
+            <a href="{{ url_for('market.market_prices') }}">Market Prices</a>
         </div>
         <div class="market-card">
-            <img src="{{ url_for('static', filename='images/maize.jpeg') }}" alt="Estimate Profit">
-            <a href="{{ url_for('soil.soil_analyzer') }}">💰 {{ t("analyze_soil") }}</a>
+            <img src="{{ url_for('static', filename='images/Ultimate Guide to AI-Powered Soil Monitoring.jpeg') }}" alt="Estimate Profit">
+            <a href="{{ url_for('soil.soil_analyzer') }}">Analyze Soil</a>
         </div>
         <div class="market-card">
             <a href="{{ url_for('crop.crop_list') }}">
-		    <img src="{{ url_for('static', filename='images/crops.png') }}" alt="Crops"><br>
-                🌱 {{ t("crops") }}
+		    <img src="{{ url_for('static', filename='images/Africa.jpeg') }}" alt="Crops"><br>
+                Crops
             </a>
         </div>
         <div class="market-card">
             <a href="{{ url_for('pest.list_pests') }}">
-		    <img src="{{ url_for('static', filename='images/pest.png') }}" alt="Pests"><br>
-                🐛 {{ t("pest_and_diseases") }}
+		    <img src="{{ url_for('static', filename='images/pest.jpeg') }}" alt="Pests"><br>
+                Pest & Diseases
             </a>
+        </div>
+	<div class="market-card">
+            <img src="{{ url_for('static', filename='images/farmer on tractor.jpg') }}" alt="equipment">
+            <a href="{{ url_for('equipment.marketplace') }}">Equipment Market</a>
+        </div>
+	<div class="market-card">
+            <img src="{{ url_for('static', filename='images/Farmer Training Program.jpeg') }}" alt="farming events">
+            <a href="{{ url_for('events_bp.view_events') }}">Farming Events</a>
+        </div>
+	<div class="market-card">
+            <img src="{{ url_for('static', filename='images/agriconect chart.png') }}" alt="forum discussion">
+            <a href="{{ url_for('forum.forum_home') }}">Farmers Forum</a>
+        </div>
+        <div class="market-card">
+            <img src="{{ url_for('static', filename='images/With Accuracy Estimate Your Construction Costs, Make a profit.jpeg') }}" alt="knowledge resources">
+            <a href="{{ url_for('knowledge_bp.view_knowledge') }}">Knowledge Source</a>
+        </div>
+        <div class="market-card">
+            <img src="{{ url_for('static', filename='images/Maize plantation.jpeg') }}" alt="weather">
+            <a href="{{ url_for('weather.weather_page') }}">Weather Updates</a>
         </div>
     </div>
 </div>
