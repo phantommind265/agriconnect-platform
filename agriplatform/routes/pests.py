@@ -30,6 +30,7 @@ def list_pests():
     )
 
 @pest_bp.route('/<crop_name>')
+@login_required
 def pests_by_crop(crop_name):
     pests = load_pests()
     crop_pests = [

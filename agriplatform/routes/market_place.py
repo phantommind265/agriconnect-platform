@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from flask_login import login_required
 
 
-UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads")
+UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads", "market")
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 marketplace_bp = Blueprint('marketplace', __name__)
 DB_PATH = os.path.join("agriplatform", "agriconnect.db")

@@ -1,4 +1,4 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 {% block content %}
 <h2>{{ t("manage_crops") }}</h2>
 
@@ -18,7 +18,7 @@
 			<td>
 				<a href="#">{{ t("edit") }}</a> |
 				<form method="POST" action="{{ url_for('admin.delete_crop', crop_name=crop_name) }}" style="display: inline;">
-					<button type="submit" onclick="return confirm('{{ t('confirm_delete') }}')">{{ t("delete") }}</button>
+					<button type="submit" onclick="return confirm('confirm_delete')">{{ t("delete") }}</button>
 				</form>
 			</td>
 		</tr>

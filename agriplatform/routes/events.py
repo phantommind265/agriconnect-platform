@@ -6,7 +6,7 @@ from agriplatform.forms.event_form import EventForm
 
 DB_PATH = os.path.join("agriplatform", "agriconnect.db")
 events_bp = Blueprint('events_bp', __name__)
-UPLOAD_FOLDER = 'static/uploads/events'
+UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads", "events")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def get_db():
@@ -26,6 +26,7 @@ def view_events():
 
 # Add new event
 @events_bp.route('/events/add', methods=['GET', 'POST'])
+@login_required
 def add_event():
     form = EventForm()
 
@@ -57,6 +58,7 @@ def add_event():
     return render_template('events/add_event.html', form=form)
 
 @events_bp.route('/events/register/<int:event_id>', methods=['POST'])
+@login_required
 def register_event(event_id):
     conn = get_db()
     cursor = conn.cursor()
@@ -81,7 +83,7 @@ def register_event(event_id):
 
     # Send confirmation email
     from flask_mail import Message
-    from app import mail  # assuming you set up Flask-Mail
+    from flask_mail import Mail  # assuming you set up Flask-Mail
 
     msg = Message(
         subject=f"Event Registration Confirmation - {event['title']}",
@@ -97,7 +99,7 @@ def register_event(event_id):
 
     We look forward to seeing you there!
     """
-    mail.send(msg)
+    Mail.send(msg)
 
     flash("You have successfully registered! A confirmation email has been sent.", "success")
     return redirect(url_for('events.view_events'))

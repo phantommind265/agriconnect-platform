@@ -7,6 +7,7 @@ from agriplatform.utils.translator import t
 crop_bp = Blueprint("crop", __name__)
 
 @crop_bp.route("/crops")
+@login_required
 def crop_list():
     with open(CROPS_DATA_PATH, "r", encoding="utf-8") as f:
         crops = json.load(f)
@@ -28,6 +29,7 @@ def crop_list():
     return render_template("crops.html", crops=filtered, t=t)
 
 @crop_bp.route("/crop/<name>")
+@login_required
 def crop_detail(name):
     with open(CROPS_DATA_PATH, "r", encoding="utf-8") as f:
         crops = json.load(f)

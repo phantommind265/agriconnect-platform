@@ -11,7 +11,7 @@ class RegisterForm(FlaskForm):
     role = SelectField("Role", choices=[
         ("farmer", "Farmer"),
         ("extension_worker", "Extension Worker"),
-        ("admin", "Admin")
+        #("admin", "Admin")
         ], validators=[DataRequired()])
     language = SelectField("Language", choices=[("en", "English"), ("ny", "Chichewa")], validators=[DataRequired()])
     submit = SubmitField("Register")

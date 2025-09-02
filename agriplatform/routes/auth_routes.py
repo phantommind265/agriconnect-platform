@@ -18,7 +18,7 @@ import secrets
 import hashlib
 from flask_mail import Message, Mail
 
-UPLOAD_FOLDER = os.path.join("agriplatform", "static", "profile_pic")
+UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads", "profile_pic")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 auth_bp = Blueprint("auth", __name__)
 

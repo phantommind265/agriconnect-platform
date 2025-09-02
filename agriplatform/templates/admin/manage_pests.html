@@ -1,4 +1,4 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 {% block content %}
 <h2>{{ t("manage_pests") }}</h2>
 
@@ -20,7 +20,7 @@
 			<td>
 				<a href="#">{{ t("edit") }}</a> |
 				<form method="POST" action="{{ url_for('admin.delete_pest', pest_name=pest_name) }}" style="display: inline;">
-					<button type="submit" onclick="return confirm('{{ t('confirm_delete_pests') }}')">{{ t("delete") }}</button>
+					<button type="submit" onclick="return confirm('confirm_delete_pests')">{{ t("delete") }}</button>
 				</form>
 			</td>
 		</tr>
