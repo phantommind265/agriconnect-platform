@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Approve Pending Farmers{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Pending Farmer Approvals</h2>
+
+  {% if farmers %}
+  <table class="table table-bordered table-hover mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>District</th>
+        <th>Crops</th>
+        <th>Registered</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for farmer in farmers %}
+      <tr>
+        <td>{{ farmer.username }}</td>
+        <td>{{ farmer.email }}</td>
+        <td>{{ farmer.district }}</td>
+        <td>{{ farmer.crops }}</td>
+        <td>{{ farmer.created_at }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('extension.approve_farmer', farmer_id=farmer.id) }}">
+            <button class="btn btn-success btn-sm" type="submit">Approve</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="alert alert-info mt-3">No pending farmers to approve.</div>
+  {% endif %}
+</div>
+{% endblock %}
+

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgriConnect</title>
+  <title>agriconnect</title>
   <link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='CSS/dashboardone.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,38 +13,9 @@
   <!-- Header -->
   <header class="header" data-animate>
     <div class="container header-container">
-      <h1 class="logo">AgriConnect</h1>
+      <h1 class="logo">agriconnect</h1>
       <div class="contact-info">
-	      <!-- Notification Bell in Navbar -->
-	      <div class="notification-container" style="position: relative; display: inline-block;">
-		      <a href="#" id="notificationBell" style="color: white; font-size: 20px;">
-			      🔔
-			      <span id="notificationCount"
-					style="display:none;
-						position:absolute;
-						top:-5px;
-                     				right:-10px;
-                     				background:red;
-                     				color:white;
-                     				padding:2px 6px;
-                     				border-radius:50%;
-                     				font-size:12px;">
-			      </span>
-		      </a>
-	      </div>
-	      <!-- Notifications Dropdown -->
-	      <div id="notificationDropdown" style="display:none;
-		       position:absolute;
-		       top:30px;
-		       right:0;
-		       background:white;
-		       border:1px solid #ddd;
-		       width:250px;
-		       box-shadow:0 4px 8px rgba(0,0,0,0.1);
-		       border-radius:6px;
-		       z-index:1000;">
-	      </div>
-	      <span><a href="{{ url_for('auth.contact') }}" class="cta-btn">📞 Get In Touch</a></span>
+	      <span><a href="{{ url_for('donation.donations') }}" class="cta-btn"><i class="fa-solid fa-hand-holding-heart me-1"></i> Donate</a></span>
       </div>
     </div>
   </header>
@@ -269,7 +240,7 @@
 
   <!-- Bottom -->
   <div class="footer-bottom">
-    © <span id="year"></span> AgriConnect. All Rights Reserved.
+    © <span id="year"></span> agriconnect. All Rights Reserved.
   </div>
 </footer>
 

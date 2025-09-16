@@ -15,7 +15,7 @@
             
             <!-- Left Section: Profile & Name -->
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="{{ url_for('static', filename='profile_pic/' ~ (user['profile_pic'] or 'default.png')) }}" 
+                <img src="{{ url_for('static', filename='uploads/profile_pic/' ~ (user['profile_pic'] or 'default.png')) }}" 
                      alt="Profile" width="45" height="45" style="border-radius:50%; object-fit:cover;">
                 <div>
                     <strong style="font-size: 1rem; color:#333;">{{ user['username'] }}</strong><br>

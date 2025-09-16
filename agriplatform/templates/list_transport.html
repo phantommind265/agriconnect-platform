@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">🚛 Available Transport Offers</h2>
+  {% if listings %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for l in listings %}
+      <div class="col">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ l[1] }} – {{ l[2] }}</h5>
+            <p class="card-text">
+              <strong>Route:</strong> {{ l[3] }}<br>
+              <strong>Date:</strong> {{ l[4] }}<br>
+              <strong>Price:</strong> {{ l[5] }}<br>
+              <strong>Contact:</strong> {{ l[6] }}
+            </p>
+            <form action="{{ url_for('transport.book_transport', listing_id=l[0]) }}" method="POST">
+		    {{ forms[l[0]].hidden_tag() }}
+		    {{ forms[l[0]].submit(class="btn btn-primary btn-sm") }}
+            </form>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{ l[7] }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No transport offers available yet.</div>
+  {% endif %}
+</div>
+{% endblock %}
+

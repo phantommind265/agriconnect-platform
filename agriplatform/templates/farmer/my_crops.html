@@ -35,8 +35,10 @@
 		    <div class="mt-2">
 			    <a href="{{ url_for('field.edit_crop', crop_id=crop[0]) }}" class="btn btn-sm btn-warning">Edit</a>
 			    <form method="POST" action="{{ url_for('field.delete_crop', crop_id=crop[0]) }}" style="display:inline;">
-				    {{ form.hidden_tag() }}
-				    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+				    {{ csrf_token() }}
+				    <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</button>
+				    <!--{{ form.hidden_tag() }}
+				    <button type="submit" class="btn btn-sm btn-danger">Delete</button>-->
 			    </form>
 		    </div>
 	    </li>

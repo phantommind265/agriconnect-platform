@@ -107,7 +107,7 @@
                 <p><strong>🌾 Crops:</strong> {{ profile.crops }}</p>
                 <p><strong>🐄 Animals:</strong> {{ profile.animals }}</p>
                 <p class="bio">{{ profile.bio }}</p>
-                <a href="#" class="btn-message">
+		<a href="{{ url_for('message_bp.users_list') }}" class="btn-message">
                     💬 Message this farmer
 		</a>
             </div>

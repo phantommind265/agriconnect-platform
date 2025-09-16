@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Add Warehouse</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.location.label }} {{ form.location(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.capacity.label }} {{ form.capacity(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.price_per_day.label }} {{ form.price_per_day(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label }} {{ form.description(class="form-control", rows="3") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📊 All Market Interests</h2>
+
+  {% if interests %}
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Farmer</th>
+        <th>Buyer</th>
+        <th>Crop</th>
+        <th>Message</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in interests %}
+      <tr>
+        <td>{{ i["farmer_name"] }}</td>
+        <td>{{ i["buyer_name"] }}</td>
+        <td>{{ i["crop"] }}</td>
+        <td>{{ i["message"] or "None" }}</td>
+        <td>{{ i["created_at"] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>No interests expressed yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>🔔 All Notifications</h2>
+  {% if notifications %}
+    <ul class="list-group">
+      {% for n in notifications %}
+      <li class="list-group-item {% if not n['is_read'] %}list-group-item-info{% endif %}">
+        <h5>{{ n['title'] }}</h5>
+        <p>{{ n['message'] }}</p>
+        {% if n['link'] %}
+          <a href="{{ n['link'] }}">View Details</a>
+        {% endif %}
+        <small class="text-muted float-end">{{ n['created_at'] }}</small>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No notifications yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
+

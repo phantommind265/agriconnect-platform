@@ -8,9 +8,40 @@ class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired(), Length(min=4)])
     confirm = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo('password', message="Passwords must match")])
+    crop = StringField("Crops", validators=[DataRequired()])
+    district = SelectField("District", choices=[
+        ("balaka", "Balaka"),
+        ("blantyre", "Blantyre"),
+        ("chikwawa", "Chikwawa"),
+        ("chiladzulu", "Chiladzulu"),
+        ("chitipa", "Chitipa"),
+        ("dedza", "Dedza"),
+        ("dowa", "Dowa"),
+        ("karonga", "Kalonga"),
+        ("kasungu", "Kasungu"),
+        ("likoma", "Likoma"),
+        ("lilongwe", "Lilongwe"),
+        ("machinga", "Machinga"),
+        ("mangochi", "Mangochi"),
+        ("mchinji", "Mchinji"),
+        ("mulanje", "Mulanje"),
+        ("mwanza", "Mwanza"),
+        ("mzimba", "Mzimba"),
+        ("neno", "Neno"),
+        ("nkhata_bay", "Nkhata Bay"),
+        ("nkhotakota", "Nkhotakota"),
+        ("nsanje", "Nsanje"),
+        ("ntcheu", "Ntcheu"),
+        ("ntchisi", "Ntchisi"),
+        ("phalombe", "Phalombe"),
+        ("rumphi", "Rumphi"),
+        ("salima", "Salima"),
+        ("thyolo", "Thyolo"),
+        ("zomba", "Zomba")
+        ], validators=[DataRequired()])
     role = SelectField("Role", choices=[
         ("farmer", "Farmer"),
-        ("extension_worker", "Extension Worker"),
+        ("extension_worker", "Extension Worker")
         #("admin", "Admin")
         ], validators=[DataRequired()])
     language = SelectField("Language", choices=[("en", "English"), ("ny", "Chichewa")], validators=[DataRequired()])

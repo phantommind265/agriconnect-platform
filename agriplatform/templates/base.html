@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}AgriConnect{% endblock %}</title>
+  <title>{% block title %}agriconnect{% endblock %}</title>
   <meta name="description" content="AgriConnect – connecting farmers, extension workers, and markets." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
       --ag-card: rgba(255,255,255,.75);
     }
     html,body{height:100%}
-    body{font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background: #0f172a; color:#e5e7eb}
+    body{font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background: #064e3b; color:#e5e7eb}
     .navbar{backdrop-filter:saturate(160%) blur(10px); background: rgba(2,6,23,.6)!important}
     .brand-logo{height:34px;width:auto}
     .nav-link, .navbar-brand{color:#e5e7eb!important}
@@ -54,7 +54,7 @@
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center gap-2" href="#">
         <img class="brand-logo" src="{{ url_for('static', filename='images/icon.png') }}" alt="AgriConnect" />
-        <span class="fw-semibold">AgriConnect</span>
+        <span class="fw-semibold">agriconnect</span>
         {% if current_user.is_authenticated %}
         <span class="badge badge-role ms-2">{{ role|title }}</span>
         {% endif %}
@@ -77,8 +77,8 @@
       <li class="nav-item"><a class="nav-link {% if 'agrishare' in request.endpoint %}active{% endif %}" href="{{ url_for('agrishare.create_share_session') }}"><i class="fa-solid fa-handshake-angle"></i> AgriShare</a></li>
       <li class="nav-item"><a class="nav-link {% if 'forum' in request.endpoint %}active{% endif %}" href="{{ url_for('forum.forum_home') }}"><i class="fa-solid fa-comments"></i> Forum</a></li>
       <li class="nav-item"><a class="nav-link {% if 'messages' in request.endpoint %}active{% endif %}" href="{{ url_for('message_bp.users_list') }}"><i class="fa-solid fa-envelope"></i> Messaging</a></li>
-      {% if current_user.is_authenticated and role in ['extension','admin'] %}
-        <li class="nav-item"><a class="nav-link {% if 'ext' in request.endpoint %}active{% endif %}" href="{{ url_for('auth.') }}"><i class="fa-solid fa-briefcase"></i> Extension</a></li>
+      {% if current_user.is_authenticated and role in ['extension_worker','admin'] %}
+        <li class="nav-item"><a class="nav-link {% if 'ext' in request.endpoint %}active{% endif %}" href="{{ url_for('auth.extension_dashboard') }}"><i class="fa-solid fa-briefcase"></i> Extension</a></li>
       {% endif %}
       {% if current_user.is_authenticated and role == 'admin' %}
         <li class="nav-item"><a class="nav-link {% if 'admin' in request.endpoint %}active{% endif %}" href="{{ url_for('auth.admin_dashboard') }}"><i class="fa-solid fa-shield"></i> Admin</a></li>
@@ -120,33 +120,32 @@
 
       {% if current_user.is_authenticated %}
       <!-- Notifications -->
-      <li class="nav-item dropdown me-lg-2">
-        <a class="nav-link position-relative" href="#" id="notifMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa-solid fa-bell"></i>
-          {% if g.get('unread_notifications',0) > 0 %}
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ g.get('unread_notifications') }}</span>
-          {% endif %}
+    <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle position-relative" href="#" role="button" data-bs-toggle="dropdown">
+    🔔
+    {% if notif_unread > 0 %}
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{ notif_unread }}
+    </span>
+    {% endif %}
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end">
+    {% if recent_notifs %}
+      {% for n in recent_notifs %}
+      <li>
+        <a class="dropdown-item" href="{{ n['link'] or '#' }}">
+          <strong>{{ n['title'] }}</strong><br>
+          <small>{{ n['message']|truncate(40) }}</small>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notifMenu" style="min-width: 320px;">
-          <li class="px-3 py-2 small text-secondary">Notifications</li>
-          {% for n in g.get('notifications', [])[:5] %}
-          <li>
-            <a class="dropdown-item d-flex gap-2 align-items-start" href="{{ n.url }}">
-              <i class="fa-solid {{ n.icon or 'fa-bell' }} mt-1"></i>
-              <div>
-                <div class="fw-semibold">{{ n.title }}</div>
-                <div class="small text-secondary">{{ n.message }}</div>
-                <div class="small text-muted">{{ n.created_at.strftime('%b %d, %H:%M') if n.created_at }}</div>
-              </div>
-            </a>
-          </li>
-          {% else %}
-          <li><span class="dropdown-item text-secondary">No new notifications</span></li>
-          {% endfor %}
-          <li><hr class="dropdown-divider"/></li>
-          <li><a class="dropdown-item" href="#">View all</a></li>
-        </ul>
       </li>
+      {% endfor %}
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-primary" href="{{ url_for('notifications.all_notifications') }}">View All</a></li>
+    {% else %}
+      <li><span class="dropdown-item">No new notifications</span></li>
+    {% endif %}
+  </ul>
+</li>
 
       <!-- Profile -->
       <li class="nav-item dropdown">
@@ -187,7 +186,7 @@
           </section>
         {% else %}
           <section class="col-12">
-            {% block content %}{% endblock %}
+		  {% block content %}<br><br>{% endblock %}
           </section>
         {% endif %}
         {% endblock %}
@@ -196,7 +195,7 @@
   </main>  <!-- Footer -->  <footer class="footer mt-auto py-4">
     <div class="container d-flex flex-wrap justify-content-between align-items-center small text-secondary">
       <div>
-        © {{  now().year if now is defined else 2025 }} AgriConnect · <a href="{{ url_for('auth.about_page') }}" class="link-light">About</a> · <a href="{{ url_for('auth.contact') }}" class="link-light">Contact</a>
+        © {{  now().year if now is defined else 2025 }} agriconnect · <a href="{{ url_for('auth.about_page') }}" class="link-light">About</a> · <a href="{{ url_for('auth.contact') }}" class="link-light">Contact</a>
       </div>
       <div class="d-flex align-items-center gap-3">
         <label class="toggle small"><input id="darkToggle" type="checkbox" class="form-check-input me-1"> Dark mode</label>
@@ -210,7 +209,7 @@
         {% for category, message in messages %}
           <div class="toast text-bg-{{ 'success' if category=='success' else ('danger' if category=='error' else 'dark') }}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
             <div class="toast-header">
-              <strong class="me-auto">AgriConnect</strong>
+              <strong class="me-auto">agriconnect</strong>
               <small>Just now</small>
               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>

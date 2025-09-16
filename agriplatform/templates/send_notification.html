@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📢 Send Notification</h2>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.message.label }} {{ form.message(class="form-control", rows="4") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.link.label }} {{ form.link(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.target.label }} {{ form.target(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.user_id.label }} {{ form.user_id(class="form-control") }}
+      <small class="text-muted">Only needed for "Specific User".</small>
+    </div>
+
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+</div>
+{% endblock %}
+
+

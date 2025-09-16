@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>💼 Market Linkages</h2>
+
+  {% if linkages %}
+    <div class="row">
+      {% for m in linkages %}
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">{{ m["buyer_name"] }} ({{ m["crop"] }})</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Posted: {{ m["created_at"] }}</h6>
+            <p><strong>Price Range:</strong> {{ m["price_range"] or "N/A" }}</p>
+            <p><strong>Location:</strong> {{ m["location"] or "N/A" }}</p>
+            <p><strong>Contact Info:</strong> {{ m["contact_info"] or "N/A" }}</p>
+            <p><strong>Notes:</strong> {{ m["notes"] or "None" }}</p>
+	    <a href="{{ url_for('linkage.express_interest', market_id=m['id']) }}" class="btn btn-sm btn-primary mt-2">
+  ✉️ Express Interest
+</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No market linkages available at the moment.</p>
+  {% endif %}
+</div>
+{% endblock %}

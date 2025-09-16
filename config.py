@@ -7,6 +7,7 @@ PRICES_DATA_PATH = os.path.join("agriplatform", "data", "market_prices.json")
 OPEN_API_KEY = os.getenv("OPENAI_API_KEY")
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Max 5MB
 UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads")
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 587
 MAIL_USE_TLS = True

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>My Warehouse Bookings</h2>
+  {% if bookings %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Number</th><th>Location</th><th>From</th><th>To</th><th>Status</th><th>Booked At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in bookings %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ b.location }}</td>
+        <td>{{ b.booked_from }}</td>
+        <td>{{ b.booked_to }}</td>
+        <td>
+          <span class="badge 
+            {% if b[4] == 'confirmed' %}bg-warning
+            {% elif b[4] == 'completed' %}bg-success
+            {% else %}bg-secondary{% endif %}">
+            {{ b[4]|capitalize }}
+          </span>
+        </td>
+        <td>{{ b.created_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="alert alert-info">You have no warehouse bookings.</div>
+  {% endif %}
+</div>
+{% endblock %}
+
+

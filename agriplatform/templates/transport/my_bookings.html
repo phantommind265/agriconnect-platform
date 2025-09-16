@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">📋 My Transport Bookings</h2>
+
+  {% if bookings %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Vehicle</th>
+            <th>Route</th>
+            <th>Date</th>
+            <th>Booked By</th>
+            <th>Booked at</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for b in bookings %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ b[1] }}</td>
+            <td>{{ b[2] }}</td>
+            <td>{{ b[3] }}</td>
+            <td>{{ b[4] }} ({{ b[5] or 'N/A' }})</td>
+            <td>{{ b[6] or 'N/A' }}</td>
+	    <td>
+		    {{ b[7] }}  <!-- Current status -->
+		    <form action="{{ url_for('transport.update_booking_status', booking_id=b[0], new_status='confirmed') }}" method="POST" style="display:inline;">
+			    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+			    <button type="submit" class="btn btn-sm btn-warning">Confirm</button>
+		    </form>
+		    <br><br>
+		    <form action="{{ url_for('transport.update_booking_status', booking_id=b[0], new_status='completed') }}" method="POST" style="display:inline;">
+			    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+			    <button type="submit" class="btn btn-sm btn-success">Complete</button>
+		    </form>
+	    </td>
+	  </tr>
+	  {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info">You have no bookings yet.</div>
+  {% endif %}
+</div>
+<style>
+  form { display: inline-block; margin-left: 5px; }
+</style>
+
+{% endblock %}
+
+

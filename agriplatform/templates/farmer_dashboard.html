@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <!-- Advisory Section -->
+    <h4>📢 Advisories</h4>
+    {% if advisories %}
+        <div class="row">
+            {% for adv in advisories %}
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm border-success">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ adv.title }}</h5>
+                            <p class="card-text">{{ adv.message }}</p>
+                            {% if adv.crop %}
+                                <span class="badge bg-info text-dark">Crop: {{ adv.crop }}</span>
+                            {% endif %}
+                            {% if adv.district %}
+                                <span class="badge bg-primary">District: {{ adv.district }}</span>
+                            {% endif %}
+                            <p class="text-muted small mt-2">Posted on {{ adv.created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No advisories available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

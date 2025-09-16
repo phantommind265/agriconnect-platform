@@ -8,7 +8,7 @@ from agriplatform.forms.edit_profile_form import EditProfileForm
 
 profile_bp = Blueprint("profile_bp", __name__)
 
-UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads" "profile_pic")
+UPLOAD_FOLDER = os.path.join("app", "static", "profile_pic")
 
 @profile_bp.route("/profile/edit", methods=["GET", "POST"])
 @login_required
@@ -45,4 +45,3 @@ def view_profile():
     user = cursor.fetchone()
     conn.close()
     return render_template("profile/view_profile.html", user=user)
-

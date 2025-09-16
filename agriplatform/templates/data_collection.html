@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}New Field Data{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Submit New Field Data</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.farmer_id.label }} {{ form.farmer_id(class="form-control") }}
+      <small class="text-muted">Leave blank if not linked to a farmer.</small>
+    </div>
+    <div class="mb-3">
+      {{ form.district.label }} {{ form.district(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.crop.label }} {{ form.crop(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.observation.label }} {{ form.observation(class="form-control", rows=4) }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📑 My Reports</h2>
+
+  {% if reports %}
+    <div class="row">
+      {% for r in reports %}
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">{{ r["title"] }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ r["report_type"] | capitalize }} • {{ r["created_at"] }}
+            </h6>
+            <p class="card-text">{{ r["content"] }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No reports available yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+

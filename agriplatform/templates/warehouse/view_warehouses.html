@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Available Warehouses</h2>
+  <a href="{{ url_for('warehouse.add_warehouse') }}" class="btn btn-success mb-3">+ Add Warehouse</a>
+
+  {% if listings %}
+    <div class="row g-3">
+      {% for l in listings %}
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ l.location }}</h5>
+            <p class="card-text">
+              <strong>Capacity:</strong> {{ l.capacity }}<br>
+              <strong>Price/day:</strong> {{ l.price_per_day }}<br>
+              <strong>Owner:</strong> {{ l.owner }}<br>
+              {{ l.description }}
+            </p>
+
+            <form method="POST" action="{{ url_for('warehouse.book_warehouse', listing_id=l.id) }}">
+              {{ forms[l.id].hidden_tag() }}
+              <div class="row">
+                <div class="col">
+                  {{ forms[l.id].booked_from(class="form-control", type="date") }}
+                </div>
+                <div class="col">
+                  {{ forms[l.id].booked_to(class="form-control", type="date") }}
+                </div>
+                <div class="col-auto">
+                  {{ forms[l.id].submit(class="btn btn-primary") }}
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer text-muted">Posted {{ l.created_at }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No warehouses available.</div>
+  {% endif %}
+</div>
+{% endblock %}
+
+

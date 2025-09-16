@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>agriconnect - Farmer Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f4f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* Sidebar - hidden on small screens, fixed on large */
+    .sidebar {
+      background: #2d3436;
+      color: #fff;
+      padding-top: 60px;
+    }
+    .sidebar a {
+      color: #dfe6e9;
+      display: block;
+      padding: 12px 20px;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background: #636e72;
+      color: #fff;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+    }
+    /* Dropdown inside sidebar */
+    .dropdown-content {
+      display: none;
+      position: static;
+      background: #3a3f41;
+      border-radius: 0;
+    }
+    .dropdown-content a {
+      padding: 10px 30px;
+      color: #dfe6e9;
+      font-size: 14px;
+    }
+    .dropdown-content a:hover {
+      background: #636e72;
+      color: #fff;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-3">
+    <button class="btn btn-outline-secondary d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <h5 class="m-0">agriconnect - Farmer Dashboard</h5>
+    <div class="ms-auto d-flex align-items-center">
+      <span class="me-3"><i class="fa-solid fa-bell"></i> <span class="badge bg-danger">3</span></span>
+      <span><i class="fa-solid fa-user-circle"></i> {{ current_user.username }}</span>
+    </div>
+  </nav>
+
+  <!-- Sidebar for large screens -->
+  <div class="d-none d-lg-block sidebar position-fixed top-0 start-0 vh-100" style="width:250px;">
+    <h4 class="text-center text-light">👨‍🌾 Farmer</h4>
+    <!--Farmer field and crop dropdown-->
+    <div class="dropdown">
+      <a href="#"><i class="fa-solid fa-seedling me-2"></i>My Fields & Crops</a>
+      <div class="dropdown-content">
+        <a href="{{ url_for('field.my_fields') }}">Add Field</a>
+        <a href="{{ url_for('field.my_crops') }}">Add Crop</a>
+        <a href="{{ url_for('field.view_fields') }}">View Fields</a>
+        <a href="{{ url_for('field.active_crops') }}">View Crops</a>
+      </div>
+    </div>
+    <a href="{{ url_for('ai.ai_assistant') }}"><i class="fa-solid fa-robot me-1"></i> AI</a>
+    <a href="#"><i class="fa-solid fa-lightbulb me-2"></i> Advisory</a>
+    <a href="{{ url_for('message_bp.users_list') }}"><i class="fa-solid fa-message me-2"></i> Messaging & Support</a>
+    <div class="dropdown">
+      <a href="#"><i class="fa-solid fa-chart-line me-2"></i> Market</a>
+      <div class="dropdown-content">
+        <a href="{{ url_for('market.market_prices') }}"> Market Prices</a>
+        <a href="{{ url_for('market.estimate_profit') }}">Estimate Profit</a>
+        <a href="{{ url_for('marketplace.market_page') }}">Marketplace</a>
+      </div>
+    </div>
+    <a href="#"><i class="fa-solid fa-bell me-2"></i> Notifications & Alerts</a>
+    <a href="#"><i class="fa-solid fa-file-lines me-2"></i> My Reports</a>
+    <a href="{{ url_for('knowledge_bp.view_knowledge') }}"><i class="fa-solid fa-book me-2"></i> Knowledge Hub</a>
+    <div class="dropdown">
+      <a href="#"><i class="fa-solid fa-handshake-angle"></i> Agrishare</a>
+      <div class="dropdown-content">
+        <a href="{{ url_for('agrishare.create_share_session') }}">Share</a>
+        <a href="{{ url_for('agrishare.join_session') }}">Receive</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offcanvas Sidebar for mobile -->
+  <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">👨‍🌾 Farmer</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- same sidebar links but stacked -->
+      <a href="{{ url_for('field.my_fields') }}" class="d-block text-white mb-2">Add Field</a>
+      <a href="{{ url_for('field.my_crops') }}" class="d-block text-white mb-2">Add Crop</a>
+      <a href="{{ url_for('field.view_fields') }}" class="d-block text-white mb-2">View Fields</a>
+      <a href="{{ url_for('field.active_crops') }}" class="d-block text-white mb-2">View Crops</a>
+      <hr class="bg-light">
+      <a href="{{ url_for('ai.ai_assistant') }}" class="d-block text-white mb-2">AI</a>
+      <a href="{{ url_for('message_bp.users_list') }}" class="d-block text-white mb-2">Messaging</a>
+      <a href="{{ url_for('market.market_prices') }}" class="d-block text-white mb-2">Market</a>
+      <a href="{{ url_for('knowledge_bp.view_knowledge') }}" class="d-block text-white mb-2">Knowledge Hub</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Quick Stats -->
+        <div class="col-md-3">
+          <div class="card p-3 text-center">
+            <h6><a href="{{ url_for('field.view_fields') }}">Total Fields</a></h6>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 text-center ">
+            <h6><a href="{{ url_for('field.active_crops') }}">Active Crops</a></h6>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 text-center">
+            <h6><a href="{{ url_for('marketplace.market_page') }}">Market Updates</a></h6>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 text-center">
+            <h6><a href="{{ url_for('message_bp.users_list') }}">Unread Messages</a></h6>
+            <h3>{{ inbox }}</h3>
+          </div>
+        </div>
+
+        <!-- Crop Growth Chart -->
+        <div class="col-lg-8">
+          <div class="card p-3">
+            <h6>Crop Growth Monitoring</h6>
+            <canvas id="growthChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Market Prices -->
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h6>Market Prices</h6>
+            <ul class="list-group">
+              {% for price in market_prices %}
+                <li class="list-group-item d-flex justify-content-between">
+                  {{ price.crop }} <span>{{ price.value }} MWK/kg</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Advisory -->
+        <div class="col-md-6">
+          <div class="card p-3">
+            <h6>Latest Advisory</h6>
+            <p>{{ latest_advisory }}</p>
+            <a href="#" class="btn btn-sm btn-success">Read More</a>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="col-md-6">
+          <div class="card p-3">
+            <h6>Notifications</h6>
+            <ul>
+              {% for note in notifications %}
+                <li>{{ note }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

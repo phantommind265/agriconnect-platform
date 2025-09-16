@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📊 My Data Submissions</h2>
+
+  {% if submissions %}
+    <div class="row">
+      {% for s in submissions %}
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">{{ s["crop"] }} ({{ s["season"] }})</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              Submitted on: {{ s["created_at"] }}
+            </h6>
+            <p><strong>Yield:</strong> {{ s["yield_amount"] or "N/A" }}</p>
+            <p><strong>Inputs:</strong> {{ s["inputs_used"] or "None" }}</p>
+            <p><strong>Notes:</strong> {{ s["notes"] or "None" }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No submissions yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Post New Advisory</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.message.label(class="form-label") }}
+            {{ form.message(class="form-control", rows=4) }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.crop.label(class="form-label") }}
+            {{ form.crop(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.district.label(class="form-label") }}
+            {{ form.district(class="form-control") }}
+        </div>
+        
+        <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+    </form>
+</div>
+{% endblock %}

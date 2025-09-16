@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<br><br><br>
+<div class="container mt-4">
+  <h2 class="mb-4">🚚 Post a New Transport Listing</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.vehicle_type.label(class="form-label") }}
+      {{ form.vehicle_type(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.capacity.label(class="form-label") }}
+      {{ form.capacity(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.route.label(class="form-label") }}
+      {{ form.route(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.available_date.label(class="form-label") }}
+      {{ form.available_date(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.price.label(class="form-label") }}
+      {{ form.price(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.contact.label(class="form-label") }}
+      {{ form.contact(class="form-control") }}
+    </div>
+
+    {{ form.submit(class="btn btn-success") }}
+  </form>
+</div>
+{% endblock %}

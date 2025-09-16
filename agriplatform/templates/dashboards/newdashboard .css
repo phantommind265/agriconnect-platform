@@ -1,0 +1,82 @@
+import sqlite3
+import os
+from flask import Blueprint, render_template, session, redirect, url_for, current_app
+# import your DB path - adjust to your project
+try:
+    from config import DB_PATH
+except Exception:
+    DB_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'AgriConnect.db')
+
+farmer_bp = Blueprint('farmer', __name__, url_prefix='/farmer', template_folder='../../templates')
+
+@farmer_bp.route('/dashboard')
+def dashboard():
+    # simple auth guard — replace with your decorator if you have one
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+
+    user_id = session['user_id']
+    username = session.get('username', 'Farmer')
+
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+
+    try:
+        # counts
+        cur.execute("SELECT COUNT(*) AS cnt FROM crops WHERE user_id = ?", (user_id,))
+        crops_count = cur.fetchone()["cnt"] or 0
+        cur.execute("SELECT COUNT(*) AS cnt FROM fields WHERE user_id = ?", (user_id,))
+        fields_count = cur.fetchone()["cnt"] or 0
+
+        # recent crops (adjust column names to match your schema)
+        cur.execute("""
+            SELECT id, crop, acreage, created_at
+            FROM crops
+            WHERE user_id = ?
+            ORDER BY created_at DESC
+            LIMIT 5
+        """, (user_id,))
+        recent_crops = cur.fetchall()
+
+        # market updates (if you have a market_prices table)
+        cur.execute("""
+            SELECT crop, price, source, updated_at
+            FROM market_prices
+            ORDER BY updated_at DESC
+            LIMIT 5
+        """)
+        market_updates = cur.fetchall()
+
+        # recent messages (join to users to show sender name if available)
+        cur.execute("""
+            SELECT m.message, m.sent_at, u.username AS sender_name
+            FROM messages m
+            LEFT JOIN users u ON u.id = m.sender_id
+            WHERE m.receiver_id = ?
+            ORDER BY m.sent_at DESC
+            LIMIT 3
+        """, (user_id,))
+        recent_messages = cur.fetchall()
+
+    except Exception as e:
+        current_app.logger.exception("Dashboard DB error")
+        crops_count = fields_count = 0
+        recent_crops = market_updates = recent_messages = []
+    finally:
+        conn.close()
+
+    return render_template(
+        'farmer/dashboard.html',
+        user_name=username,
+        crops_count=crops_count,
+        fields_count=fields_count,
+        recent_crops=recent_crops,
+        market_updates=market_updates,
+        recent_messages=recent_messages
+    )
+
+
+
+
+

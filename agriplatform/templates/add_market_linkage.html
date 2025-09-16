@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>🔗 Add Market Linkage</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.crop.label }}  
+      {{ form.crop(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.buyer_name.label }}  
+      {{ form.buyer_name(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.price_range.label }}  
+      {{ form.price_range(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.location.label }}  
+      {{ form.location(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.contact_info.label }}  
+      {{ form.contact_info(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.notes.label }}  
+      {{ form.notes(class="form-control", rows="3") }}
+    </div>
+
+    <button type="submit" class="btn btn-success">{{ form.submit.label }}</button>
+  </form>
+</div>
+{% endblock %}
+
+

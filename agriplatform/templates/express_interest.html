@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📩 Express Interest in {{ market["buyer_name"] }} ({{ market["crop"] }})</h2>
+  <form method="POST">
+	  {{ form.hidden_tag() }}
+	  
+	  <div class="mb-3">
+		  {{ form.message.label }}
+		  {{ form.message(class="form-control", rows="3") }}
+	  </div>
+
+	  {{ form.submit(class="btn btn-success") }}
+	  <a href="{{ url_for('linkage.view_market') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
+
+
+

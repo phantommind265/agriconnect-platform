@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Bookings for My Warehouses</h2>
+  {% if bookings %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th><th>User</th><th>Location</th><th>From</th><th>To</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in bookings %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ b.booker }}</td>
+        <td>{{ b.location }}</td>
+        <td>{{ b.booked_from }}</td>
+        <td>{{ b.booked_to }}</td>
+        <td>
+          <span class="badge 
+            {% if b.status == 'confirmed' %}bg-warning
+            {% elif b.status == 'completed' %}bg-success
+            {% else %}bg-secondary{% endif %}">
+            {{ b.status|capitalize }}
+          </span>
+        </td>
+        <td>
+          <form method="POST" action="{{ url_for('warehouse.update_warehouse_booking_status', booking_id=b.id, new_status='confirmed') }}" style="display:inline;">
+            {{ forms[b.id].hidden_tag() }}
+            <button class="btn btn-sm btn-warning" type="submit">Confirm</button>
+          </form>
+          <form method="POST" action="{{ url_for('warehouse.update_warehouse_booking_status', booking_id=b.id, new_status='completed') }}" style="display:inline;">
+            {{ forms[b.id].hidden_tag() }}
+            <button class="btn btn-sm btn-success" type="submit">Complete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="alert alert-info">No bookings for your warehouses.</div>
+  {% endif %}
+</div>
+{% endblock %}
+

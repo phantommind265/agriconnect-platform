@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="UTF-8" />
-	<title>Agriconnect</title>
+	<title>agriconnect</title>
 	<style>
     .login-container {
         background: white;
@@ -93,13 +93,13 @@
         text-decoration: underline;
     }
 	</style>
-	<link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
+	<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
 
 <body>
 
 <div class="login-container">
-    <h2>🌱 {{ t("login") }}</h2>
+    <h2>Login</h2>
     <form method="POST">
         {{ form.hidden_tag() }}
 
@@ -119,13 +119,13 @@
     </form>
 
     <p>
-    {{ t("no_account") }}
-    <a href="{{ url_for('auth.register') }}">{{ t("register_now") }}</a>
+    Don't have an account
+    <a href="{{ url_for('auth.register') }}">Register now</a>
     </p>
 
     <p>
-    {{ t("forgot_password") }}
-    <a href="{{ url_for('auth.forgot_password')}}">{{ t("forgot_password") }}</a>
+    Forgot password
+    <a href="{{ url_for('auth.forgot_password')}}">Forgot password</a>
     </p>
 
 </div>

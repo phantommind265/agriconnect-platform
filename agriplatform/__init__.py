@@ -1,16 +1,46 @@
-from flask import Flask
+from flask import Flask, g
 import sqlite3
+import config
 from config import DB_PATH
 from flask_wtf.csrf import CSRFProtect
 from agriplatform.utils.translator import t
 from flask_cors import CORS
 from agriplatform.routes.ai_routes import ai_bp, chat
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 import config
+from config import DB_PATH
 from flask_mail import Mail, Message
 from agriplatform.models.models import User
 
 csrf = CSRFProtect()
+
+def get_unread_notifications(user_id):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    # Fetch unread notifications for this user or global ones (user_id IS NULL)
+    cursor.execute("""
+        SELECT id, title, message, link, created_at 
+        FROM notifications 
+        WHERE (user_id = ? OR user_id IS NULL) AND is_read = 0
+        ORDER BY created_at DESC
+        LIMIT 5
+    """, (user_id,))
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+def count_unread_notifications(user_id):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT COUNT(*) 
+        FROM notifications 
+        WHERE (user_id = ? OR user_id IS NULL) AND is_read = 0
+    """, (user_id,))
+    unread = cursor.fetchone()[0]
+    conn.close()
+    return unread
+
 
 def create_app():
     app = Flask(__name__)
@@ -59,6 +89,7 @@ def create_app():
     def inject_translator():
         return dict(t=t)
 
+
     from agriplatform.routes.crop_routes import crop_bp
     app.register_blueprint(crop_bp)
 
@@ -102,7 +133,7 @@ def create_app():
     from agriplatform.routes.events import events_bp
     app.register_blueprint(events_bp)
 
-    from agriplatform.routes.notifications import notifications_bp
+    from agriplatform.routes.notification import notifications_bp
     app.register_blueprint(notifications_bp)
 
     from agriplatform.routes.knowledge import knowledge_bp
@@ -116,5 +147,49 @@ def create_app():
 
     from agriplatform.routes.field import field_bp
     app.register_blueprint(field_bp)
+
+    from agriplatform.routes.advisory import advisory_bp
+    app.register_blueprint(advisory_bp)
+
+    from agriplatform.routes.farmer_advisory import farmer_advisory_bp
+    app.register_blueprint(farmer_advisory_bp)
+
+    from agriplatform.routes.services import services_bp
+    app.register_blueprint(services_bp)
+
+    from agriplatform.routes.reports import reports_bp
+    app.register_blueprint(reports_bp)
+
+    from agriplatform.routes.data_submission import data_bp
+    app.register_blueprint(data_bp)
+
+    from agriplatform.routes.market_linkage import linkage_bp
+    app.register_blueprint(linkage_bp)
+
+    from agriplatform.routes.donation import donation_bp
+    app.register_blueprint(donation_bp)
+
+    from agriplatform.routes.transport import transport_bp
+    app.register_blueprint(transport_bp)
+
+    from agriplatform.routes.warehouse import warehouse_bp
+    app.register_blueprint(warehouse_bp)
+
+    from agriplatform.routes.extension_routes import extension_bp
+    app.register_blueprint(extension_bp)
+
+    from agriplatform.routes.data_collection import collection_bp
+    app.register_blueprint(collection_bp)
+
+    from agriplatform.routes.analytics import extension_analytics_bp
+    app.register_blueprint(extension_analytics_bp)
+
+    @app.context_processor
+    def inject_notifications():
+        if current_user.is_authenticated:
+            unread = count_unread_notifications(current_user.id)
+            recent = get_unread_notifications(current_user.id)
+            return dict(notif_unread=unread, recent_notifs=recent)
+        return dict(notif_unread=0, recent_notifs=[])
 
     return app

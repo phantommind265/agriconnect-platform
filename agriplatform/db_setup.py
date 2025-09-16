@@ -18,8 +18,14 @@ def init_db():
             password TEXT NOT NULL,
             reset_token TEXT,
             profile_pic TEXT DEFAULT 'default,png',
+            crop TEXT,
+            district TEXT,
+            title TEXT,
             role TEXT NOT NULL CHECK(role IN ('farmer', 'extension_worker', 'admin')) NOT NULL DEFAULT 'farmer',
-            language TEXT CHECK(language IN ('en', 'ny')) NOT NULL DEFAULT 'en'
+            language TEXT CHECK(language IN ('en', 'ny')) NOT NULL DEFAULT 'en',
+            status TEXT NOT NULL DEFAULT 'pending',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            last_login DATETIME
             )
         ''')
 
@@ -175,14 +181,15 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS notifications (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
+        user_id INTEGER,
         message TEXT NOT NULL,
         link TEXT,
         is_read INTEGER DEFAULT 0,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY(user_id) REFERENCES users(id)
+        created_at DATETIME DEFAULT CURRENT_TIMESTEMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
         )
     """)
+
 
     #event registration table
     cursor.execute("""
@@ -277,6 +284,172 @@ def init_db():
         FOREIGN KEY (field_id) REFERENCES fields (id)
         )
     ''')
+
+    # Create advisories table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS advisories (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        message TEXT NOT NULL,
+        crop TEXT,               -- optional, to target specific crops
+        district TEXT,           -- optional, to target specific districts
+        created_at TEXT NOT NULL
+        )
+    """)
+
+
+    # Create services table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS services (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        service_type TEXT NOT NULL,
+        district TEXT NOT NULL,
+        contact TEXT,
+        created_at TEXT NOT NULL
+        )
+    """)
+
+    #reports table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS reports (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        farmer_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        report_type TEXT NOT NULL,
+        content TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (farmer_id) REFERENCES users(id)
+        )
+    """)
+
+
+    #data submission table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS data_submissions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        farmer_id INTEGER NOT NULL,
+        crop TEXT NOT NULL,
+        season TEXT NOT NULL,
+        yield_amount REAL,
+        inputs_used TEXT,
+        notes TEXT,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (farmer_id) REFERENCES users(id)
+        )
+    """)
+    
+    #market linkage table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS market_linkages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        crop TEXT NOT NULL,
+        buyer_name TEXT NOT NULL,
+        price_range TEXT,
+        location TEXT,
+        contact_info TEXT,
+        notes TEXT,
+        created_at TEXT NOT NULL
+        )
+    """)
+
+    #market intrest table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS market_interest (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        farmer_id INTEGER NOT NULL,
+        market_id INTEGER NOT NULL,
+        message TEXT,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (farmer_id) REFERENCES users(id),
+        FOREIGN KEY (market_id) REFERENCES market_linkages(id)
+        )
+    """)
+
+    #donation table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS donations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        amount REAL NOT NULL,
+        date TEXT NOT NULL
+        )
+    """)
+
+    # Table for transport listings
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS transport_listings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        owner_id INTEGER NOT NULL,
+        vehicle_type TEXT NOT NULL,
+        capacity TEXT NOT NULL,
+        route TEXT NOT NULL,
+        available_date TEXT NOT NULL,
+        price TEXT NOT NULL,
+        contact TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (owner_id) REFERENCES users(id)
+        )
+    """)
+
+    # Table for transport bookings
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS transport_bookings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        listing_id INTEGER NOT NULL,
+        farmer_id INTEGER NOT NULL,
+        quantity TEXT,
+        status TEXT DEFAULT 'pending',
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (listing_id) REFERENCES transport_listings(id),
+        FOREIGN KEY (farmer_id) REFERENCES users(id)
+        )
+    """)
+    
+    # Table for transport listings
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS warehouse_listings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        owner_id INTEGER NOT NULL,
+        location TEXT NOT NULL,
+        capacity TEXT NOT NULL,
+        price_per_day REAL NOT NULL,
+        description TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    # Table for transport bookings
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS warehouse_bookings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        listing_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        status TEXT DEFAULT 'pending',
+        booked_from DATE NOT NULL,
+        booked_to DATE NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(listing_id) REFERENCES warehouse_listings(id)
+        )
+    """)
+
+    #data collection table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS field_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        worker_id INTEGER NOT NULL,
+        farmer_id INTEGER,
+        district TEXT NOT NULL,
+        crop TEXT NOT NULL,
+        observation TEXT NOT NULL,
+        date_collected DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(worker_id) REFERENCES users(id),
+        FOREIGN KEY(farmer_id) REFERENCES users(id)
+        )
+    """)
+
+
 
 
     conn.commit()

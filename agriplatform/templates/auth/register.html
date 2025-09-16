@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 	<meta charset="UTF-8">
-	<title>Agriconnect</title>
+	<title>agriconnect</title>
 	<style>
     .register-container {
         background: white;
@@ -106,7 +106,7 @@
 	</head>
 	<body>
 <div class="register-container">
-    <h2>{{ t("register") }}</h2>
+    <h2>Register</h2>
     <form method="POST">
         {{ form.hidden_tag() }}
 
@@ -117,7 +117,7 @@
 
 	<div class="form-group username">
 		{{ form.email.label }}
-		{{ form.email(class="form-contro;", size=32) }}
+		{{ form.email(class="form-control", size=32) }}
 	</div>
 
         <div class="form-group password">
@@ -129,6 +129,16 @@
             {{ form.confirm.label }}
             {{ form.confirm(class="form-control", size=32) }}
         </div>
+
+	<div class="form-group username">
+                {{ form.crop.label }}
+                {{ form.crop(class="form-control", size=32) }}
+        </div>
+
+	<div class="form-group language">
+		{{ form.district.label }}
+		{{ form.district(class="form-select") }}
+	</div>
 
 	<div class="form-group language">
 		{{ form.role.label }}
@@ -146,8 +156,8 @@
     </form>
 
     <p>
-        {{ t("have_account") }}
-        <a href="{{ url_for('auth.login') }}">{{ t("login") }}</a>
+        Have account
+        <a href="{{ url_for('auth.login') }}">Login</a>
     </p>
 </div>
 </body>

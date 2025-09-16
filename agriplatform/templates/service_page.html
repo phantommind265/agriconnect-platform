@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <!-- Nearby Services Section -->
+    <h4>🛠 Nearby Services</h4>
+    {% if services %}
+        <div class="row">
+            {% for s in services %}
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm border-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ s.name }}</h5>
+                            <p class="card-text">
+                                <strong>Type:</strong> {{ s.service_type }} <br>
+                                <strong>District:</strong> {{ s.district }} <br>
+                                {% if s.contact %}
+                                    <strong>Contact:</strong> {{ s.contact }} <br>
+                                {% endif %}
+                            </p>
+                            <p class="text-muted small">Added on {{ s.created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No nearby services available for your district.</p>
+    {% endif %}
+</div>
+{% endblock %}

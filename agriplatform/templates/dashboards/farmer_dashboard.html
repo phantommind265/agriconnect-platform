@@ -1,61 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgriConnect - Farmer Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farmer Dashboard - agriconnect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <style>
-    body {
-      background: #f4f7fa;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    body { background-color: #f8fafc; font-family: "Segoe UI", sans-serif; }
+    .navbar { background-color: #2e7d32; }
+    .navbar-brand, .nav-link, .navbar-toggler-icon { color: #fff !important; }
     .sidebar {
-      height: 600vh;
-      background: #2d3436;
-      color: #fff;
-      position: fixed;
-      top: 0; left: 0;
-      width: 250px;
-      padding-top: 60px;
+      /*position: fixed; top: 56px; left: 0;
+      height: calc(100vh - 56px); width: 250px;
+      background: #1e2a38; padding: 15px;
+      overflow-y: auto; transition: transform 0.3s ease-in-out;*/
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 220px;
+	    height: 100vh;
+	    background: #1b2735;
+	    color: #fff;
+	    overflow-y: auto;
+	    z-index: 100;
     }
-    .sidebar a {
-      color: #dfe6e9;
-      display: block;
-      padding: 12px 20px;
-      text-decoration: none;
+    .sidebar a { display: block; color: #d1d5db; padding: 10px 12px;
+      border-radius: 8px; text-decoration: none; transition: background 0.2s, color 0.2s;}
+    .sidebar a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .content { margin-left: 250px; padding: 20px; transition: margin-left 0.3s ease-in-out; }
+    .card { border-radius: 16px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
+    .hover-scale { transition: transform 0.2s; cursor: pointer;}
+    .hover-scale:hover { transform: scale(1.05);}
+    @media (max-width: 991px) {
+      .sidebar { transform: translateX(-100%);}
+      .sidebar.active { transform: translateX(0);}
+      .content { margin-left: 0; }
     }
-    .sidebar a:hover {
-      background: #636e72;
-      color: #fff;
-    }
-    .topbar {
-      margin-left: 250px;
-      background: #fff;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-    }
-    .content {
-      margin-left: 250px;
-      padding: 20px;
-    }
-    .card {
-	    border-radius: 15px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
-    }
+    .toggle-btn { background:#2e7d32; color:#fff; border:none; padding:8px 12px; border-radius:6px;}
+
     /* Dropdown container */
     .dropdown {
-	    position: relative;
+            position: relative;
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
-	    top: 40px;
+            top: 40px;
             left: 0;
             background: white;
             min-width: 200px;
@@ -80,142 +72,406 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+	/* Footer Styles */
+.footer {
+  background: #064e3b; /* dark green */
+  color: #e5e7eb; /* light gray */
+  padding: 50px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.footer-col h2,
+.footer-col h3 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #e5e7eb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #facc15; /* yellow */
+}
+
+/* Newsletter */
+.newsletter {
+  display: flex;
+  margin-top: 10px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.newsletter button {
+  background: #facc15;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.newsletter button:hover {
+  background: #eab308;
+}
+
+/* Social Icons */
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: #e5e7eb;
+  margin-right: 12px;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #facc15;
+}
+
+/* Bottom */
+.footer-bottom {
+  border-top: 1px solid #1f2937;
+  margin-top: 40px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
   </style>
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h4 class="text-center text-light">👨‍🌾 Farmer</h4>
-    <!--Farmer field and crop dropdown-->
-    <div class="dropdown">
-	    <a href="#"><i class="fa-solid fa-seedling me-2"></i>My Fields & Crops</a>
-	    <div class="dropdown-content">
-		    <a href="{{ url_for('field.my_fields') }}"><i class="fa-solid fa-seedling me-2"></i> Add Field</a>
-		    <a href="{{ url_for('field.my_crops') }}"><i class="fa-solid fa-seedling me-2"></i> Add Crop</a>
-		    <a href="{{ url_for('field.view_fields') }}"><i class="fa-solid fa-seedling me-2"></i> View Fields</a>
-		    <a href="{{ url_for('field.active_crops') }}"><i class="fa-solid fa-seedling me-2"></i> View Crops</a>
-	    </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container-fluid">
+    <button class="toggle-btn d-lg-none me-2" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <a class="navbar-brand" href="#">agriconnect</a>
+    <!-- Notifications -->
+    <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle position-relative" href="#" role="button" data-bs-toggle="dropdown">
+    🔔
+    {% if notif_unread > 0 %}
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{ notif_unread }}
+    </span>
+    {% endif %}
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end">
+    {% if recent_notifs %}
+      {% for n in recent_notifs %}
+      <li>
+        <a class="dropdown-item" href="{{ n['link'] or '#' }}">
+          <strong>{{ n['title'] }}</strong><br>
+          <small>{{ n['message']|truncate(40) }}</small>
+        </a>
+      </li>
+      {% endfor %}
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-primary" href="{{ url_for('notifications.all_notifications') }}">View All</a></li>
+    {% else %}
+      <li><span class="dropdown-item">No new notifications</span></li>
+    {% endif %}
+  </ul>
+</li>
+
+    <div class="ms-auto">
+      <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#aiAssistant">
+        🤖 Ask AI
+      </button>
     </div>
-    <a href="{{ url_for('ai.ai_assistant') }}"><i class="fa-solid fa-robot me-1"></i> AI</a>
-    <!--<a href="{{ url_for('market.market_prices') }}"><i class="fa-solid fa-chart-line me-2"></i> Market Prices</a>-->
-    <a href="#"><i class="fa-solid fa-lightbulb me-2"></i> Advisory</a>
-    <a href="{{ url_for('message_bp.users_list') }}"><i class="fa-solid fa-message me-2"></i> Messaging & Support</a>
-    <!--Market dropdown-->
+  </div>
+</nav>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebarMenu">
+  <h5 class="text-light text-center mb-3">👨‍🌾 Farmer</h5>
+  <a href="{{ url_for('farmer.view_profile') }}"><i class="fa-solid fa-user"></i> Profile</a>
+
+  <!--Farmer field and crop dropdown-->
+  <div class="dropdown">
+	  <a href="#"><i class="fa-solid fa-seedling me-2"></i>My Fields & Crops</a>
+          <div class="dropdown-content">
+		  <a href="{{ url_for('field.my_fields') }}"><i class="fa-solid fa-wheat-awn me-2"></i> Add Field</a>
+                  <a href="{{ url_for('field.my_crops') }}"><i class="fa-solid fa-seedling me-2"></i> Add Crop</a>
+                  <a href="{{ url_for('field.view_fields') }}"><i class="fa-solid fa-wheat-awn"></i> View Fields</a>
+                  <a href="{{ url_for('field.active_crops') }}"><i class="fa-solid fa-seedling"></i> View Crops</a>
+          </div>
+  </div>
+  <!--<a href="#"><i class="fa-solid fa-chart-line me-2"></i> Market Prices</a>-->
+  <a href="{{ url_for('farmer_advisory.dashboard') }}"><i class="fa-solid fa-lightbulb me-2"></i> Advisory</a>
+  <a href="{{ url_for('message_bp.users_list') }}"><i class="fa-solid fa-message me-2"></i> Messaging</a>
+  <!--<a href="#"><i class="fa-solid fa-bell me-2"></i> Alerts</a>-->
+  <a href="{{ url_for('reports.my_reports') }}"><i class="fa-solid fa-file-lines me-2"></i> Reports</a>
+  <a href="{{ url_for('reports.export_pdf') }}"><i class="fa-solid fa-download"></i> Download PDF</a>
+  <!--Agrishare dropdown-->
+  <div class="dropdown">
+	  <a href="#"><i class="fa-solid fa-handshake-angle"></i> Agrishare</a>
+	  <div class="dropdown-content">
+		  <a href="{{ url_for('agrishare.create_share_session') }}"><i class="fa-solid fa-share"></i>Share</a>
+                  <a href="{{ url_for('agrishare.join_session') }}"><i class="fa-solid fa-arrow-down-short-wide"></i>Receive</a>
+          </div>
+  </div>
+  <a href="{{ url_for('knowledge_bp.view_knowledge') }}"><i class="fa-solid fa-book me-2"></i> Knowledge Hub</a>
+  <a href="{{ url_for('farmer.all_farmers') }}"><i class="fa-solid fa-people-group"></i> Farmer Directory</a>
+  <!--Market dropdown-->
     <div class="dropdown">
-	    <a href="#"><i class="fa-solid fa-chart-line me-2"></i> Market</a>
+            <a href="#"><i class="fa-solid fa-chart-line me-2"></i> Market</a>
             <div class="dropdown-content">
-                <a href="{{ url_for('market.market_prices') }}"> Market Prices</a>
-                <a href="{{ url_for('market.estimate_profit') }}">Estimate Profit</a>
-                <a href="{{ url_for('marketplace.market_page') }}">Marketplace</a>
+		    <a href="{{ url_for('market.market_prices') }}"><i class="fa-solid fa-tags"></i> Market Prices</a>
+                <a href="{{ url_for('market.estimate_profit') }}"><i class="fa-solid fa-calculator"></i> Estimate Profit</a>
+                <a href="{{ url_for('marketplace.market_page') }}"><i class="fa-solid fa-shop"></i> Marketplace</a>
             </div>
     </div>
-    <a href="#"><i class="fa-solid fa-bell me-2"></i> Notifications & Alerts</a>
-    <a href="#"><i class="fa-solid fa-file-lines me-2"></i> My Reports</a>
-    <a href="{{ url_for('knowledge_bp.view_knowledge') }}"><i class="fa-solid fa-book me-2"></i> Knowledge Hub</a>
-    <!--Agrishare dropdown-->
-    <div class="dropdown">
-	    <a href="#"><i class="fa-solid fa-handshake-angle"></i> Agrishare</a>
-	    <div class="dropdown-content">
-		    <a href="{{ url_for('agrishare.create_share_session') }}"><i class="fa-solid fa-share"></i>Share</a>
-		    <a href="{{ url_for('agrishare.join_session') }}"><i class="fa-solid fa-arrow-down-short-wide"></i>Receive</a>
-	    </div>
+    <a href="{{ url_for('ai.ai_assistant') }}"><i class="fa-solid fa-robot"></i> Agriconnect AI</a>
+    <a href="{{ url_for('weather.weather_page') }}"><i class="fa-solid fa-cloud"></i> Weather Update</a>
+
+    <a href="{{ url_for('forum.forum_home') }}"><i class="fa-solid fa-people-group"></i> Forum Discussion</a>
+    <!--Events dropdown -->
+        <div class="dropdown">
+                <a href="#"><i class="fa-solid fa-calender"></i> Events</a>
+                <div class="dropdown-content">
+                        <a href="{{ url_for('events_bp.view_events') }}"><i class="fa-solid fa-calender"></i> View Events</a>
+                        <a href="{{ url_for('events_bp.add_event') }}"><i class="fa-solid fa-plus"></i> Add Event</a>
+			<a href="{{ url_for('events_bp.my_events') }}"><i class="fa-solid fa-calender-check"></i> My Events</a>
+                </div>
+        </div>
+
+	<a href="{{ url_for('transport.new_transport') }}"><i class="fa-solid fa-car"></i> Post Transport</a>
+	<a href="{{ url_for('warehouse.add_warehouse') }}">Warehouse</a>
+	<a href="{{ url_for('crop.crop_list') }}"><i class="fa-solid fa-seedling"></i> Crops</a>
+	<a href="{{ url_for('pest.list_pests') }}"><i class="fa-solid fa-bug"></i> Pest & Diseases</a>
+
+	<a href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<!-- Content -->
+<div class="content">
+  <div class="container-fluid mt-4 pt-3">
+    <h2 class="fw-bold text-success mb-4">👋 Welcome back, {{ current_user.username }}!</h2>
+
+    <!-- Quick Action Cards -->
+    <div class="row g-3">
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-car fa-2x"></i>
+          <h5><a href="{{ url_for('transport.list_transport') }}">Transport</a></h5>
+          <p class="small text-muted">Access proper tarnsport to your goods at affordable prices.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-car fa-2x"></i>
+          <h5><a href="{{ url_for('transport.my_bookings') }}"> My Bookings</a></h5>
+          <p class="small text-muted"></p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-car fa-2x"></i>
+	  <h5><a href="{{ url_for('warehouse.view_warehouses') }}">Warehouse</a></h5>
+          <p class="small text-muted"></p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-car fa-2x"></i>
+	  <h5><a href="{{ url_for('warehouse.my_warehouse_bookings') }}">My Bookings</a></h5>
+          <p class="small text-muted"></p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-crosshairs fa-2x"></i>
+	  <h5><a href="{{ url_for('services.all_services') }}">Near Services</a>
+</h5>
+          <p class="small text-muted">All close farming support system brought to you.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-handshake fa-2x me-2"></i>
+          <h5><a href="{{ url_for('linkage.view_market') }}">Market Linkages</a></h5>
+          <p class="small text-muted">Offering Market linkages to all farmers.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center hover-scale h-100 p-3">
+          <i class="fa-solid fa-tractor fa-2x"></i>
+          <h5><a href="{{ url_for('equipment.marketplace') }}">Equipment</a></h5>
+          <p class="small text-muted">Equipment access to every farmer regardless of location.</p>
+        </div>
+      </div>
     </div>
-    <!--Equipment dropdown-->
-    <!--
-    <div class="dropdown">
-	    <a href="#">Equipment</a>
-	    <div class="dropdown-content">
-		    <a href="{{ url_for('equipment.register_equipment') }}">{{ t("register_equipment") }}</a>
-		    <a href="{{ url_for('equipment.list_equipment') }}">{{ t("equipment_list") }}</a>
-		    <a href="{{ url_for('equipment.marketplace') }}">Marketplace</a>
-	    </div>
+
+    <!-- Price Trends Chart -->
+    <div class="card mt-5">
+      <div class="card-header bg-success text-white">
+        📊 Latest Market Price Trends
+      </div>
+      <div class="card-body">
+        <canvas id="priceTrendChart" height="200"></canvas>
+      </div>
     </div>
-    -->
+    <br><br><br><br>
+
+<!-- AI Assistant Modal -->
+<div class="modal fade" id="aiAssistant" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">🤖 Agri AI Assistant</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control mb-3" placeholder="Ask for advice..."></textarea>
+        <button class="btn btn-success w-100">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Logo & About -->
+    <div class="footer-col">
+      <h2 class="footer-logo">🌱 AgriConnect</h2>
+      <p>
+        Connecting farmers, extension workers & markets in Malawi with technology, knowledge, and opportunities.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/forums">Discussion Forums</a></li>
+        <li><a href="/profiles">Farmers Profiles</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div class="footer-col">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="/knowledge">Knowledge Hub</a></li>
+        <li><a href="/market">Market Prices</a></li>
+        <li><a href="/weather">Weather Updates</a></li>
+        <li><a href="/support">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="footer-col">
+      <h3>Stay Connected</h3>
+      <p>Subscribe for updates on farming tips, market insights, and weather alerts.</p>
+      <form class="newsletter">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
   </div>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <h5>AgriConnect - Farmer Dashboard</h5>
-    <div>
-      <span class="me-3"><i class="fa-solid fa-bell"></i> <span class="badge bg-danger">3</span></span>
-      <span><i class="fa-solid fa-user-circle"></i> {{ current_user.username }}</span>
-    </div>
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    © <span id="year"></span> AgriConnect. All Rights Reserved.
   </div>
-
-  <!-- Content -->
-  <div class="content">
-    <div class="row g-4">
-
-      <!-- Quick Stats -->
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-          <h6><a href="{{ url_for('field.view_fields') }}">Total Fields</a></h6>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-		<h6><a href="{{ url_for('field.active_crops') }}">Active Crops</a></h6>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-          <h6><a href="{{ url_for('marketplace.market_page') }}">Market Updates</a></h6>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card p-3 text-center">
-		<h6><a href="{{ url_for('message_bp.users_list') }}">Unread Messages</a></h6>
-          <h3>{{ inbox }}</h3>
-        </div>
-      </div>
-
-      <!-- Crop Growth Chart -->
-      <div class="col-md-8">
-        <div class="card p-3">
-          <h6>Crop Growth Monitoring</h6>
-          <canvas id="growthChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Market Prices -->
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h6>Market Prices</h6>
-          <ul class="list-group">
-            {% for price in market_prices %}
-              <li class="list-group-item d-flex justify-content-between">
-                {{ price.crop }} <span>{{ price.value }} MWK/kg</span>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-      <!-- Advisory -->
-      <div class="col-md-6">
-        <div class="card p-3">
-          <h6>Latest Advisory</h6>
-          <p>{{ latest_advisory }}</p>
-          <a href="#" class="btn btn-sm btn-success">Read More</a>
-        </div>
-      </div>
-
-      <!-- Notifications -->
-      <div class="col-md-6">
-        <div class="card p-3">
-          <h6>Notifications</h6>
-          <ul>
-            {% for note in notifications %}
-              <li>{{ note }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-    </div>
+</footer>
   </div>
+</div>
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Auto year update
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Toggle sidebar on mobile
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('sidebarMenu').classList.toggle('active');
+  });
+
+  // Sample chart
+  const ctx = document.getElementById('priceTrendChart');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat'],
+        datasets: [{
+          label: 'Maize (MWK/kg)',
+          data: [300,320,315,330,340,345],
+          borderColor: '#2e7d32',
+          tension: 0.3,
+          fill: false
+        }]
+      },
+      options: {
+        responsive:true,
+        scales:{ y:{ beginAtZero:false } }
+      }
+    });
+  }
+</script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+	<h2>Your Notifications</h2>
+	{% if notifications %}
+	<ul class="list-group">
+		{% for n in notifications %}
+		<li class="list-group-item d-flex justify-content-between">
+			{{ n.message }}
+			<small class+"text-muted">{{ n.created_at }}</small>
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<div class="alert alert-info mt-3">No notifications yet.</div>
+	{% endif %}
+</div>
+{% endblock %}

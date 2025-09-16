@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgriConnect • Extension Dashboard</title>
+  <title>agriconnect • Extension Dashboard</title>
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -11,6 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
@@ -19,7 +20,7 @@
       --bg: #0b1324;
       --bg-soft: #111a33;
       --card: #121a34;
-      --text: #e6e9f0;
+      --text: white;/*#e6e9f0;*/
       --muted: #a9b1c6;
       --accent: #22c55e;
       --accent-2: #38bdf8;
@@ -32,7 +33,7 @@
     html, body { height: 100%; }
     body {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, #0d1730 100%);
+      background: linear-gradient(180deg, var(--bg) 0%, #064e3b 100%);
       color: var(--text);
     }
 
@@ -40,7 +41,7 @@
 
     /* Sidebar */
     .sidebar {
-      background: linear-gradient(180deg, var(--bg-soft) 0%, #0e1935 100%);
+      background: linear-gradient(180deg, var(--bg-soft) 0%, #064e3b 100%);
       border-right: 1px solid rgba(255,255,255,.06);
       position: sticky;
       top: 0; height: 100vh; overflow-y: auto;
@@ -97,9 +98,8 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="brand">
-        <i class="fa-solid fa-seedling fa-lg"></i>
         <div>
-          <div class="fw-bold">AgriConnect</div>
+          <div class="fw-bold">agriconnect</div>
           <div class="text-muted" style="font-size:.85rem">Extension Worker</div>
         </div>
       </div>
@@ -111,15 +111,18 @@
 
       <div class="nav-title">Dashboard</div>
       <nav class="d-grid">
-        <a class="side-link active" href="/ext/dashboard"><i class="fa-solid fa-grid-2"></i> Overview</a>
-        <a class="side-link" href="/ext/farmers"><i class="fa-solid fa-people-group"></i> Farmer Management</a>
-        <a class="side-link" href="/ext/analytics"><i class="fa-solid fa-chart-line"></i> Analytics</a>
-        <a class="side-link" href="/ext/market"><i class="fa-solid fa-store"></i> Market Linkage</a>
-        <a class="side-link" href="/ext/notifications"><i class="fa-solid fa-bell"></i> Notifications & Alerts</a>
-        <a class="side-link" href="/ext/data-tools"><i class="fa-solid fa-clipboard-list"></i> Data Collection Tools</a>
-        <a class="side-link" href="/ext/messaging"><i class="fa-solid fa-messages"></i> Messaging & Support</a>
-        <a class="side-link" href="/ext/advisory"><i class="fa-solid fa-wheat-awn"></i> Crop Advisory & Reports</a>
-        <a class="side-link" href="/ext/knowledge"><i class="fa-solid fa-book-open"></i> Knowledge Sharing</a>
+        <a class="side-link active" href="#"><i class="fa-solid fa-grid-2"></i> Overview</a>
+        <a class="side-link" href="{{ url_for('extension.pending_farmers') }}"><i class="fa-solid fa-people-group"></i> Farmer Management</a>
+	<a class="side-link" href="{{ url_for('extension_analytics.analytics_dashboard') }}"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a class="side-link" href="{{ url_for('linkage.add_market_linkage') }}"><i class="fa-solid fa-store"></i> Market Linkage</a>
+        <a class="side-link" href="{{ url_for('notifications.send_notification') }}"><i class="fa-solid fa-bell"></i> Send Notification</a>
+        <a class="side-link" href="{{ url_for('collection.add_field_data') }}"><i class="fa-solid fa-clipboard-list"></i> Data Collection Tools</a>
+	<a class="side-link" href="{{ url_for('message_bp.users_list') }}"><i class="fa-solid fa-message"></i> Messaging & Support</a>
+	<a class="side-link" href="{{ url_for('services.new_service') }}"><i class="fa-solid fa-crosshairs"></i> Near Services</a>
+	<a class="side-link" href="{{ url_for('advisory.new_advisory') }}"><i class="fa-solid fa-wheat-awn"></i> Crop Advisory</a>
+	<a class="side-link" href="{{ url_for('linkage.all_interests') }}"><i class="fa-solid fa-eye me-2"></i> Market Interests</a>
+	<a class="side-link" href="{{ url_for('reports.add_report') }}"><i class="fa-solid fa-file-alt me-2"></i> Reports</a>
+	<a class="side-link" href="{{ url_for('knowledge_bp.add_knowledge') }}"><i class="fa-solid fa-book-open"></i> Knowledge Sharing</a>
       </nav>
     </aside>
 
@@ -128,15 +131,40 @@
       <div class="topbar">
         <div>
           <div class="text-muted" style="font-size:.9rem">Welcome back</div>
-          <h1 class="h5 m-0">{{ current_user.name if current_user else 'Extension Worker' }}</h1>
+          <h1 class="h5 m-0">{{ current_user.username }}</h1>
         </div>
 
         <div class="d-flex align-items-center gap-3">
-          <button class="btn btn-sm btn-outline-light position-relative">
-            <i class="fa-solid fa-bell"></i>
-          </button>
+		<!-- Notifications -->
+		<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle position-relative" href="#" role="button" data-bs-toggle="dropdown">
+    🔔
+    {% if notif_unread > 0 %}
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{ notif_unread }}
+    </span>
+    {% endif %}
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end">
+    {% if recent_notifs %}
+      {% for n in recent_notifs %}
+      <li>
+        <a class="dropdown-item" href="{{ n['link'] or '#' }}">
+          <strong>{{ n['title'] }}</strong><br>
+          <small>{{ n['message']|truncate(40) }}</small>
+        </a>
+      </li>
+      {% endfor %}
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-primary" href="{{ url_for('notifications.all_notifications') }}">View All</a></li>
+    {% else %}
+      <li><span class="dropdown-item">No new notifications</span></li>
+    {% endif %}
+  </ul>
+</li>
+
           <div class="profile-pill">
-            <img class="avatar" src="{{ url_for('static', filename='images/avatar-default.png') }}" alt="avatar"/>
+            <img class="avatar" src="{{ url_for('static', filename='images/icon.png') }}" alt="avatar"/>
             <span class="text-muted" style="font-size:.9rem">{{ current_user.role|capitalize if current_user else 'Extension' }}</span>
           </div>
         </div>
@@ -150,7 +178,7 @@
               <div class="icon"><i class="fa-solid fa-users"></i></div>
               <div>
                 <div class="text-muted">Active Farmers</div>
-		<div class="fs-4 fw-bold"><!--{{ kpidotactive_farmers or 0 }}--></div>
+		<div class="fs-4 fw-bold"><p>Still working on it...</p></div>
               </div>
             </div>
           </div>
@@ -177,7 +205,7 @@
       <!-- Quick Links -->
       <div class="row g-3 quick-links">
         <div class="col-12 col-md-6 col-xl-3">
-          <a class="d-block glass-card p-3 card-hover" href="/ext/farmers">
+		<a class="d-block glass-card p-3 card-hover" href="{{ url_for('extension.manage_farmers') }}">
             <div class="d-flex align-items-center justify-content-between">
               <div>
                 <div class="section-title">Farmer Management</div>
@@ -188,15 +216,14 @@
           </a>
         </div>
         <!-- Repeat for Market, Data Tools, Messaging, Advisory, Notifications, Knowledge -->
-      </div>
+      </div><br>
 
       <div class="row g-3 quick-links">
         <div class="col-12 col-md-6 col-xl-3">
-		<a class="d-block glass-card p-3 card-hover" href="{{ url_for('message_bp.users_list') }}">
+		<a class="d-block glass-card p-3 card-hover" href="{{ url_for('collection.add_field_data') }}">
             <div class="d-flex align-items-center justify-content-between">
               <div>
-                <div class="section-title">Messaging & Support</div>
-                <div class="text-muted">Profiles, visits</div>
+                <div class="section-title">Data collection</div>
               </div>
               <i class="fa-solid fa-people-group fa-lg"></i>
             </div>
@@ -204,9 +231,6 @@
         </div>
       </div>
 
-      <div class="mt-4 footnote">
-        Tip: Link sidebar items to your Flask routes (e.g. <code>/ext/*</code>)
-      </div>
     </main>
   </div>
 

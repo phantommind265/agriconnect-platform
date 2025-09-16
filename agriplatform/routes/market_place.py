@@ -151,3 +151,25 @@ def delete_item(item_id):
     conn.close()
 
     return redirect(url_for('marketplace.market_page'))
+
+
+@marketplace_bp.route("/seed", methods=["GET"])
+def seed_marketplace():
+    sample_data = [
+        ("Maize (50kg)", 25000, "High quality maize from Lilongwe", "Grains", "Hopeson Chikuse", "0997255736"),
+        ("Groundnuts (10kg)", 15000, "Washed and sorted groundnuts", "Legumes", "Clement Matapa", "0985643175"),
+        ("Fertizer (NPK)", 40000, "50kg NPK fertilizer for maize", "Inputs", "AgroTech Dealer", "0885810114")
+        ]
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    from datetime import datetime
+    cursor.executemany('''
+    INSERT INTO market_items (title, price, description, category, seller_name, contact_info)
+    VALUES (?, ?, ?, ?, ?, ?)
+''', sample_data)
+
+    conn.commit()
+    conn.close()
+    return "✅ some startup services added successfully."
+

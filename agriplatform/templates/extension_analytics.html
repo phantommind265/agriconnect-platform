@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Extension Worker Analytics</h2>
+
+  <!-- Filters -->
+  <form method="GET" class="row g-2 mb-4">
+    <div class="col-md-3">
+      <input type="text" name="district" placeholder="Filter by District"
+             value="{{ district_filter }}" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <input type="date" name="start_date" value="{{ start_date }}" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <input type="date" name="end_date" value="{{ end_date }}" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+    </div>
+  </form>
+
+  <!-- Charts -->
+  <div class="row">
+    <div class="col-md-6 mb-4"><canvas id="farmersDistrictChart"></canvas></div>
+    <div class="col-md-6 mb-4"><canvas id="approvalChart"></canvas></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-4"><canvas id="cropRecordsChart"></canvas></div>
+    <div class="col-md-6 mb-4"><canvas id="monthlyTrendChart"></canvas></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const farmersByDistrict = {{ farmers_by_district | tojson }};
+  const approvalCounts = {{ approval_counts | tojson }};
+  const recordsPerCrop = {{ records_per_crop | tojson }};
+  const monthlyTrends = {{ monthly_trends | tojson }};
+
+  // Farmers per District
+  new Chart(document.getElementById('farmersDistrictChart'), {
+    type: 'bar',
+    data: {
+      labels: Object.keys(farmersByDistrict),
+      datasets: [{
+        label: 'Farmers',
+        data: Object.values(farmersByDistrict),
+        backgroundColor: 'rgba(75,192,192,0.5)'
+      }]
+    }
+  });
+
+  // Approval Status
+  new Chart(document.getElementById('approvalChart'), {
+    type: 'pie',
+    data: {
+      labels: Object.keys(approvalCounts),
+      datasets: [{
+        data: Object.values(approvalCounts),
+        backgroundColor: ['#4caf50','#f44336']
+      }]
+    }
+  });
+
+  // Records per Crop
+  new Chart(document.getElementById('cropRecordsChart'), {
+    type: 'bar',
+    data: {
+      labels: Object.keys(recordsPerCrop),
+      datasets: [{
+        label: 'Records',
+        data: Object.values(recordsPerCrop),
+        backgroundColor: 'rgba(54,162,235,0.5)'
+      }]
+    }
+  });
+
+  // Monthly Trends
+  new Chart(document.getElementById('monthlyTrendChart'), {
+    type: 'line',
+    data: {
+      labels: Object.keys(monthlyTrends),
+      datasets: [{
+        label: 'Records',
+        data: Object.values(monthlyTrends),
+        fill: false,
+        borderColor: 'rgba(255,99,132,1)'
+      }]
+    }
+  });
+</script>
+{% endblock %}
+

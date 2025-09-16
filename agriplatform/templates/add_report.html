@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📝 Submit Report</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.title.label }}  
+      {{ form.title(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.report_type.label }}  
+      {{ form.report_type(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.farmer_id.label }}  
+      {{ form.farmer_id(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.content.label }}  
+      {{ form.content(class="form-control", rows="5") }}
+    </div>
+
+    <button type="submit" class="btn btn-success">{{ form.submit.label }}</button>
+  </form>
+</div>
+{% endblock %}

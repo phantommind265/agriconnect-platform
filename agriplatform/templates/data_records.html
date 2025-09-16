@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Field Data Records{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Collected Field Data</h2>
+
+  <!-- Filter Form -->
+  <form method="GET" class="row g-2 mb-3">
+    <div class="col-md-4">
+      <input type="text" name="district" placeholder="Filter by District" value="{{ district_filter }}" class="form-control">
+    </div>
+    <div class="col-md-4">
+      <input type="text" name="crop" placeholder="Filter by Crop" value="{{ crop_filter }}" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+  </form>
+
+  {% if data_entries %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>District</th>
+        <th>Crop</th>
+        <th>Observation</th>
+        <th>Worker</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in data_entries %}
+      <tr>
+        <td>{{ entry.id }}</td>
+        <td>{{ entry.district }}</td>
+        <td>{{ entry.crop }}</td>
+        <td>{{ entry.observation }}</td>
+        <td>{{ entry.worker_name }}</td>
+        <td>{{ entry.date_collected }}</td>
+        <td>
+          <a href="{{ url_for('collection.edit_field_data', data_id=entry.id) }}" class="btn btn-sm btn-warning">Edit</a>
+          <form method="POST" action="{{ url_for('collection.delete_field_data', data_id=entry.id) }}" style="display:inline;">
+	  <form method="POST" action="{{ url_for('collection.delete_field_data', data_id=entry.id) }}" style="display:inline;">
+		  {{ csrf_token() }}
+		  <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</button>
+	  </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <nav>
+    <ul class="pagination">
+      {% for p in range(1, total_pages + 1) %}
+      <li class="page-item {% if p == page %}active{% endif %}">
+        <a class="page-link" href="{{ url_for('collection.view_field_data', page=p, district=district_filter, crop=crop_filter) }}">{{ p }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  {% else %}
+  <div class="alert alert-info mt-3">No field data records found.</div>
+  {% endif %}
+</div>
+{% endblock %}
+

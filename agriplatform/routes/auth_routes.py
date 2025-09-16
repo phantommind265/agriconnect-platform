@@ -32,6 +32,7 @@ def farmer_dashboard():
         return redirect(url_for('auth.login'))
     return render_template('dashboards/farmer_dashboard.html')
 
+
 @auth_bp.route('/extension/dashboard')
 @login_required
 def extension_dashboard():
@@ -55,7 +56,12 @@ def home():
 #testing
 @auth_bp.route('/testing')
 def testing():
-    return render_template('base.html')
+    return render_template('farmer_dashboard.html')
+
+#testing two
+@auth_bp.route('/testingtwo')
+def testingtwo():
+    return render_template('new_advisory.html')
 
 #help route
 @auth_bp.route('/help')
@@ -167,6 +173,8 @@ def register():
     if form.validate_on_submit():
         username = form.username.data.strip()
         password = form.password.data.strip()
+        crop = form.crop.data.strip()
+        district = form.district.data
         role = form.role.data
         language = form.language.data
         email = form.email.data.strip()
@@ -191,8 +199,8 @@ def register():
         # insert new user
         hashed_password = generate_password_hash(password)
         cursor.execute(
-            "INSERT INTO users (username, password, role, language, email, profile_pic) VALUES (?, ?, ?, ?, ?, ?)",
-            (username, hashed_password, role, language, email, filename),
+            "INSERT INTO users (username, password, crop, district, role, language, email, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (username, hashed_password, crop, district, role, language, email, filename),
         )
         conn.commit()
         user_id = cursor.lastrowid
