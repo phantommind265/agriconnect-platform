@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4 pt-3">
+<h2 class="fw-bold text-success mb-4">Maintenance Log for {{ equipment[1] }}</h2>
+<div class="card p-4 shadow-lg mb-5" style="border-radius:16px;">
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+    {{ form.description.label(class="form-label fw-semibold text_dark") }} 
+    {{ form.description(class="form-control", placeholder="Describle the maaaintenance task") }}
+    </div>
+    <div class="mb-3">
+    {{ form.date.label(class="form-label fw-semibold text_dark") }} 
+    {{ form.date(class="form-control") }}
+    </div>
+    <div class="mb-3">
+    {{ form.cost.label(class="form-label fw-semibold text_dark") }} 
+    {{ form.cost(class="form-control", placeholder="Enter cost(optional)") }}
+    </div>
+	    <button type="sub,it" class="btn btn-success w-100 py-2"><i class="fa-solid fa-wrench me-2"></i> Save Log</button>
+</form>
+    </div>
+    <div class="card p-4 shadow" style="border-radius:16px;">
+<h3 class="fw-bold text-success mb-3">Previous Maintenance</h3>
+<ul class="list-group list-group-flush">
+{% for log in logs %}
+<li class="list-group-item"><strong>{{ log[1] }}</strong> - {{ log[0] }} {% if log[2] %}<span class="text-muted">(Cost: {{ log[2] }}</span>){% endif %}</li>
+{% else %}
+    <li class="list-group-item text-muted">No maintenance records yet</li>
+{% endfor %}
+</ul>
+    </div>
+    </div>
+{% endblock %}

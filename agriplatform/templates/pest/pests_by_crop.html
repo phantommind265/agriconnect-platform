@@ -1,34 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!--
-<h2>{{ t("pests_for_crop") }}: {{ crop }}</h2>
-{% if pests %}
-<table>
-	<thead>
-		<tr>
-			<th>{{ t("name") }}</th>
-			<th>{{ t("symptoms") }}</th>
-			<th>{{ t("solution") }}</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for pest in pests %}
-		<tr>
-			<td>{{ pest.name }}</td>
-			<td>{{ pest.symptoms }}</td>
-			<td>{{ pest.solution }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
-{% else %}
-	<p>{{ t("no_pests_found") }}</p>
-{% endif %}
-
-<a href="{{ url_for('pest.list_pests') }}">{{ t("back_to_all_pests") }}</a>
-
--->
 <style>
     .crop-pest-container {
         background: #ffffff;

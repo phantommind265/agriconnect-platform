@@ -1,111 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<br><br>
-<div class="container mt-4">
-    <h2>📚 Add Knowledge Resource</h2>
-    <p class="subtitle">Share useful agricultural knowledge with the community.</p>
-
+<div class="container mt-4 pt-3">
+    <h2 class="fw-bold text-success mt-4">Add Knowledge Resource</h2>
+    <p>Share useful agricultural knowledge with the community.</p>
+<div class="card p-4 shadow-lg" style="border-radius:16px;">
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
 
         <div class="mb-3">
-            <label>{{ form.title.label(class="form-label") }}</label>
-            {{ form.title(size=40, class_="form-control", placeholder="Enter resource title") }}
+            {{ form.title.label(class="form-label fw-semibold text-dark") }}
+            {{ form.title(size=40, class="form-control", placeholder="Enter resource title") }}
         </div>
 
         <div class="mb-3">
-            <label>{{ form.content.label (class="form-label")}}</label>
-            {{ form.content(rows=3, cols=50, class_="form-control", placeholder="Write detailed information...") }}
+            {{ form.content.label (class="form-label fw-semibold text-dark")}}
+            {{ form.content(rows=3, cols=50, class="form-control", placeholder="Write detailed information...") }}
         </div>
 
         <div class="mb-3">
-            <label>{{ form.category.label(class="form-label") }}</label>
-            {{ form.category(class_="form-control") }}
+            {{ form.category.label(class="form-label fw-semibold text-dark") }}
+            {{ form.category(class="form-control") }}
         </div>
 
         <div class="mb-3">
-            <label>{{ form.file.label(class="form-label") }}</label>
-            {{ form.file(class_="form-control") }}
+            {{ form.file.label(class="form-label fw-semibold text-dark") }}
+            {{ form.file(class="form-control") }}
         </div>
 
-        <button type="submit" class="btn btn-success">Add Resource</button>
+	<button type="submit" class="btn btn-success w-100 py-2"><i class="fa-solid fa-save me-2"></i> Submit Resource</button>
     </form>
 </div>
-<!--
-<style>
-    .form-container {
-        max-width: 700px;
-        margin: 40px auto;
-        background: #fff;
-        padding: 25px 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        font-family: Arial, sans-serif;
-    }
-
-    .form-container h2 {
-        font-size: 24px;
-        color: #2f855a;
-        margin-bottom: 10px;
-    }
-
-    .form-container .subtitle {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 20px;
-    }
-
-    .styled-form .form-group {
-        margin-bottom: 18px;
-    }
-
-    .styled-form label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 8px;
-        color: #333;
-    }
-
-    .form-input, .form-textarea, .form-select {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 15px;
-        outline: none;
-        transition: border-color 0.3s ease;
-    }
-
-    .form-input:focus, .form-textarea:focus, .form-select:focus {
-        border-color: #2f855a;
-        box-shadow: 0 0 4px rgba(47,133,90,0.3);
-    }
-
-    .form-textarea {
-        resize: vertical;
-        min-height: 120px;
-    }
-
-    .form-input-file {
-        border: none;
-        font-size: 14px;
-    }
-
-    .btn-primary {
-        background: #2f855a;
-        color: #fff;
-        border: none;
-        padding: 12px 18px;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background: #276749;
-    }
-</style>
--->
+</div>
 {% endblock %}
 

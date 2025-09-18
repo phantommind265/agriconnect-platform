@@ -99,7 +99,7 @@
 </style>
 
 <div class="profile-form-container">
-    <h2>🌱 {% if profile %}Edit{% else %}Create{% endif %} Farmer Profile</h2>
+    <h2>{% if profile %}Edit{% else %}Create{% endif %} Farmer Profile</h2>
     <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
 

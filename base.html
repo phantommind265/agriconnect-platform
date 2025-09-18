@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}agriconnect{% endblock %}</title>
+  <title>{% block title %}AgriConnect{% endblock %}</title>
   <meta name="description" content="AgriConnect – connecting farmers, extension workers, and markets." />
 
   <!-- Fonts & Icons -->
@@ -93,8 +93,8 @@
   <nav class="navbar navbar-expand-lg fixed-top border-bottom">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-        <img class="brand-logo" src="{{ url_for('static', filename='images/icon.png') }}" alt="agriconnect" />
-        <span class="fw-semibold">agriconnect</span>
+        <img class="brand-logo" src="{{ url_for('static', filename='images/icon.png') }}" alt="AgriConnect" />
+        <span class="fw-semibold">AgriConnect</span>
         {% if current_user.is_authenticated %}
           <span class="badge badge-role ms-2">{{ role|title }}</span>
         {% endif %}
@@ -127,9 +127,6 @@
           {% endif %}
           {% if current_user.is_authenticated and role == 'admin' %}
             <li class="nav-item"><a class="nav-link {% if 'admin' in request.endpoint %}active{% endif %}" href="{{ url_for('auth.admin_dashboard') }}"><i class="fa-solid fa-shield"></i> Admin</a></li>
-          {% endif %}
-	  {% if current_user.is_authenticated and role == 'farmer' %}
-	  <li class="nav-item"><a class="nav-link {% if 'farmer' in request.endpoint %}active{% endif %}" href="{{ url_for('auth.farmer_dashboard') }}"><i class="fa-solid fa-shield"></i> Farmer</a></li>
           {% endif %}
         </ul>
 
@@ -201,10 +198,11 @@
                 {% block sidebar %}{% endblock %}
               </div>
             </aside>
-	    <section class="col-12 col-lg-9">
-		    {% block content2 %}{% endblock %}
-		    {% else %}
-            <section class="col-12" style="padding-top: 100px">
+            <section class="col-12 col-lg-9">
+              {% block content2 %}{% endblock %}
+            </section>
+          {% else %}
+            <section class="col-12">
               {% block content %}{% endblock %}
             </section>
           {% endif %}
@@ -216,14 +214,14 @@
   <footer class="footer mt-auto py-4">
     <div class="container d-flex flex-wrap justify-content-between align-items-center small text-secondary">
       <div>
-        © {{ now().year if now is defined else 2025 }} agriconnect ·
-        <a href="{{ url_for('auth.about_page') }}" style="color: grey;">About</a> ·
-        <a href="{{ url_for('auth.contact') }}" style="color: grey;">Contact</a>
+        © {{ now().year if now is defined else 2025 }} AgriConnect ·
+        <a href="{{ url_for('auth.about_page') }}" class="link-light">About</a> ·
+        <a href="{{ url_for('auth.contact') }}" class="link-light">Contact</a>
       </div>
       <div class="d-flex align-items-center gap-3">
         <label class="toggle small"><input id="darkToggle" type="checkbox" class="form-check-input me-1"> Dark mode</label>
-        <a style="color: grey;" href="#">Terms</a>
-        <a style="color: grey;" href="#">Privacy</a>
+        <a class="link-light" href="#">Terms</a>
+        <a class="link-light" href="#">Privacy</a>
       </div>
     </div>
   </footer>
@@ -236,7 +234,7 @@
           <div class="toast text-bg-{{ 'success' if category=='success' else ('danger' if category=='error' else 'dark') }}"
                role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
             <div class="toast-header">
-              <strong class="me-auto">agriconnect</strong>
+              <strong class="me-auto">AgriConnect</strong>
               <small>Just now</small>
               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -252,7 +250,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content ag-card">
         <div class="modal-header">
-          <h5 class="modal-title"><i class="fa-solid fa-robot me-2"></i>agriconnect AI</h5>
+          <h5 class="modal-title"><i class="fa-solid fa-robot me-2"></i>AgriConnect AI</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>agriconnect</title>
+  <title>AgriConnect</title>
   <link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -30,7 +30,7 @@
     /* Header */
     .header {background:#2a7a4d;color:#fff;padding:1rem 0;}
     .header-container {display:flex;justify-content:space-between;align-items:center;}
-    .logo {font-size:1.5rem;color:white;font-weight:700;}
+    .logo {font-size:1.5rem;font-weight:700;}
     .cta-btn {
       background:#fff;color:#2a7a4d;padding:0.5rem 1rem;border-radius:20px;
       font-weight:500;transition:background .3s;
@@ -140,7 +140,7 @@
 <body>
   <header class="header">
     <div class="container header-container">
-      <h1 class="logo">agriconnect</h1>
+      <h1 class="logo">AgriConnect</h1>
       <a href="{{ url_for('donation.donations') }}" class="cta-btn"><i class="fa-solid fa-hand-holding-heart"></i> Donate</a>
     </div>
   </header>
@@ -149,9 +149,9 @@
     <div class="container">
       <div class="glass">
         <h1>What We Do</h1>
-        <p class="blurb">We help Malawian farmers and extension workers connect, learn, trade, and make data driven decisions all in one place.</p>
+        <p class="blurb">We help Malawian farmers and extension workers connect, learn, trade, and make data-driven decisions — all in one place.</p>
         <h2>How We Create Value</h2>
-        <p class="blurb">agriconnect blends agronomy know how with a smart assistant, messaging and market access. We bring reliable local data to your fingertips and make it simple to act whether that’s finding buyers, asking an expert, or planning for next week’s weather.</p>
+        <p class="blurb">AgriConnect blends messaging, market access, and agronomy know-how with a smart assistant. We bring reliable local data to your fingertips and make it simple to act — whether that’s finding buyers, asking an expert, or planning for next week’s weather.</p>
         <a href="{{ url_for('auth.contact') }}" class="btn">Contact Us</a>
       </div>
     </div>
@@ -169,12 +169,12 @@
 
   <section class="about container">
     <h2>Farmer Growth</h2>
-    <p>Start building the farming future you deserve by connecting with trusted partners on agriconnect.</p>
+    <p>Start building the farming future you deserve by connecting with trusted partners on AgriConnect.</p>
     <div class="about-grid">
       <div class="about-card">
         <img src="{{ url_for('static', filename='images/Green Tech.jpeg') }}" alt="Tech">
         <h3>Technology & Innovation</h3>
-        <p>Farming meets technology manage your farm, market your crops, and succeed all in one place.</p>
+        <p>Farming meets technology—manage your farm, market your crops, and succeed all in one place.</p>
       </div>
       <div class="about-card">
         <h3>Join Now</h3>
@@ -184,12 +184,12 @@
       <div class="about-card">
         <img src="{{ url_for('static', filename='images/person and picnic basket.jpeg') }}" alt="Support">
         <h3>Farmer Support</h3>
-        <p>Farming doesn’t have to be a struggle; with agriconnect, you’re never alone.</p>
+        <p>Farming doesn’t have to be a struggle; with AgriConnect, you’re never alone.</p>
       </div>
       <div class="about-card">
         <img src="{{ url_for('static', filename='images/farmer on tractor.jpg') }}" alt="Smart">
         <h3>Smart Farming Starts Here</h3>
-        <p>Don’t just farm, farm smart! agriconnect gives you the tools to stay ahead.</p>
+        <p>Don’t just farm—farm smart! AgriConnect gives you the tools to stay ahead.</p>
       </div>
     </div>
   </section>
@@ -199,7 +199,7 @@
       <h2>Why Choose Us</h2>
       <div class="choose-grid">
         <div class="choose-item"><img src="{{ url_for('static', filename='images/Maize plantation.jpeg') }}" alt=""><h3>Connecting Farmers, Growing Together</h3></div>
-        <div class="choose-item"><img src="{{ url_for('static', filename='images/Planting Secrets.jpeg') }}" alt=""><h3>Your Farm, Your Future Connected</h3></div>
+        <div class="choose-item"><img src="{{ url_for('static', filename='images/Planting Secrets.jpeg') }}" alt=""><h3>Your Farm, Your Future—Connected</h3></div>
         <div class="choose-item"><img src="{{ url_for('static', filename='images/Agriculture Farm.jpeg') }}" alt=""><h3>From Soil to Success, We’re With You</h3></div>
       </div>
     </div>
@@ -209,20 +209,20 @@
     <div class="container">
       <h2>We Provide the Best Services</h2>
       <div class="service-grid">
-        <div class="service-box"><h3>Farmer Support & Growth</h3><p>Take your farm beyond your village agriconnect brings the world to your crops.</p></div>
-        <div class="service-box"><h3>Market Access & Trade</h3><p>Your hard work deserves better profits agriconnect connects farmers and buyers instantly.</p></div>
-        <div class="service-box"><h3>Technology & Innovation</h3><p>Digital farming is the future, and with agriconnect, the future is here for you.</p></div>
-        <div class="service-box"><h3>Community & Sustainability</h3><p>Every farmer deserves knowledge, tools, and opportunities agriconnect gives you all three.</p></div>
+        <div class="service-box"><h3>Farmer Support & Growth</h3><p>Take your farm beyond your village—AgriConnect brings the world to your crops.</p></div>
+        <div class="service-box"><h3>Market Access & Trade</h3><p>Your hard work deserves better profits—AgriConnect connects farmers and buyers instantly.</p></div>
+        <div class="service-box"><h3>Technology & Innovation</h3><p>Digital farming is the future, and with AgriConnect, the future is here for you.</p></div>
+        <div class="service-box"><h3>Community & Sustainability</h3><p>Every farmer deserves knowledge, tools, and opportunities—AgriConnect gives you all three.</p></div>
       </div>
     </div>
   </section>
 
   <section class="stats">
     <div class="container stats-grid">
-      <div class="stat-box"><h3>10,000+</h3><p style="color: black;">Farmers Registered</p></div>
-      <div class="stat-box"><h3>500+</h3><p style="color: black;">Extension Workers</p></div>
-      <div class="stat-box"><h3>20+</h3><p style="color: black;">Districts Reached</p></div>
-      <div class="stat-box"><h3>15,000+</h3><p style="color: black;">Happy Clients</p></div>
+      <div class="stat-box"><h3>10,000+</h3><p>Farmers Registered</p></div>
+      <div class="stat-box"><h3>500+</h3><p>Extension Workers</p></div>
+      <div class="stat-box"><h3>20+</h3><p>Districts Reached</p></div>
+      <div class="stat-box"><h3>15,000+</h3><p>Happy Clients</p></div>
     </div>
   </section>
 
@@ -262,7 +262,7 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
-        <h2>agriconnect</h2>
+        <h2>AgriConnect</h2>
         <p>Connecting farmers, extension workers & markets in Malawi with technology, knowledge, and opportunities.</p>
       </div>
       <div class="footer-col">
@@ -299,7 +299,7 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom">© <span id="year"></span> agriconnect. All Rights Reserved.</div>
+    <div class="footer-bottom">© <span id="year"></span> AgriConnect. All Rights Reserved.</div>
   </footer>
 
   <script>

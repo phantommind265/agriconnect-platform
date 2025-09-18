@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!--
-<h2>{{ pest.name }}</h2>
-
-<p><strong>{{ t("crops_affected") }}:</strong> {{ pest.crops | join(",") }}</p>
-<p><strong>{{ t("symptoms") }}:</strong> {{ pest.symptoms }}</p>
-<p><strong>{{ t("solution") }}:</strong> {{ pest.solution }}</p>
-
-<a href="{{ url_for('pest.list_pests') }}">{{ t("back_to_all_pests") }}</a>
--->
 <style>
     .pest-detail-container {
         background: #ffffff;
@@ -22,7 +13,7 @@
     }
 
     .pest-detail-container h2 {
-        color: #2e7d32;
+        color: grey;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -30,6 +21,7 @@
     .pest-info {
         margin-bottom: 20px;
         line-height: 1.6;
+	color: black;
     }
 
     .pest-info strong {
@@ -65,15 +57,15 @@
     <h2>🪲 {{ pest.name }}</h2>
 
     <div class="info-box pest-info">
-        <p><strong>{{ t("crops_affected") }}:</strong> {{ pest.crops | join(", ") }}</p>
+        <p><strong>Crops Affected:</strong> {{ pest.crops | join(", ") }}</p>
     </div>
     <div class="info-box pest-info">
-        <p><strong>{{ t("symptoms") }}:</strong> {{ pest.symptoms }}</p>
+        <p><strong>Symptoms:</strong> {{ pest.symptoms }}</p>
     </div>
     <div class="info-box pest-info">
-        <p><strong>{{ t("solution") }}:</strong> {{ pest.solution }}</p>
+        <p><strong>Solution:</strong> {{ pest.solution }}</p>
     </div>
 
-    <a class="back-link" href="{{ url_for('pest.list_pests') }}">⬅ {{ t("back_to_all_pests") }}</a>
+    <a class="back-link" href="{{ url_for('pest.list_pests') }}">Back To All Pests</a>
 </div>
 {% endblock %}

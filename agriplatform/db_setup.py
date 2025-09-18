@@ -37,6 +37,7 @@ def init_db():
         price REAL NOT NULL,
         description TEXT,
         category TEXT NOT NULL,
+        image_filename TEXT,
         seller_name TEXT NOT NULL,
         contact_info TEXT NOT NULL,
         created_at TEXT DEFAULT CURRENT_TIMESTAMP

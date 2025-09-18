@@ -13,6 +13,7 @@ equipment_bp = Blueprint('equipment', __name__, url_prefix='/equipment')
 
 
 DB_PATH = os.path.join("agriplatform", "agriconnect.db")
+UPLOAD_FOLDER = os.path.join("agriplatform", "static", "uploads", "equipment")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -27,7 +28,7 @@ def register_equipment():
         filename = None
         if form.image.data:
             filename = secure_filename(form.image.data.filename)
-            image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            image_path = os.path.join(UPLOAD_FOLDER, filename)
             form.image.data.save(image_path)
 
         conn = get_db_connection()
@@ -50,29 +51,19 @@ def register_equipment():
         flash("Equipment registered successfully!", "success")
         return redirect(url_for('equipment.list_equipment'))
 
-    return render_template('register_equipment.html', form=form)
+    return render_template('equipment/register_equipment.html', form=form)
 
 @equipment_bp.route('/list')
 def list_equipment():
-    #user_id = session.get('user_id')
-    #if not user_id:
-     #   flash("Please log in to see your list of equipments")
-      #  return redirect(url_for('auth.login'))
-
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM equipment WHERE owner_id = ?", (current_user.id,))
     equipments = cursor.fetchall()
     conn.close()
-    return render_template('list_equipment.html', equipments=equipments)
+    return render_template('equipment/list_equipment.html', equipments=equipments)
 
 @equipment_bp.route('/<int:equipment_id>/availability', methods=['GET', 'POST'])
 def availability(equipment_id):
-    #user_id = session.get('user_id')
-    #if not user_id:
-     #   flash("Please log in to see your list of equipments")
-      #  return redirect(url_for('auth.login'))
-
     form = AvailabilityForm()
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -97,7 +88,7 @@ def availability(equipment_id):
     unavailable_dates = [row['date'] for row in cursor.fetchall()]
     conn.close()
 
-    return render_template('availability.html', form=form, equipment=equipment, unavailable_dates=unavailable_dates)
+    return render_template('equipment/availability.html', form=form, equipment=equipment, unavailable_dates=unavailable_dates)
 
 @equipment_bp.route('/<int:equipment_id>/book', methods=['GET', 'POST'])
 @login_required
@@ -137,7 +128,7 @@ def request_booking(equipment_id):
             return redirect(url_for('equipment.list_equipment'))
 
     conn.close()
-    return render_template('booking_request.html', form=form, equipment=equipment)
+    return render_template('equipment/booking_request.html', form=form, equipment=equipment)
 
 
 @equipment_bp.route('/<int:equipment_id>/maintenance', methods=['GET', 'POST'])
@@ -174,7 +165,7 @@ def maintenance_log(equipment_id):
     logs = cursor.fetchall()
 
     conn.close()
-    return render_template('maintenance_log.html', form=form, equipment=equipment, logs=logs)
+    return render_template('equipment/maintenance_log.html', form=form, equipment=equipment, logs=logs)
 
 
 @equipment_bp.route('/usage_analytics')
@@ -218,7 +209,7 @@ def usage_analytics():
 
     conn.close()
 
-    return render_template('usage_analytics.html', analytics=analytics)
+    return render_template('equipment/usage_analytics.html', analytics=analytics)
 
 @equipment_bp.route('/marketplace', methods=['GET'])
 def marketplace():
@@ -252,5 +243,5 @@ def marketplace():
     equipments = cursor.fetchall()
     conn.close()
 
-    return render_template('equipment_marketplace.html', equipments=equipments, search=search, filter_type=filter_type, filter_location=filter_location)
+    return render_template('equipment/equipment_marketplace.html', equipments=equipments, search=search, filter_type=filter_type, filter_location=filter_location)
 

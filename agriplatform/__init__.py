@@ -19,7 +19,7 @@ def get_unread_notifications(user_id):
     cursor = conn.cursor()
     # Fetch unread notifications for this user or global ones (user_id IS NULL)
     cursor.execute("""
-        SELECT id, title, message, link, created_at 
+        SELECT id, message, link, created_at 
         FROM notifications 
         WHERE (user_id = ? OR user_id IS NULL) AND is_read = 0
         ORDER BY created_at DESC

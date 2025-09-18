@@ -157,15 +157,8 @@
   <a href="{{ url_for('transport.new_transport') }}"><i class="fa-solid fa-car"></i> Post Transport</a>
   <a href="{{ url_for('warehouse.add_warehouse') }}">Warehouse</a>
   <a href="{{ url_for('crop.crop_list') }}"><i class="fa-solid fa-seedling"></i> Crops</a>
-  <div class="dropdown">
-    <a href="#"><i class="fa-solid fa-tractor"></i> Equipment</a>
-    <div class="dropdown-content">
-	    <a href="{{ url_for('equipment.register_equipment') }}"><i class="fa-solid fa-plus"></i> Register Equipment</a>
-      <a href="{{ url_for('equipment.list_equipment') }}">Available Equipment</a>
-      <a href="{{ url_for('equipment.usage_analytics') }}">Usage Analytics</a>
-    </div>
-  </div>
   <a href="{{ url_for('pest.list_pests') }}"><i class="fa-solid fa-bug"></i> Pest & Diseases</a>
+
   <a href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
 </div>
 

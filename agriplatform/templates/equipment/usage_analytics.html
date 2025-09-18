@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4 pt-3">
+<h2 class="fw-bold text-sucess mb-4">Usage Analytics</h2>
+
+{% if analytics %}
+<div class="table-responsive shadow-sm rounded mb-5" style+"border-radius:16px;">
+<table class="table table-striped table-hover align-middle mb-0">
+    <thead class="table-success text-center">
+        <tr>
+            <th scope="col">Equipment</th>
+            <th scope="col">Bookings Count</th>
+            <th scope="col">Booked Days</th>
+            <th scope="col">Maintenance Logs</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in analytics %}
+        <tr>
+            <td class="text-semibold">{{ stat.equipment }}</td>
+            <td class="text-center">{{ stat.bookings_count }}</td>
+            <td class="text-center">{{ stat.booked_days }}</td>
+            <td class="text-center">{{ stat.maintenance_count }}</td>
+        </tr>
+	{% endfor %}
+    </tbody>
+</table>
+</div>
+
+<div class="card p-4 shadow-sm" style="bolder-radius:16px;">
+	<h4 class="fw-bold text-success mb-4">Bookings Overview</h4>
+	<canvas id="usageChart" height="120"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js></script>
+<script>
+	const labels = [
+		{% for stat in analytics %}
+		"{{ stat.equipment }}",
+		{% endfor %}
+		];
+	const bookingsData = [
+		{% for stat in analytics %}
+		{{ stat.bookings_count }},
+		{% endfor %}
+		];
+	const bookedDaysData = [
+		{% for stat in analytics %}
+		{{ stat.booked_days }},
+		{% endfor %}
+		];
+	const ctx = document.getElementById('usageChart').getContext('2d');
+	const usageChart = new Chart(ctx, {
+		type: 'bar'
+		data: {
+			labels: labels,
+			datasets: [
+				{
+					label: 'Bookings Count',
+					data: bookingData,
+					backgroundColor: 'rgba(40, 167, 69, 0.7)',
+					borderRadius: 8
+				},
+				{
+					label: 'Booked Days',
+					data: bookedDaysData,
+					backgroundColor: 'rgba(23, 162, 184, 0.7)',
+					borderRadius: 8
+				}
+				]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Equipment Booking Analytics',
+					color: '#198754',
+					font: {
+						size: 18,
+						weight: 'bold'
+					}
+				}
+			},
+			scales: {
+				y: {
+					beginAtZero: true,
+					ticks: {
+						stepSize: 1
+					}
+				}
+			}
+		}
+	});
+</script>
+        {% else %}
+	<div class="alert alert-info shadow-sm mt-3" role="alert">
+            No equipment found
+	</div>
+        {% endif %}
+</div>
+{% endblock %}

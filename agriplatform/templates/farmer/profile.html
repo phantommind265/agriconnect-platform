@@ -22,7 +22,8 @@
     .profile-picture {
         max-width: 200px;
         max-height: 200px;
-        border-radius: 50%;
+	cursor: pointer;
+        border-radius: 10%;
         margin-bottom: 20px;
         border: 4px solid #a5d6a7;
         object-fit: cover;
@@ -124,7 +125,7 @@
 </style>
 
 <div class="profile-container">
-    <h2>🌱 Farmer Profile</h2>
+    <h2>Farmer Profile</h2>
 
     {% if profile %}
         {% if profile.image_filename %}
@@ -147,7 +148,7 @@
 
     {% else %}
         <p class="no-picture">No profile found</p>
-        <a href="{{ url_for('farmer.edit_profile') }}" class="btn-success">🌱 Create Profile</a>
+        <a href="{{ url_for('farmer.edit_profile') }}" class="btn-success">Create Profile</a>
     {% endif %}
 </div>
 {% endblock %}

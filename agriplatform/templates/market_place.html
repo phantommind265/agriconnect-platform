@@ -2,57 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Agriconnect Marketplace</title>
+		<title>agriconnect Marketplace</title>
 	</head>
-	<!--
-	<body>
-		<h1>Marketplace</h1>
-		<p>Buy and sell agricultural products and tools.</P>
-		<div id="market-items">
-			<a href="{{ url_for('marketplace.add_item') }}"><button style="margin-bottom: 20px;">Post New Item</button></a>
-			<form method="GET" action="{{ url_for('marketplace.market_page') }}">
-				<input type="text" name="q" placeholder="Search item......" value="{{ request.args.get('q', '') }}">
-				<select name="category">
-					<option value="">All Categories</option>
-					<option value="Fruits">Fruits</option>
-					<option value="Vegetables">Vegetables</option>
-					<option value="Livestock">Livestock</option>
-					<option value="Grains">Grains</option>
-					<option value="Legumes">Legumes</option>
-					<option value="Inputs">Inputs</option>
-					<option value="Tools">Tools & Equipment</option>
-					<option value="Other">Other</option>
-				</select>
-				<button type="submit">Search</button>
-			</form>
-			{% if items %}
-			<h2>Available Items</h2>
-			<div style="display: flex; flex-wrap: wrap; gap: 16px;">
-				{% for item in items %}
-				{% if session.get('role') == 'admin' %}
-					<form method="POST" action="{{ url_for('marketplace.delete_item', item_id=item['id']) }}" style="display: inline;">
-						<button type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
-					</form>
-				{% endif %}
-					<div style="border:1px solid #ccc; padding:12px; border-radius: 8px; width:300px; background: #f9f9f9;">
-						<h3>{{ item.title }} - MK{{ item.price }}</h3>
-						<p><strong>Category:</strong> {{ item.category }}</p>
-						<p>{{ item.description }}</p>
-						{% if item['image_filename'] %}
-							<img src="{{ url_for('static', filename='uploads/' + item['image_filename']) }}" width="100%">
-						{% else %}
-							<p style="color: gray;">No image uploaded</p>
-						{% endif %}
-						<p><strong>Seller:</strong> {{ item.seller_name }} | {{ item.contact_info }}</p>
-						<p style="font-size: 12px; color: gray;"><small>Posted on: {{ item.created_at }}</small></p>
-					</div>
-				{% endfor %}
-			{% else %}
-				<p>No items available yet.</p>
-			{% endif %}
-		</div>
-	</body>
-	-->
+	{% extends "base.html" %}
+	{% block content %}
 <style>
     body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -172,7 +125,7 @@
         background: darkred;
     }
 </style>
-<link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
+<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
 
 <div class="market-container">
     <h1>🌽 Marketplace</h1>
@@ -183,7 +136,7 @@
             <button>➕ Post New Item</button>
         </a>
         <form method="GET" action="{{ url_for('marketplace.market_page') }}">
-            <input type="text" name="q" placeholder="Search item..." value="{{ request.args.get('q', '') }}">
+            <input type="text" name="q" class="form-control" placeholder="Search item..." value="{{ request.args.get('q', '') }}">
             <select name="category">
                 <option value="">All Categories</option>
                 <option value="Fruits">🍎 Fruits</option>
@@ -215,7 +168,7 @@
                     <p>{{ item.description }}</p>
 
                     {% if item['image_filename'] %}
-                        <img src="{{ url_for('static', filename='uploads/' + item['image_filename']) }}" alt="Product Image">
+		    <img src="{{ url_for('static', filename='uploads/market/' + item['image_filename']) }}" alt="Product Image">
                     {% else %}
                         <p style="color: gray; font-style:italic;">No image uploaded</p>
                     {% endif %}
@@ -229,4 +182,4 @@
         <p style="text-align:center; color:gray;">No items available yet.</p>
     {% endif %}
 </div>
-</html>
+{% endblock %}

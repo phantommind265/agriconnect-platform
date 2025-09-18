@@ -1,38 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-
-<!--
-
-	<h2>{{ t("pest_and_diseases") }}</h2>
-	<form method="GET" action="{{ url_for('pest.list_pests') }}">
-		<input type="text" name="q" placeholder="{{ t('search_by_name_or_symptom') }}" value="{{ query }}">
-		<button type="submit">{{ t("search") }}</button>
-	</form>
-	<br><br>
-	<table>
-		<thead>
-			<tr>
-				<th>{{ t("name") }}</th>
-				<th>{{ t("crops_affected") }}</th>
-				<th>{{ t("symptoms") }}</th>
-				<th>{{ t("solution") }}</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for pest in pests %}
-			<tr>
-				<td><a href="{{ url_for('pest.view_pest', name=pest.name) }}">{{ pest.name }}</a></td>
-				<td>{{ pest.crops | join(', ') }}</td>
-				<td>{{ pest.symptoms }}</td>
-				<td>{{ pest.solution }}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
--->
 <style>
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  body, .container {
+    font-size: 16px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+    display: block;
+    width: 100%;
+  }
+
+  th {
+    background-color: transparent;
+  }
+
+  td {
+    border-top: none;
+  }
+}
     .pest-container {
+	    color: black;
         background: #ffffff;
         padding: 25px;
         border-radius: 12px;
@@ -114,22 +104,43 @@
     .pest-container a:hover {
         text-decoration: underline;
     }
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+  body, .container {
+    font-size: 16px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+    display: block;
+    width: 100%;
+  }
+
+  th {
+    background-color: transparent;
+  }
+
+  td {
+    border-top: none;
+  }
+}
+
 </style>
 
 <div class="pest-container">
-    <h2>🪲 {{ t("pest_and_diseases") }}</h2>
+	<h2>🪲 {{ t("pest_and_diseases") }}</h2>
 
     <form method="GET" action="{{ url_for('pest.list_pests') }}">
-        <input type="text" name="q" placeholder="{{ t('search_by_name_or_symptom') }}" value="{{ query }}">
-        <button type="submit">{{ t("search") }}</button>
+	    <input type="text" name="q" placeholder="{{ t("search_by_name_or_symptom") }}" value="{{ query }}">
+	<button type="submit">{{ t("search") }}</button>
     </form>
 
     <table>
         <thead>
             <tr>
-                <th>{{ t("name") }}</th>
-                <th>{{ t("crops_affected") }}</th>
-                <th>{{ t("symptoms") }}</th>
+		    <th>{{ t("name") }}</th>
+		<th>{{ t("crops_affected") }}</th>
+		<th>{{ t("symptoms") }}</th>
                 <th>{{ t("solution") }}</th>
             </tr>
         </thead>
