@@ -21,6 +21,15 @@ class Config:
     #SECRET_KEY = os.environ.get("SECRET_KEY", "this-is-a-dev-secret")
     LANGUAGES = ["en", "ny"]
 
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = 'chikusehopeson@gmail.com'
+    MAIL_PASSWORD = 'app_password'
+    MAIL_DEFAULT_SENDER = ('AgriConnect Support', 'chikusehopeson@gmail.com')
+
+
+
     """
     later work
 

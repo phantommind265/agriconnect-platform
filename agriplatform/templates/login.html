@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="UTF-8" />
-	<title>agriconnect</title>
+	<title>Agriconnect</title>
 	<style>
     .login-container {
         background: white;
@@ -92,20 +92,22 @@
     .login-container p a:hover {
         text-decoration: underline;
     }
-    /* Mobile Responsiveness */
-@media (max-width: 600px) {
-  body, .container {
-    font-size: 16px;
-  }
-
+    @media (max-width: 600px) {
+	    .login-container {
+		    padding: 25px 30px;
+	    }
+	    .login-container h2 {
+		    font-size: 24px;
+	    }
+    }
 	</style>
-	<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+	<link rel="icon" href="{{ url_for('static', filename='images/file_000000001550622f90928690b79b8a94.png') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
 
 <body>
 
 <div class="login-container">
-    <h2>Login</h2>
+    <h2>{{ t("login") }}</h2>
     <form method="POST">
         {{ form.hidden_tag() }}
 
@@ -125,13 +127,13 @@
     </form>
 
     <p>
-    Don't have an account
-    <a href="{{ url_for('auth.register') }}">Register now</a>
+    {{ t("no_account") }}
+    <a href="{{ url_for('auth.register') }}">{{ t("register_now") }}</a>
     </p>
 
     <p>
-    Forgot password
-    <a href="{{ url_for('auth.forgot_password')}}">Forgot password</a>
+    {{ t("forgot_password") }}
+    <a href="{{ url_for('auth.forgot_password')}}">{{ t("forgot_password") }}</a>
     </p>
 
 </div>

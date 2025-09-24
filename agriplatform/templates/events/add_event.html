@@ -1,30 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Add New Event</h2>
+<div class="container mt-4 pt-3">
+<h2 class="fe-bold text-success mb-4">Add New Event</h2>
+
+<div class="card p-4 shadow-lg mb-5" style="border-radius:16px;">
 <form method="POST" enctype="multipart/form-data">
 	{{ form.hidden_tag() }}
+	
+	<div class="mb-3">
+	{{ form.title.label(class="form-label fw-semibold text-dark") }}
+	{{ form.title(class="form-control", placeholder="Enter event title") }}
+	</div>
+	
+	<div class="mb-3">
+	{{ form.description.label(class="form-label fw-semibold text-dark") }}
+	{{ form.description(class="form-control", rows=3, placeholder="Brief description of the event") }}
+	</div>
+	
+	<div class="mb-3">
+	{{ form.location.label(class="form-label fw-semibold text-dark") }}
+	{{ form.location(class="form-control", placeholder="Enter event location") }}
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6 mb-3">
+	{{ form.date.label(class="form-label fw-semibold text-dark") }}
+	{{ form.date(class="form-control") }}
+		</div>
 
-	<p>{{ form.title.label }}
-	<br>{{ form.title(size=40) }}</p>
+		<div class="col-md-6 mb-3">
+	{{ form.time.label(class="form-label fw-semibold text-dark") }}
+	{{ form.time(class="form-control") }}
+		</div>
+	</div>
 
-	<p>{{ form.description.label }}
-	<br>{{ form.description(rows=3, cols=40) }}</p>
+	<div class="mb-4">
+		{{ form.organizer.label(class="form-label fw-semibold text-dark") }}
+		{{ form.organizer(class="form-control", placeholder="Organizer name") }}
+	</div>
+	
 
-	<p>{{ form.location.label }}
-	<br>{{ form.location(size=40) }}</p>
-
-	<p>{{ form.date.label }}
-	<br>{{ form.date() }}</p>
-
-	<p>{{ form.time.label }}
-	<br>{{ form.time() }}</p>
-
-	<p>{{ form.organizer.label }}
-	<br>{{ form.organizer(size=40) }}</p>
-
-	<p>{{ form.flyer.label }}
-	<br>{{ form.flyer() }}</p>
-
-	<p>{{ form.submit(class_="btn btn-primary") }}</p>
+	<div class="mb-4">
+		{{ form.flyer.label(class="form-label fw-semibold text-dark") }}
+		{{ form.flyer(class="form-control") }}
+	</div>
+	
+	<button type="submit" class="btn btn-success w-100 py-2"><i class="fa-solid fa-plus-circle me-2"></i>Add Event</button>
 </form>
+</div>
+</div>
 {% endblock %}

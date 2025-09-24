@@ -1,97 +1,103 @@
+
 {% extends "base.html" %}
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">🌱 Upcoming Events</h2>
+  <h2 class="mb-4 text-center fw-bold text-success">Upcoming Events</h2>
 
-    {% if events %}
-    <div class="row g-4">
-        {% for event in events %}
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100 border-0 rounded-4 event-card">
-                <!-- Event Flyer -->
-                {% if event.flyer_path %}
-                <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-1]) }}"
-                     class="card-img-top rounded-top-4"
-                     alt="Event Flyer"
-                     style="height: 220px; object-fit: cover;">
-                {% else %}
-                <img src="{{ url_for('static', filename='CSS/background.jpg') }}"
-                     class="card-img-top rounded-top-4"
-                     alt="Default Event"
-                     style="height: 220px; object-fit: cover;">
-                {% endif %}
+  {% if events %}
+  <div class="row g-4">
+    {% for event in events %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100 border-0 rounded-4 event-card">
+        <!-- Event Flyer -->
+        {% if event.flyer_path %}
+          <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-1]) }}"
+               class="card-img-top rounded-top-4"
+               alt="{{ event.title }} Flyer"
+               style="height:220px; object-fit:cover;">
+        {% else %}
+          <img src="{{ url_for('static', filename='images/icon.png') }}"
+               class="card-img-top rounded-top-4"
+               alt="Default Event"
+               style="height:220px; object-fit:cover;">
+        {% endif %}
 
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">{{ event.title }}</h5>
-                    <p class="card-text text-muted mb-1">
-                        📅 {{ event.date }} &nbsp; 🕒 {{ event.time }}
-                    </p>
-                    <p class="card-text">
-                        📍 <span class="fw-semibold">{{ event.location }}</span>
-                    </p>
-                </div>
-                <div class="card-footer bg-white border-0">
-                    <button class="btn btn-sm btn-success w-100" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#eventModal{{ loop.index }}">
-                        View Details
-                    </button>
-                </div>
-            </div>
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ event.title }}</h5>
+          <p class="card-text text-muted mb-1">
+            📅 {{ event.date }} &nbsp; 🕒 {{ event.time }}
+          </p>
+          <p class="card-text">
+            📍 <span class="fw-semibold">{{ event.location }}</span>
+          </p>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="eventModal{{ loop.index }}" tabindex="-1" aria-labelledby="eventModalLabel{{ loop.index }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content rounded-4">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="eventModalLabel{{ loop.index }}">{{ event.title }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        {% if event.flyer_path %}
-                        <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-1]) }}"
-                             class="img-fluid rounded mb-3"
-                             alt="Event Flyer">
-                        {% endif %}
-                        <p><strong>Date:</strong> {{ event.date }}</p>
-                        <p><strong>Time:</strong> {{ event.time }}</p>
-                        <p><strong>Location:</strong> {{ event.location }}</p>
-                        {% if event.organizer %}
-                        <p><strong>Organizer:</strong> {{ event.organizer }}</p>
-                        {% endif %}
-                        {% if event.description %}
-                        <p>{{ event.description }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="modal-footer">
-			    <form action="{{ url_for('events_bp.register_event', event_id=event.id) }}" method="POST">
-				    {{ csrf_token() }}
-				    <button type="submit" class="btn btn-primary">Register for Event</button>
-			    </form>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
+        <div class="card-footer bg-white border-0">
+          <button class="btn btn-sm btn-success w-100 shadow-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#eventModal{{ loop.index }}">
+            View Details
+          </button>
         </div>
-        {% endfor %}
+      </div>
     </div>
-    {% else %}
-    <div class="text-center mt-5">
-        <p class="text-muted fs-5">No upcoming events found.</p>
+
+    <!-- Event Modal -->
+    <div class="modal fade" id="eventModal{{ loop.index }}" tabindex="-1" 
+         aria-labelledby="eventModalLabel{{ loop.index }}" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="eventModalLabel{{ loop.index }}">
+              {{ event.title }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {% if event.flyer_path %}
+              <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-1]) }}"
+                   class="img-fluid rounded mb-3"
+                   alt="{{ event.title }} Flyer">
+            {% endif %}
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Time:</strong> {{ event.time }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            {% if event.organizer %}
+              <p><strong>Organizer:</strong> {{ event.organizer }}</p>
+            {% endif %}
+            {% if event.description %}
+              <p>{{ event.description }}</p>
+            {% endif %}
+          </div>
+          <div class="modal-footer">
+		  <form action="{{ url_for('events_bp.register_event', event_id=event.id) }}" method="POST">
+                                                                        <input type="hidden"
+                                                                               name="csrf_token"
+                                                                               value="{{ csrf_token() }}">
+                                                                        <button type="submit" class="btn btn-primary">Register for Event</button>
+                                                                </form>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    {% endif %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center mt-5">
+    <p class="text-muted fs-5">No upcoming events found.</p>
+  </div>
+  {% endif %}
 </div>
 
 <style>
 .event-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 </style>
 {% endblock %}
-
-

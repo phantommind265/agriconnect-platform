@@ -2,36 +2,49 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>📅 My Registered Events</h2>
-    <hr>
+    <h2 class="fw-bold text-success">📅 My Registered Events</h2>
+    <hr class="mb-4">
 
     {% if events %}
         <div class="row">
             {% for event in events %}
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm border-0">
-                    {% if event['flyer'] %}
-                        <img src="{{ url_for('static', filename='uploads/' + event['flyer']) }}" 
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm border-0 h-100" style="border-radius: 16px; transition: transform 02.s;">
+			{% if event.flyer_path %}
+                        <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-11]) }}" 
                              class="card-img-top" 
                              alt="Event Flyer" 
-                             style="height: 200px; object-fit: cover;">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ event['title'] }}</h5>
-                        <p class="card-text text-muted">
+                             style="height: 200px; object-fit: cover; border-top-left-radius:16px; border-top-right-radius:16px;">
+			{% else %}
+			<img src="{{ url_for('static', filename='images/icon.png') }}"
+			     class="card-img-top rounded-top-4"
+                             alt="Default Event"
+                             style="height: 220px; object-fit: cover;">
+			{% endif %}
+			<div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-semibold text-dark">{{ event['title'] }}</h5>
+                        <p class="card-text text-muted mb-3">
                             📍 {{ event['location'] }} <br>
                             🗓 {{ event['date'] }}
                         </p>
-                        <p class="card-text">{{ event['description']|truncate(100) }}</p>
+                        <p class="card-text text-secondary small flex-grow-1">{{ event['description']|truncate(100) }}</p>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-muted">You have not registered for any events yet.</p>
+    <div class="alert alert-info shadow-sm" role="alert">
+        You have not registered for any events yet.
+    </div>
     {% endif %}
 </div>
+<style>
+.card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+</style>
 {% endblock %}
 
 

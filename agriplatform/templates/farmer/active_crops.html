@@ -26,12 +26,13 @@
                     <td>{{ crop[4] }}</td>
                     <td>{{ crop[5] }}</td>
                     <td>
-                        <a href="{{ url_for('field.edit_crop', crop_id=crop[0]) }}" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="{{ url_for('field.delete_crop', crop_id=crop[0]) }}" 
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Are you sure you want to delete this crop?')">
-                           Delete
-                        </a>
+                        <a href="{{ url_for('field.edit_crop', crop_id=crop[0]) }}" class="btn btn-sm btn-primary">Edit</ai>
+			<form action="{{ url_for('field.delete_crop', crop_id=crop[0]) }}" method="POST">
+                                    <input type="hidden"
+                                           name="csrf_token"
+                                           value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this crop?')">Delete</button>
+                            </form>
                     </td>
                 </tr>
                 {% endfor %}

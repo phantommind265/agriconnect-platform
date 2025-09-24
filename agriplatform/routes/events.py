@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import sqlite3, os
+from flask_mail import Message, Mail
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from agriplatform.forms.event_form import EventForm
@@ -56,22 +57,21 @@ def add_event():
         return redirect(url_for('events_bp.view_events'))
 
     return render_template('events/add_event.html', form=form)
-
+"""
 @events_bp.route('/events/register/<int:event_id>', methods=['POST'])
 @login_required
 def register_event(event_id):
     conn = get_db()
     cursor = conn.cursor()
+    
 
     # Check if already registered
-    cursor.execute("SELECT * FROM event_registrations WHERE user_id=? AND event_id=?", 
-                   (current_user.id, event_id))
+    cursor.execute("SELECT * FROM event_registrations WHERE user_id=? AND event_id=?", (current_user.id, event_id))
     if cursor.fetchone():
         flash("You have already registered for this event.", "warning")
         return redirect(url_for('events.view_events'))
 
-    cursor.execute("INSERT INTO event_registrations (current_user.id, event_id) VALUES (?, ?)", 
-                   (current_user.id, event_id))
+    cursor.execute("INSERT INTO event_registrations (current_user.id, event_id) VALUES (?, ?)", (current_user.id, event_id))
     conn.commit()
 
     # Fetch user email and event details
@@ -82,27 +82,88 @@ def register_event(event_id):
     event = cursor.fetchone()
 
     # Send confirmation email
-    from flask_mail import Message
-    from flask_mail import Mail  # assuming you set up Flask-Mail
+    from flask_mail import Message, Mail
+    
+    def send_email_confirmation(user_id, event_id):
+        cursor.execute("SELECT email FROM users WHERE id=?", (current_user.id,))
+        user_email = cursor.fetchone()['email']
 
-    msg = Message(
-        subject=f"Event Registration Confirmation - {event['title']}",
-        recipients=[user_email]
-    )
-    msg.body = f"""
-    Hello,
+        cursor.execute("SELECT title, date, location FROM events WHERE id=?", (event_id,))
+        event = cursor.fetchone()
 
-    You have successfully registered for the event:
-    Title: {event['title']}
-    Date: {event['date']}
-    Location: {event['location']}
+        message = Message(
+                subject=f"Event Registration Confirmation - {event['title']}",
+                recipients=[user_email],
+                message = f'''
+                Hello,
 
-    We look forward to seeing you there!
-    """
-    Mail.send(msg)
+                You have successfully registered for the event:
+                Title: {event['title']}
+                Date: {event['date']}
+                Location: {event['location']}
 
-    flash("You have successfully registered! A confirmation email has been sent.", "success")
-    return redirect(url_for('events.view_events'))
+                We look forward to seeing you there!
+                ''',
+
+                sender="chikusehopeson@gmail.com")
+        mail.send(message)
+        flash("You have successfully registered! A confirmation email has been sent.", "success")
+    return redirect(url_for('events_bp.view_events'))
+"""
+
+@events_bp.route('/events/register/<int:event_id>', methods=['POST'])
+@login_required
+def register_event(event_id):
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    try:
+        # Check if already registered
+        cursor.execute("SELECT * FROM event_registrations WHERE user_id=? AND event_id=?", (current_user.id, event_id))
+        if cursor.fetchone():
+            flash("You have already registered for this event.", "warning")
+            return redirect(url_for('events.view_events'))
+
+        #insert new user
+        cursor.execute("INSERT INTO event_registrations (user_id, event_id) VALUES (?, ?)", (current_user.id, event_id))
+        conn.commit()
+
+        # Fetch user email and event details
+        cursor.execute("SELECT email FROM users WHERE id=?", (current_user.id,))
+        user_email = cursor.fetchone()[0]
+
+        cursor.execute("SELECT title, date, location FROM events WHERE id=?", (event_id,))
+        event = cursor.fetchone()
+        if event:
+            event = {'title': event[0], 'date': event[1], 'location': event[2]}
+
+        # Send confirmation email
+        mail = Mail
+        message = Message(
+                subject=f"Event Registration Confirmation - {event['title']}",
+                recipients=[user_email],
+                body=f"""
+                Hello,
+
+                You have successfully registered for the event:
+                Title: {event['title']}
+                Date: {event['date']}
+                Location: {event['location']}
+
+                We look forward to seeing you there!
+                """
+                )
+        mail.send(message)
+        flash("You have successfully registered! A confirmation email has been sent.", "success")
+    except Exception as e:
+        flash(f"An error occured: {str(e)}", "danger")
+        conn.rollback()
+    finally:
+        cursor.close()
+        conn.close()
+    return redirect(url_for('events_bp.view_events'))
+
+
 
 #admin event atendees
 @events_bp.route('/events/<int:event_id>/attendees')
