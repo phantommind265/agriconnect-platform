@@ -87,19 +87,19 @@
 </style>
 
 <div class="crop-details">
-    <h2>🌱 {{ crop.name }}</h2>
+    <h2>{{ crop.name }}</h2>
     <p><strong>{{ t("description") }}:</strong> {{ crop.description }}</p>
     <p><strong>{{ t("soil_type") }}:</strong> {{ crop.soil }}</p>
     <p><strong>{{ t("season") }}:</strong> {{ crop.season }}</p>
 
     <hr>
-    <h3 style="color:#2e7d32; margin-bottom: 15px;">🌿 {{ t("growth_cycle") }}</h3>
+    <h3 style="color:#2e7d32; margin-bottom: 15px;">{{ t("growth_cycle") }}</h3>
     {% if crop.growth_cycle %}
     <div class="growth-cycle">
         <ul>
             {% for step in crop.growth_cycle %}
             <li class="cycle-step">
-                <h4 class="cycle-title">📌 {{ step.stage }}</h4>
+                <h4 class="cycle-title">{{ step.stage }}</h4>
                 <p class="cycle-description">{{ step.instructions }}</p>
             </li>
             {% endfor %}
@@ -109,6 +109,6 @@
         <p style="color: gray; text-align:center;">{{ t("no_growth_cycle_info") }}</p>
     {% endif %}
 
-    <a class="back-link" href="{{ url_for('crop.crop_list') }}">⬅️ {{ t("back_to_crops") }}</a>
+    <a class="back-link" href="{{ url_for('crop.crop_list') }}">{{ t("back_to_crops") }}</a>
 </div>
 {% endblock %}

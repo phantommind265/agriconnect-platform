@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="fw-bold text-success">📅 My Registered Events</h2>
+    <h2 class="fw-bold text-success">My Registered Events</h2>
     <hr class="mb-4">
 
     {% if events %}
@@ -11,7 +11,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card shadow-sm border-0 h-100" style="border-radius: 16px; transition: transform 02.s;">
 			{% if event.flyer_path %}
-                        <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-11]) }}" 
+                        <img src="{{ url_for('static', filename=event.flyer_path.split('static/')[-1]) }}" 
                              class="card-img-top" 
                              alt="Event Flyer" 
                              style="height: 200px; object-fit: cover; border-top-left-radius:16px; border-top-right-radius:16px;">

@@ -1,37 +1,5 @@
 {% extends "base.html" %}
 
-<!--
-<h2>{{ t("crop_list") }}</h2>
-
-<form method="get" style="margin-bottom: 1rem;">
-    <input type="text" name="q" placeholder="{{ t('search_crop')}}" value="{{ request.args.get('q', '') }}">
-    <select name="soil">
-        <option value="">{{ t("any_soil") }}</option>
-        <option value="Loamy">Loamy</option>
-        <option value="Sandy">Sandy</option>
-        <option value="Clay">Clay</option>
-    </select>
-    <select name="season">
-        <option value="">{{ t("any_season") }}</option>
-        <option value="Rainy">Rainy</option>
-        <option value="Dry">Dry</option>
-    </select>
-    <button type="submit">{{ t("filter") }}</button>
-</form>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-    {% for crop in crops %}
-    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; background-color: #fff;">
-        <h3>{{ crop.name }}</h3>
-        <p>{{ crop.description[:100] }}......</p>
-        <a href="{{ url_for('crop.crop_detail', name=crop.name) }}">{{ t("view_details") }}</a>
-    </div>
-    {% else %}
-    <p>{{ t("no_crops_found") }}</p>
-    {% endfor %}
-</div>
--->
-
 {% block content %}
 <style>
     .crop-container {
@@ -124,7 +92,7 @@
 </style>
 
 <div class="crop-container">
-    <h2 style="color:#2e7d32;">🌱 {{ t("crop_list") }}</h2>
+    <h2 style="color:#2e7d32;">{{ t("crop_list") }}</h2>
 
     <form method="get" class="filter-form">
         <input type="text" name="q" placeholder="{{ t('search_crop')}}" value="{{ request.args.get('q', '') }}">
@@ -145,9 +113,9 @@
     <div class="crop-grid">
         {% for crop in crops %}
         <div class="crop-card">
-            <h3>🌿 {{ crop.name }}</h3>
+            <h3>{{ crop.name }}</h3>
             <p>{{ crop.description[:100] }}...</p>
-            <a href="{{ url_for('crop.crop_detail', name=crop.name) }}">📖 {{ t("view_details") }}</a>
+            <a href="{{ url_for('crop.crop_detail', name=crop.name) }}">{{ t("view_details") }}</a>
         </div>
         {% else %}
         <p style="color:gray; text-align:center;">{{ t("no_crops_found") }}</p>

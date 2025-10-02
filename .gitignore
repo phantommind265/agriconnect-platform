@@ -1,5 +1,5 @@
+agriplatform/agriconnect.db
 venv/
 __pycache__/
 *.pyc
 .DS_Store
-agriconnect.db

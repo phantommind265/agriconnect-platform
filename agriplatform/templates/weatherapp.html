@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>agriconnect weather</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Arial', sans-serif;
+      background: #064e3b;
+      color: #333;
+    }
+    .glass-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      margin: 15px;
+    }
+    .clock {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .weather input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+    .weather button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2a7a4d;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .weather button:hover {
+	    background:#24663f;
+      transform: scale(1.05);
+    }
+    .weather-info {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Digital Clock -->
+  <div class="glass-box clock" id="clock">00:00:00</div>
+  <!-- Weather App -->
+  <div class="glass-box weather">
+    <h2>Agriconnect Weather Information</h2>
+    <input type="text" id="city" placeholder="Enter District">
+    <button onclick="getWeather()">Search</button>
+    <div class="weather-info" id="weatherInfo">Detecting location...</div>
+  </div>
+  <script>
+    // Digital Clock
+    function updateClock() {
+      let now = new Date();
+      let hours = String(now.getHours()).padStart(2, '0');
+      let minutes = String(now.getMinutes()).padStart(2, '0');
+      let seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    // Weather App
+    let apiKey = "a6cfac316dc3684564ad11d0ac21b1f8" //"3044df3caf1c2b431c1a7fc48c4875ab"  OpenWeather API key 
+    async function getWeather(city) {
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      try {
+        let response = await fetch(url);
+        let data = await response.json();
+        if (data.cod === 200) {
+          document.getElementById("weatherInfo").innerHTML = `
+            🌆 ${data.name}, ${data.sys.country}<br>
+            🌡️ ${data.main.temp}°C<br>
+            ☁️ ${data.weather[0].description}
+          `;
+        } else {
+          document.getElementById("weatherInfo").innerHTML = "District not found!";
+        }
+      } catch (error) {
+        document.getElementById("weatherInfo").innerHTML = "Error fetching data.";
+      }
+    }
+    // Auto-location weather (GPS)
+    function getLocationWeather() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async position => {
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+          try {
+            let response = await fetch(url);
+            let data = await response.json();
+            document.getElementById("weatherInfo").innerHTML = `
+              📍 Auto Location: ${data.name}, ${data.sys.country}<br>
+              🌡️ ${data.main.temp}°C<br>
+              ☁️ ${data.weather[0].description}
+            `;
+          } catch {
+            document.getElementById("weatherInfo").innerHTML = "Unable to fetch location weather.";
+          }
+        });
+      } else {
+        document.getElementById("weatherInfo").innerHTML = "Geolocation not supported!";
+      }
+    }
+    // Run auto-location on page load
+    window.onload = getLocationWeather;
+  </script>
+</body>
+</html>

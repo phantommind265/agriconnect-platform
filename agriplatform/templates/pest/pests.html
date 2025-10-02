@@ -128,7 +128,7 @@
 </style>
 
 <div class="pest-container">
-	<h2>🪲 {{ t("pest_and_diseases") }}</h2>
+	<h2>{{ t("pest_and_diseases") }}</h2>
 
     <form method="GET" action="{{ url_for('pest.list_pests') }}">
 	    <input type="text" name="q" placeholder="{{ t("search_by_name_or_symptom") }}" value="{{ query }}">

@@ -7,8 +7,9 @@ weather_bp = Blueprint('weather', __name__)
 
 @weather_bp.route('/weather')
 def weather_page():
-    return render_template('weather.html')
+    return render_template('weatherapp.html')
 
+"""
 @weather_bp.route('/api/weather', methods=['POST'])
 def get_weather():
     try:
@@ -43,3 +44,4 @@ def get_weather():
     except Exception as e:
         print("Error in weather route:", str(e))
         return jsonify({'error': str(e)}), 500
+ """

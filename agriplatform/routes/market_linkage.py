@@ -60,9 +60,9 @@ def view_market():
     db = get_db()
 
     # Fetch farmer's registered crops (assuming you have a crops table)
-    farmer_crops = db.execute("SELECT crops FROM users WHERE id = ?",
+    farmer_crops = db.execute("SELECT crop FROM users WHERE id = ?",
                               (current_user.id,)).fetchall()
-    crop_list = [c["crops"] for c in farmer_crops]
+    crop_list = [c["crop"] for c in farmer_crops]
 
     # Fetch market linkages
     if crop_list:

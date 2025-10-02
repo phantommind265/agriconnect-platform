@@ -8,7 +8,6 @@ from agriplatform.forms.forum_form import NewPostForm
 forum_bp = Blueprint('forum', __name__)
 DB_PATH = os.path.join("agriplatform", "agriconnect.db")
 
-# helper to get db connection
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -28,12 +27,11 @@ def new_post():
     form = NewPostForm()
 
     if form.validate_on_submit():
-        title = form.title.data
         content = form.content.data
 
         conn = get_db_connection()
-        conn.execute('INSERT INTO forum_posts (user_id, title, content) VALUES (?, ?, ?)',
-                     (current_user.id, title, content))
+        conn.execute('INSERT INTO forum_posts (user_id, content) VALUES (?, ?)',
+                     (current_user.id, content))
         conn.commit()
         conn.close()
         return redirect(url_for('forum.forum_home'))
